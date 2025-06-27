@@ -221,12 +221,13 @@
 <!-- SECTION: Career History -->
 <section id="resume" class="section">
   <h2 class="section-title">Career History</h2>
-  <div class="horizontal-timeline">
+  <div class="timeline-container">
+    <div class="timeline-line"></div>
 
     <!-- Entry 1 -->
     <div class="timeline-entry">
       <div class="timeline-dot"></div>
-      <div class="timeline-content">
+      <div class="timeline-box">
         <h3>Corporate Intern - Engineering</h3>
         <h4>Company Name (Reporting to David Knolhoff, Skip Manager: Ron Smith)</h4>
         <p>Miami, FL — Present</p>
@@ -241,7 +242,7 @@
     <!-- Entry 2 -->
     <div class="timeline-entry">
       <div class="timeline-dot"></div>
-      <div class="timeline-content">
+      <div class="timeline-box">
         <h3>Engine Platform Engineering Intern</h3>
         <h4>Caterpillar – Lafayette, IN</h4>
         <p>May 2025 – Aug. 2025</p>
@@ -256,7 +257,7 @@
     <!-- Entry 3 -->
     <div class="timeline-entry">
       <div class="timeline-dot"></div>
-      <div class="timeline-content">
+      <div class="timeline-box">
         <h3>Design Engineering Intern</h3>
         <h4>HUSCO International – Waukesha, WI</h4>
         <p>May 2024 – Aug. 2024</p>
@@ -267,7 +268,6 @@
         </ul>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -279,106 +279,89 @@
     margin-bottom: 60px;
   }
 
-  .horizontal-timeline {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+  .timeline-container {
     position: relative;
-    padding: 40px 20px;
-    max-width: 1200px;
+    max-width: 900px;
     margin: auto;
-    gap: 40px;
+    padding: 40px 20px;
   }
 
-  .horizontal-timeline::before {
-    content: '';
+  .timeline-line {
     position: absolute;
-    top: 20px;
-    left: 0;
-    right: 0;
-    height: 4px;
+    left: 40px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
     background: #000;
-    z-index: 0;
   }
 
   .timeline-entry {
     position: relative;
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    margin-bottom: 60px;
+    padding-left: 80px;
   }
 
   .timeline-dot {
+    position: absolute;
+    left: 32px;
+    top: 10px;
     width: 16px;
     height: 16px;
     background: #fff;
     border: 2px solid #000;
     border-radius: 50%;
-    position: relative;
-    top: 12px;
-    z-index: 1;
+    z-index: 2;
   }
 
-  .timeline-content {
+  .timeline-box {
     background: #fff;
     border: 1px solid #000;
-    padding: 20px;
+    padding: 16px 20px;
     border-radius: 6px;
-    margin-top: 40px;
-    text-align: left;
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
   }
 
-  .timeline-content h3 {
+  .timeline-box h3 {
     margin: 0 0 5px;
     font-size: 1.25rem;
+    color: #000;
   }
 
-  .timeline-content h4 {
+  .timeline-box h4 {
     margin: 0 0 10px;
     font-weight: normal;
     color: #555;
     font-size: 1rem;
   }
 
-  .timeline-content p {
+  .timeline-box p {
     margin: 0 0 10px;
     font-size: 0.95rem;
     color: #777;
   }
 
-  .timeline-content ul {
-    padding-left: 20px;
-  }
-
-  .timeline-content li {
-    margin-bottom: 8px;
-    font-size: 0.95rem;
-    color: #333;
+  .timeline-box ul {
+    padding-left: 0;
     list-style: none;
   }
 
-  @media screen and (max-width: 900px) {
-    .horizontal-timeline {
-      flex-direction: column;
-      align-items: center;
-    }
+  .timeline-box li {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    color: #333;
+  }
 
-    .timeline-entry {
-      width: 100%;
-    }
-
-    .horizontal-timeline::before {
-      top: 0;
-      left: 50%;
-      width: 4px;
-      height: 100%;
+  @media screen and (max-width: 768px) {
+    .timeline-line {
+      left: 20px;
     }
 
     .timeline-dot {
-      left: -10px;
-      top: 0;
+      left: 12px;
+    }
+
+    .timeline-entry {
+      padding-left: 60px;
     }
   }
 </style>
