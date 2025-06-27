@@ -114,32 +114,37 @@
       max-width: 1100px;
       margin: 0 auto;
     }
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-    }
 
-    footer {
-      width: 100%;
-      background-color: #000;
-      color: white;
-      padding: 60px 5vw;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: flex-start;
-      box-sizing: border-box;
-    }
+footer {
+    width: 100vw;
+    background-color: #000;
+    color: white;
+    padding: 60px 0;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+  }
 
-    footer a {
-      color: white;
-      text-decoration: none;
-    }
+  .footer-content {
+    width: 100%;
+    max-width: 1100px;
+    padding: 0 5vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    box-sizing: border-box;
+  }
 
-    footer a:hover {
-      text-decoration: underline;
-  }
+  footer a {
+    color: white;
+    text-decoration: none;
+  }
+
+  footer a:hover {
+    text-decoration: underline;
+  }
+
   </style>
 </head>
 
@@ -382,19 +387,9 @@
 </section>
   
 <!-- SECTION: Footer -->
-<footer style="
-  width: 100%;
-  background-color: #000;
-  color: white;
-  padding: 60px 5vw;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-  box-sizing: border-box;
-  margin: 0;
-">
-  <!-- About Me Section -->
+  <footer>
+    <div class="footer-content">
+        <!-- About Me Section -->
   <div style="flex: 1 1 60%; max-width: 600px; padding-right: 40px;">
     <h3 style="text-decoration: underline; margin-top: 0;">About Me</h3>
     <p style="margin: 0;">
@@ -413,9 +408,9 @@
     <a href="#projects" style="color: white; text-decoration: none;">Projects →</a>
     <a href="#contact" style="color: white; text-decoration: none;">Contact →</a>
   </div>
-</footer>
-
-
+      <a href="#top">Back to top</a>
+    </div>
+  </footer>
 
   <!-- SECTION: Scripts -->
   <script>
