@@ -155,44 +155,6 @@
     </p>
   </section>
 
-<!-- SECTION: Career History -->
-<section id="resume" class="section">
-  <h2 class="section-title">Career History</h2>
-  <div class="timeline-container">
-    <div class="timeline-line"></div>
-
-    <!-- Entry 1 -->
-    <div class="timeline-entry">
-      <div class="timeline-dot"></div>
-      <div class="timeline-box">
-        <h3>Engine Platform Engineering Intern</h3>
-        <h4>Caterpillar – Lafayette, IN</h4>
-        <p>May 2025 – Aug. 2025</p>
-        <ul>
-          <li>- Improved mining truck engine oil management system serviceability by tripling oil fill rate and optimizing drainage design, saving 10+ hours of service time annually per truck.</li>
-          <li>- Balanced preventive maintenance with productivity to extend machine lifespan and maximize operational efficiency.</li>
-          <li>- Documented system response differences between autonomous and human-operated trucks, enhancing software clarity for customers.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Entry 2 -->
-    <div class="timeline-entry">
-      <div class="timeline-dot"></div>
-      <div class="timeline-box">
-        <h3>Design Engineering Intern</h3>
-        <h4>HUSCO International – Waukesha, WI</h4>
-        <p>May 2024 – Aug. 2024</p>
-        <ul>
-          <li>- Designed and prototyped hydraulic control valves for OEMs, meeting performance and durability standards.</li>
-          <li>- Collaborated with customer engineers and internal teams to refine designs and align with manufacturing capabilities.</li>
-          <li>- Created technical documentation and drawings using GD&T for precise manufacturing and quality control.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
 <style>
   .section-title {
     text-align: center;
@@ -210,7 +172,7 @@
 
   .timeline-line {
     position: absolute;
-    left: 55px;
+    left: 40px; /* Center of the dot */
     top: 0;
     bottom: 0;
     width: 4px;
@@ -223,16 +185,16 @@
     padding-left: 80px;
   }
 
-.timeline-dot {
-  position: absolute;
-  left: 32px; /* 40px - half of 16px width */
-  top: 10px;
-  width: 16px;
-  height: 16px;
-  background: #fff; /* White center */
-  border: 2px solid #000; /* Black outline */
-  border-radius: 50%;
-  z-index: 2;
+  .timeline-dot {
+    position: absolute;
+    left: 32px; /* 40px - half of 16px width */
+    top: 10px;
+    width: 16px;
+    height: 16px;
+    background: #fff;
+    border: 2px solid #000;
+    border-radius: 50%;
+    z-index: 2;
   }
 
   .timeline-box {
@@ -287,6 +249,7 @@
     }
   }
 </style>
+
 
   <!-- SECTION: Projects -->
   <section id="projects" class="section">
