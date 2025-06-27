@@ -114,6 +114,32 @@
       max-width: 1100px;
       margin: 0 auto;
     }
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
+
+    footer {
+      width: 100%;
+      background-color: #000;
+      color: white;
+      padding: 60px 5vw;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      box-sizing: border-box;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+  }
   </style>
 </head>
 
@@ -346,7 +372,7 @@
   </section>
 
 <!-- SECTION: Contact -->
-<section id="contact" class="section" style="padding: 60px 0; background-color: #f9f9f9;">
+<section id="contact" class="section" style="padding: 60px 0; background-color: #ffffff;">
   <h2 style="text-align: center; font-size: 3.125rem;">Get in Touch</h2>
   <div style="max-width: 600px; margin: 0 auto; padding-left: 120px;">
     <p>✉️ <span>jrmacias@wisc.edu</span></p>
@@ -354,7 +380,7 @@
     <p>🔗 https://www.linkedin.com/in/jack-macias</p>
   </div>
 </section>
-
+  
 <!-- SECTION: Footer -->
 <footer style="
   width: 100%;
@@ -366,15 +392,19 @@
   justify-content: space-between;
   align-items: flex-start;
   box-sizing: border-box;
+  margin: 0;
 ">
+  <!-- About Me Section -->
   <div style="flex: 1 1 60%; max-width: 600px; padding-right: 40px;">
-    <h3 style="text-decoration: underline;">About Me</h3>
-    <p>
+    <h3 style="text-decoration: underline; margin-top: 0;">About Me</h3>
+    <p style="margin: 0;">
       Mechanical engineering student at UW–Madison who has built a foundation in design, analysis, and practical
       problem solving through internships and team-based engineering challenges. Driven to contribute solutions
       that blend innovation and efficiency, while continuously developing technical expertise and broad professional skills.
     </p>
   </div>
+
+  <!-- Navigation Links -->
   <div style="flex: 1 1 30%; display: flex; flex-direction: column; gap: 1rem; padding-left: 40px;">
     <a href="#home" style="color: white; text-decoration: none;">Home →</a>
     <a href="#about" style="color: white; text-decoration: none;">About Me →</a>
@@ -384,6 +414,7 @@
     <a href="#contact" style="color: white; text-decoration: none;">Contact →</a>
   </div>
 </footer>
+
 
 
   <!-- SECTION: Scripts -->
