@@ -111,6 +111,40 @@
       padding: 60px 5vw;
     }
 
+    /* Timeline resume styles */
+    .timeline {
+      position: relative;
+      margin-left: 20px;
+      padding-left: 20px;
+      border-left: 2px solid #000;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 40px;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -10px;
+      top: 0.3em;
+      width: 12px;
+      height: 12px;
+      background-color: #000;
+      border-radius: 50%;
+    }
+
+    .timeline-date {
+      font-weight: bold;
+      color: #0077cc;
+      margin-bottom: 8px;
+    }
+
+    .timeline-content {
+      padding-left: 10px;
+    }
+
     #contact p {
       display: flex;
       align-items: center;
@@ -199,67 +233,51 @@
 
     <section id="resume" class="section">
       <h2>Resume</h2>
-      <p>Resume content coming soon...</p>
-    </section>
-
-    <section id="projects" class="section">
-      <h2>Projects</h2>
-      <p>Projects content coming soon...</p>
-    </section>
-
-    <section id="contact" class="section">
-      <h2 style="text-align: center; font-size: 3.125rem;">Get in Touch</h2>
-      <div style="max-width: 600px; margin: 0 auto; padding-left: 80px;">
-        <p>✉︎ <span>jrmacias@wisc.edu</span></p>
-        <p>☎︎ <span>(908) 381-4532</span></p>
-        <p>🔗 <a href="https://www.linkedin.com/in/jack-macias" target="_blank">linkedin.com/in/jack-macias</a></p>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="footer-about">
-      <h3>About Me</h3>
       <p>
-        Mechanical engineering student at UW–Madison who has built a foundation in design, analysis, and practical
-        problem solving, through internships and team-based engineering challenges. Driven to contribute solutions
-        that blend innovation and efficiency, while continuously developing technical expertise and broad professional skills.
+        Mechanical engineering student at UW–Madison who has built a foundation in design, analysis, and practical problem solving,
+        through internships and team-based engineering challenges. Driven to contribute solutions that blend innovation and efficiency,
+        while continuously developing technical expertise and broad professional skills.
       </p>
-    </div>
-    <div class="footer-nav">
-      <a href="#home">Home ➜</a>
-      <a href="#about">About Me ➜</a>
-      <a href="#resume">Resume ➜</a>
-      <a href="#projects">Projects ➜</a>
-      <a href="#contact">Contact ➜</a>
-    </div>
-  </footer>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const typedText = document.querySelector(".typed-text");
-      const words = ["Student", "Engineer", "Learner"];
-      let wordIndex = 0, charIndex = 0, isDeleting = false;
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">Expected May 2027</div>
+          <div class="timeline-content">
+            <h3>Education</h3>
+            <p><strong>University of Wisconsin–Madison</strong><br />Bachelor of Science, Mechanical Engineering</p>
+          </div>
+        </div>
 
-      function type() {
-        const currentWord = words[wordIndex];
-        if (!isDeleting) {
-          typedText.textContent = currentWord.substring(0, charIndex + 1);
-          charIndex++;
-          if (charIndex === currentWord.length) setTimeout(() => isDeleting = true, 2000);
-        } else {
-          typedText.textContent = currentWord.substring(0, charIndex - 1);
-          charIndex--;
-          if (charIndex === 0) {
-            isDeleting = false;
-            wordIndex = (wordIndex + 1) % words.length;
-          }
-        }
-        setTimeout(type, isDeleting ? 100 : 200);
-      }
+        <div class="timeline-item">
+          <div class="timeline-date">May–Aug 2025</div>
+          <div class="timeline-content">
+            <h3>Caterpillar – Engine Platform Engineering Intern</h3>
+            <ul>
+              <li>Improved mining truck oil fill system; reduced service time by 10 hours/year</li>
+              <li>Balanced preventative maintenance with equipment uptime strategy</li>
+              <li>Enhanced error response clarity across human-operated & autonomous trucks</li>
+            </ul>
+          </div>
+        </div>
 
-      type();
-    });
-  </script>
-</body>
-</html>
+        <div class="timeline-item">
+          <div class="timeline-date">May–Aug 2024</div>
+          <div class="timeline-content">
+            <h3>HUSCO – Design Engineering Intern</h3>
+            <ul>
+              <li>Designed hydraulic valves for OEMs; prototyped for tractors and skid steers</li>
+              <li>Collaborated with customer engineers and internal teams for spec alignment</li>
+              <li>Created engineering drawings with GD&T for precise manufacturing</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">2023–Present</div>
+          <div class="timeline-content">
+            <h3>Awards</h3>
+            <ul>
+              <li>UW–Madison Engineering Diversity Scholarship Recipient</li>
+              <li>College of Engineering Dean’s Honors List</li>
+              <li>Town Proclamation: Leadership & Service, Hillsborough NJ</li>
+              <li>Eagle Scout, Troop 1776
