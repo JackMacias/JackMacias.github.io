@@ -176,6 +176,7 @@
         text-align: left;
       }
     }
+    
   </style>
 </head>
 
@@ -217,39 +218,115 @@
     </p>
   </section>
 
-  <!-- SECTION: Resume -->
-  <section id="resume" class="section">
-    <h2>Experience</h2>
-    <div class="alt-timeline">
-      <!-- Experience: Caterpillar -->
-      <div class="timeline-card left">
-        <div class="content">
-          <h3>Caterpillar</h3>
-          <h4>Engine Platform Engineering Intern</h4>
-          <p><em>May 2025 – Aug. 2025 | Lafayette, IN</em></p>
-          <ul>
-            <li>Tripled oil filling rate, reducing 10+ hrs of service annually per mining truck</li>
-            <li>Optimized oil drainage system for maintainability</li>
-            <li>Improved fault response for autonomous vs. human-operated fleets</li>
-          </ul>
-        </div>
-      </div>
+<!-- SECTION: Resume -->
+<style>
+  .resume-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
 
-      <!-- Experience: HUSCO -->
-      <div class="timeline-card right">
-        <div class="content">
-          <h3>HUSCO International</h3>
-          <h4>Design Engineering Intern</h4>
-          <p><em>May 2024 – Aug. 2024 | Waukesha, WI</em></p>
-          <ul>
-            <li>Developed control valves for skid steers & tracked vehicles</li>
-            <li>Coordinated specs with OEMs and internal engineers</li>
-            <li>Created drawings & documentation using GD&T standards</li>
-          </ul>
-        </div>
+  .resume-card {
+    opacity: 0;
+    transform: translateX(0);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .resume-card.left {
+    align-self: flex-start;
+    transform: translateX(-100px);
+  }
+
+  .resume-card.right {
+    align-self: flex-end;
+    transform: translateX(100px);
+  }
+
+  .resume-card.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .resume-content {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-left: 6px solid #0077cc;
+    border-radius: 8px;
+    max-width: 600px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .resume-card.right .resume-content {
+    border-left: none;
+    border-right: 6px solid #0077cc;
+  }
+
+  @media screen and (max-width: 768px) {
+    .resume-card, .resume-card.right {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .resume-card .resume-content, .resume-card.right .resume-content {
+      border-left: 6px solid #0077cc;
+      border-right: none !important;
+      text-align: left;
+    }
+  }
+</style>
+
+<section id="resume" class="section">
+  <h2>Experience</h2>
+
+  <div class="resume-wrapper">
+    <!-- Resume Card 1: Caterpillar -->
+    <div class="resume-card slide-in left">
+      <div class="resume-content">
+        <h3>Caterpillar</h3>
+        <h4>Engine Platform Engineering Intern</h4>
+        <p><em>May 2025 – Aug. 2025 | Lafayette, IN</em></p>
+        <ul>
+          <li>Tripled oil filling rate, saving 10+ hours annually per mining truck</li>
+          <li>Optimized oil drainage system for maintainability</li>
+          <li>Improved fault detection on autonomous vs. human-operated fleets</li>
+        </ul>
       </div>
     </div>
-  </section>
+
+    <!-- Resume Card 2: HUSCO -->
+    <div class="resume-card slide-in right">
+      <div class="resume-content">
+        <h3>HUSCO International</h3>
+        <h4>Design Engineering Intern</h4>
+        <p><em>May 2024 – Aug. 2024 | Waukesha, WI</em></p>
+        <ul>
+          <li>Developed hydraulic valves for construction machinery</li>
+          <li>Collaborated with OEM teams on design specs and testing</li>
+          <li>Produced GD&T manufacturing documentation and drawings</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Resume Animation Script -->
+<script>
+  function revealOnScroll() {
+    const cards = document.querySelectorAll('.resume-card');
+    const windowHeight = window.innerHeight;
+
+    cards.forEach(card => {
+      const top = card.getBoundingClientRect().top;
+      if (top < windowHeight - 100) {
+        card.classList.add('visible');
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', revealOnScroll);
+  window.addEventListener('scroll', revealOnScroll);
+</script>
+  
   <!-- SECTION: Projects -->
   <section id="projects" class="section">
     <h2>Projects</h2>
