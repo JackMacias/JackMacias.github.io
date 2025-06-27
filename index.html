@@ -219,6 +219,49 @@
   </section>
 
 <!-- SECTION: Career History -->
+<section id="resume" class="section">
+  <h2 class="section-title">Career History</h2>
+  <div class="resume-container">
+
+    <!-- Entry 1 -->
+    <div class="resume-item">
+      <h3 class="resume-title">Corporate Intern - Engineering</h3>
+      <h4 class="resume-subtitle">Company Name (Reporting to David Knolhoff, Skip Manager: Ron Smith)</h4>
+      <p class="resume-location">Miami, FL — Present</p>
+      <ul class="resume-details">
+        <li>Supported engineering teams in project development, testing, and documentation.</li>
+        <li>Assisted in process improvement initiatives and technical research tasks.</li>
+        <li>Collaborated across departments to enhance operational efficiency and communication.</li>
+      </ul>
+    </div>
+
+    <!-- Entry 2 -->
+    <div class="resume-item">
+      <h3 class="resume-title">Engine Platform Engineering Intern</h3>
+      <h4 class="resume-subtitle">Caterpillar – Lafayette, IN</h4>
+      <p class="resume-location">May 2025 – Aug. 2025</p>
+      <ul class="resume-details">
+        <li>Improved mining truck engine oil management system serviceability by tripling oil fill rate and optimizing drainage design, saving 10+ hours of service time annually per truck.</li>
+        <li>Balanced preventive maintenance with productivity to extend machine lifespan and maximize operational efficiency.</li>
+        <li>Documented system response differences between autonomous and human-operated trucks, enhancing software clarity for customers.</li>
+      </ul>
+    </div>
+
+    <!-- Entry 3 -->
+    <div class="resume-item">
+      <h3 class="resume-title">Design Engineering Intern</h3>
+      <h4 class="resume-subtitle">HUSCO International – Waukesha, WI</h4>
+      <p class="resume-location">May 2024 – Aug. 2024</p>
+      <ul class="resume-details">
+        <li>Designed and prototyped hydraulic control valves for OEMs, meeting performance and durability standards.</li>
+        <li>Collaborated with customer engineers and internal teams to refine designs and align with manufacturing capabilities.</li>
+        <li>Created technical documentation and drawings using GD&T for precise manufacturing and quality control.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
 <style>
   .section-title {
     text-align: center;
@@ -227,148 +270,59 @@
     margin-bottom: 40px;
   }
 
-  .timeline-container {
-    position: relative;
-    max-width: 1000px;
+  .resume-container {
+    max-width: 900px;
     margin: auto;
-    padding: 40px 20px;
+    padding: 0 20px;
   }
 
-  .timeline-line {
-    position: absolute;
-    left: 60px;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: #000;
-  }
-
-  .timeline-entry {
+  .resume-item {
+    margin-bottom: 40px;
+    border-left: 4px solid #000;
+    padding-left: 20px;
     position: relative;
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 60px;
-    padding-left: 100px;
   }
 
-  .timeline-dot {
+  .resume-item::before {
+    content: '';
     position: absolute;
-    left: 52px;
-    top: 6px;
+    left: -10px;
+    top: 5px;
     width: 16px;
     height: 16px;
     background: #fff;
     border: 2px solid #000;
     border-radius: 50%;
-    z-index: 2;
   }
 
-  .timeline-date {
-    position: absolute;
-    left: 80px;
-    top: 0;
-    font-weight: bold;
-    color: #000;
-    white-space: nowrap;
+  .resume-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
   }
 
-  .timeline-box {
-    margin-left: 160px;
-    background: #fff;
-    border: 1px solid #000;
-    padding: 16px 20px;
-    border-radius: 6px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    max-width: 700px;
-  }
-
-  .timeline-box h3 {
-    margin: 0 0 5px;
-    color: #000;
-    font-size: 1.25rem;
-  }
-
-  .timeline-box h4 {
-    margin: 0 0 10px;
-    font-weight: normal;
-    color: #333;
+  .resume-subtitle {
     font-size: 1rem;
+    color: #555;
+    margin: 5px 0;
   }
 
-  .timeline-box ul {
-    margin-top: 10px;
+  .resume-location {
+    font-size: 0.95rem;
+    color: #777;
+    margin-bottom: 10px;
+  }
+
+  .resume-details {
     padding-left: 20px;
   }
 
-  .timeline-box li {
-    color: #000;
-    margin-bottom: 6px;
+  .resume-details li {
+    margin-bottom: 8px;
     font-size: 0.95rem;
-  }
-
-  @media screen and (max-width: 768px) {
-    .timeline-line {
-      left: 20px;
-    }
-
-    .timeline-dot {
-      left: 12px;
-    }
-
-    .timeline-date {
-      left: 40px;
-    }
-
-    .timeline-entry {
-      flex-direction: column;
-      align-items: flex-start;
-      padding-left: 40px;
-    }
-
-    .timeline-box {
-      margin-left: 0;
-    }
+    color: #333;
   }
 </style>
-
-<section id="resume" class="section">
-  <h2 class="section-title">Career History</h2>
-  <div class="timeline-container">
-    <div class="timeline-line"></div>
-
-    <!-- Entry 1 -->
-    <div class="timeline-entry">
-      <div class="timeline-dot"></div>
-      <div class="timeline-date">May 2025 – Aug. 2025</div>
-      <div class="timeline-box">
-        <h3>Caterpillar</h3>
-        <h4>Engine Platform Engineering Intern – Lafayette, IN</h4>
-        <ul>
-          <li>Improved mining truck engine oil management system serviceability by tripling oil fill rate and optimizing drainage design, saving 10+ hours of service time annually per truck.</li>
-          <li>Balanced preventive maintenance with productivity to extend machine lifespan and maximize operational efficiency.</li>
-          <li>Documented system response differences between autonomous and human-operated trucks, enhancing software clarity for customers.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Entry 2 -->
-    <div class="timeline-entry">
-      <div class="timeline-dot"></div>
-      <div class="timeline-date">May 2024 – Aug. 2024</div>
-      <div class="timeline-box">
-        <h3>HUSCO International</h3>
-        <h4>Design Engineering Intern – Waukesha, WI</h4>
-        <ul>
-          <li>Designed and prototyped hydraulic control valves for OEMs, meeting performance and durability standards.</li>
-          <li>Collaborated with customer engineers and internal teams to refine designs and align with manufacturing capabilities.</li>
-          <li>Created technical documentation and drawings using GD&T for precise manufacturing and quality control.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-
 
   <!-- SECTION: Projects -->
   <section id="projects" class="section">
