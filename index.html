@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- SECTION: Head -->
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Jack Macias | Mechanical Engineer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <style>
     html {
@@ -19,6 +18,7 @@
       color: #222;
     }
 
+    /* SECTION: Navbar & Header */
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -59,6 +59,7 @@
       align-items: center;
       justify-content: space-around;
       padding: 15vh 5vw;
+      flex-wrap: wrap;
     }
 
     .hero-image img {
@@ -72,6 +73,7 @@
     .hero-text {
       text-align: left;
       max-width: 50%;
+      min-width: 300px;
     }
 
     .hero-text h1 {
@@ -109,95 +111,76 @@
 
     .section {
       padding: 60px 5vw;
+      max-width: 1100px;
+      margin: 0 auto;
     }
 
-    /* Timeline resume styles */
-    .timeline {
+    /* SECTION: Timeline Styles */
+    .alt-timeline {
       position: relative;
-      margin-left: 20px;
-      padding-left: 20px;
-      border-left: 2px solid #000;
+      margin-top: 40px;
     }
 
-    .timeline-item {
-      position: relative;
+    .timeline-card {
+      display: flex;
+      justify-content: flex-start;
       margin-bottom: 40px;
     }
 
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -10px;
-      top: 0.3em;
-      width: 12px;
-      height: 12px;
-      background-color: #000;
-      border-radius: 50%;
+    .timeline-card.right {
+      justify-content: flex-end;
     }
 
-    .timeline-date {
-      font-weight: bold;
-      color: #0077cc;
-      margin-bottom: 8px;
+    .timeline-card .content {
+      background-color: #f9f9f9;
+      border-left: 6px solid #0077cc;
+      padding: 20px;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 8px;
     }
 
-    .timeline-content {
-      padding-left: 10px;
+    .timeline-card.right .content {
+      border-left: none;
+      border-right: 6px solid #0077cc;
     }
 
-    #contact p {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .timeline-card h3 {
+      margin-top: 0;
+      margin-bottom: 5px;
       font-size: 1.25rem;
     }
 
-    #contact a {
-      color: black;
-      text-decoration: none;
+    .timeline-card h4 {
+      margin: 0;
+      font-weight: normal;
+      font-size: 1.05rem;
+      color: #444;
     }
 
-    /* Footer styles */
-    footer {
-      background-color: #000;
-      color: white;
-      padding: 60px 5vw;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
+    .timeline-card ul {
+      padding-left: 20px;
+      margin-top: 10px;
     }
 
-    .footer-about {
-      flex: 1 1 60%;
-      max-width: 600px;
-    }
+    @media screen and (max-width: 768px) {
+      .timeline-card, .timeline-card.right {
+        flex-direction: column;
+        align-items: center;
+      }
 
-    .footer-about h3 {
-      text-decoration: underline;
-    }
-
-    .footer-nav {
-      flex: 1 1 30%;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      padding-top: 1rem;
-      padding-left: 50px;
-    }
-
-    .footer-nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 1rem;
-      transition: color 0.3s;
-    }
-
-    .footer-nav a:hover {
-      color: #0077cc;
+      .timeline-card .content, .timeline-card.right .content {
+        border-left: 6px solid #0077cc;
+        border-right: none !important;
+        text-align: left;
+      }
     }
   </style>
 </head>
+
 <body>
+  <!-- SECTION: Navbar -->
   <nav class="navbar">
     <div class="logo">Jack Macias</div>
     <ul>
@@ -209,6 +192,7 @@
     </ul>
   </nav>
 
+  <!-- SECTION: Hero -->
   <header id="home" class="section">
     <div class="hero-container">
       <div class="hero-text">
@@ -222,66 +206,80 @@
     </div>
   </header>
 
-  <main>
-    <section id="about" class="section">
-      <h2>About Me</h2>
-      <p>Mechanical engineering student at UW–Madison with a foundation in design, analysis, and practical problem
-        solving, shaped through internships and team-based engineering challenges. Driven to contribute to engineering
-        solutions that blend innovation and efficiency, while continuously developing both technical expertise and broader
-        professional skills.</p>
-    </section>
+  <!-- SECTION: About -->
+  <section id="about" class="section">
+    <h2>About Me</h2>
+    <p>
+      Mechanical engineering student at UW–Madison with a foundation in design, analysis, and practical problem solving,
+      shaped through internships and team-based engineering challenges. Driven to contribute to engineering solutions
+      that blend innovation and efficiency, while continuously developing both technical expertise and broader
+      professional skills.
+    </p>
+  </section>
 
-    <section id="resume" class="section">
-      <h2>Resume</h2>
-      <p>
-        Mechanical engineering student at UW–Madison who has built a foundation in design, analysis, and practical problem solving,
-        through internships and team-based engineering challenges. Driven to contribute solutions that blend innovation and efficiency,
-        while continuously developing technical expertise and broad professional skills.
-      </p>
-
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-date">Expected May 2027</div>
-          <div class="timeline-content">
-            <h3>Education</h3>
-            <p><strong>University of Wisconsin–Madison</strong><br />Bachelor of Science, Mechanical Engineering</p>
-          </div>
+  <!-- SECTION: Resume -->
+  <section id="resume" class="section">
+    <h2>Experience</h2>
+    <div class="alt-timeline">
+      <!-- Experience: Caterpillar -->
+      <div class="timeline-card left">
+        <div class="content">
+          <h3>Caterpillar</h3>
+          <h4>Engine Platform Engineering Intern</h4>
+          <p><em>May 2025 – Aug. 2025 | Lafayette, IN</em></p>
+          <ul>
+            <li>Tripled oil filling rate, reducing 10+ hrs of service annually per mining truck</li>
+            <li>Optimized oil drainage system for maintainability</li>
+            <li>Improved fault response for autonomous vs. human-operated fleets</li>
+          </ul>
         </div>
+      </div>
 
-        <div class="timeline-item">
-          <div class="timeline-date">May–Aug 2025</div>
-          <div class="timeline-content">
-            <h3>Caterpillar – Engine Platform Engineering Intern</h3>
-            <ul>
-              <li>Improved mining truck oil fill system; reduced service time by 10 hours/year</li>
-              <li>Balanced preventative maintenance with equipment uptime strategy</li>
-              <li>Enhanced error response clarity across human-operated & autonomous trucks</li>
-            </ul>
-          </div>
+      <!-- Experience: HUSCO -->
+      <div class="timeline-card right">
+        <div class="content">
+          <h3>HUSCO International</h3>
+          <h4>Design Engineering Intern</h4>
+          <p><em>May 2024 – Aug. 2024 | Waukesha, WI</em></p>
+          <ul>
+            <li>Developed control valves for skid steers & tracked vehicles</li>
+            <li>Coordinated specs with OEMs and internal engineers</li>
+            <li>Created drawings & documentation using GD&T standards</li>
+          </ul>
         </div>
+      </div>
+    </div>
+  </section>
+  <!-- SECTION: Projects -->
+  <section id="projects" class="section">
+    <h2>Projects</h2>
 
-        <div class="timeline-item">
-          <div class="timeline-date">May–Aug 2024</div>
-          <div class="timeline-content">
-            <h3>HUSCO – Design Engineering Intern</h3>
-            <ul>
-              <li>Designed hydraulic valves for OEMs; prototyped for tractors and skid steers</li>
-              <li>Collaborated with customer engineers and internal teams for spec alignment</li>
-              <li>Created engineering drawings with GD&T for precise manufacturing</li>
-            </ul>
-          </div>
-        </div>
+    <h3>Bicep Curl Climber Design – Ri3D RustHOUNDS</h3>
+    <ul>
+      <li>Co-founded “Robot in 3 Days” challenge team at the collegiate level</li>
+      <li>Developed the “Bicep Curl Climb,” adopted by ~35% of top 100 FRC teams</li>
+      <li>Published open-source documentation with 1.9M+ views worldwide</li>
+    </ul>
 
-        <div class="timeline-item">
-          <div class="timeline-date">2023–Present</div>
-          <div class="timeline-content">
-            <h3>Awards</h3>
-            <ul>
-              <li>UW–Madison Engineering Diversity Scholarship Recipient</li>
-              <li>College of Engineering Dean’s Honors List</li>
-              <li>Town Proclamation: Leadership & Service, Hillsborough NJ</li>
-              <li>Eagle Scout, Troop 1776
- 
+    <h3>High Ground Clearance Suspension Arm – Baja SAE</h3>
+    <ul>
+      <li>Designed arched suspension arms to increase clearance over obstacles</li>
+      <li>Performed FEA simulations in SolidWorks to achieve safety goals</li>
+      <li>Prototyped and tested components during endurance race conditions</li>
+    </ul>
+  </section>
+
+  <!-- SECTION: Contact -->
+  <section id="contact" class="section">
+    <h2 style="text-align: center; font-size: 3.125rem;">Get in Touch</h2>
+    <div style="max-width: 600px; margin: 0 auto; padding-left: 80px;">
+      <p>✉︎ <span>jrmacias@wisc.edu</span></p>
+      <p>☎︎ <span>(908) 381-4532</span></p>
+      <p>🔗 <a href="https://www.linkedin.com/in/jack-macias" target="_blank">linkedin.com/in/jack-macias</a></p>
+    </div>
+  </section>
+
+  <!-- SECTION: Footer -->
   <footer>
     <div class="footer-about">
       <h3>About Me</h3>
@@ -300,6 +298,7 @@
     </div>
   </footer>
 
+  <!-- SECTION: Scripts -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const typedText = document.querySelector(".typed-text");
