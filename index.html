@@ -218,43 +218,31 @@
     </p>
   </section>
 
-<!-- SECTION: Resume -->
+<!-- SECTION: Working Experience -->
 <style>
   .timeline {
     position: relative;
     max-width: 1000px;
     margin: auto;
-    padding: 40px 0;
+    padding: 50px 0;
   }
 
-  .timeline::after {
+  .timeline::before {
     content: '';
     position: absolute;
-    width: 2px;
-    background-color: #000;
     top: 0;
     bottom: 0;
     left: 50%;
-    margin-left: -1px;
+    width: 2px;
+    background: #000;
+    transform: translateX(-50%);
   }
 
   .timeline-entry {
-    padding: 20px 40px;
     position: relative;
     width: 50%;
-  }
-
-  .timeline-entry::after {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    right: -10px;
-    background-color: #fff;
-    border: 2px solid #000;
-    top: 15px;
-    border-radius: 50%;
-    z-index: 1;
+    padding: 20px 40px;
+    box-sizing: border-box;
   }
 
   .timeline-entry.left {
@@ -267,19 +255,35 @@
     text-align: left;
   }
 
-  .timeline-entry.right::after {
+  .timeline-entry::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 2px solid #000;
+    border-radius: 50%;
+    z-index: 1;
+  }
+
+  .timeline-entry.left::before {
+    right: -10px;
+  }
+
+  .timeline-entry.right::before {
     left: -10px;
   }
 
   .timeline-content {
-    background-color: #fff;
-    padding: 20px;
+    background: #fff;
     border: 1px solid #000;
+    padding: 20px;
     border-radius: 6px;
   }
 
   .timeline-content h3 {
-    margin-top: 0;
+    margin: 0;
     color: #000;
   }
 
@@ -300,7 +304,7 @@
   }
 
   @media screen and (max-width: 768px) {
-    .timeline::after {
+    .timeline::before {
       left: 8px;
     }
 
@@ -316,14 +320,13 @@
       left: 0;
     }
 
-    .timeline-entry::after,
-    .timeline-entry.right::after {
+    .timeline-entry::before {
       left: 0;
     }
   }
 </style>
 
-<section id="resume" class="section">
+<section id="experience" class="section">
   <h2 style="text-align: center;">Working Experience</h2>
   <div class="timeline">
 
@@ -363,6 +366,7 @@
 
   </div>
 </section>
+
 
   <!-- SECTION: Projects -->
   <section id="projects" class="section">
