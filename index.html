@@ -220,132 +220,64 @@
 
 <!-- SECTION: Working Experience -->
 <style>
-  .timeline-container {
+  .timeline-vertical {
+    display: flex;
+    flex-direction: column;
     position: relative;
-    max-width: 1200px;
+    max-width: 1000px;
     margin: auto;
-    padding: 60px 0;
+    padding: 40px 20px;
   }
 
-  .timeline-line {
+  .timeline-vertical::before {
+    content: '';
     position: absolute;
-    left: 50%;
-    width: 4px;
-    background: #000;
+    left: 40px;
     top: 0;
     bottom: 0;
-    transform: translateX(-50%);
+    width: 4px;
+    background: #000;
   }
 
-  .timeline-item {
+  .timeline-entry {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 40px;
     position: relative;
-    width: 50%;
-    padding: 40px 20px;
-    box-sizing: border-box;
   }
 
-  .timeline-item .timeline-box {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    border: 1px solid #000;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    position: relative;
-    opacity: 0;
-    transform: translateX(0);
-    transition: all 2.4s ease;
-  }
-
-  .timeline-item.left {
-    left: 0;
-    text-align: right;
-  }
-
-  .timeline-item.left .timeline-box {
-    margin-left: auto;
-    transform: translateX(-100px);
-  }
-
-  .timeline-item.right {
-    left: 50%;
-    text-align: left;
-  }
-
-  .timeline-item.right .timeline-box {
-    margin-right: auto;
-    transform: translateX(100px);
-  }
-
-  .timeline-item.visible .timeline-box {
-    transform: translateX(0);
-    opacity: 1;
-  }
-
-  .timeline-date {
+  .timeline-entry::before {
+    content: '';
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 120px;
-    text-align: center;
-    font-size: 0.85rem;
-    color: #000;
-    background-color: #fff;
+    left: 32px;
+    top: 6px;
+    width: 16px;
+    height: 16px;
+    background: #fff;
     border: 2px solid #000;
     border-radius: 50%;
-    padding: 8px 0;
-    font-weight: 600;
-    z-index: 2;
-  }
-
-  .timeline-item.left .timeline-date {
-    right: calc(50% + 36px);
-  }
-
-  .timeline-item.right .timeline-date {
-    left: calc(50% + 36px);
-  }
-
-  .connector {
-    position: absolute;
-    width: 36px;
-    height: 2px;
-    background: #000;
-    top: 50%;
-    transform: translateY(-50%);
     z-index: 1;
   }
 
-  .timeline-item.left .connector {
-    right: calc(50% - 2px);
+  .timeline-date {
+    width: 120px;
+    text-align: right;
+    padding-right: 20px;
+    font-weight: bold;
+    color: #000;
   }
 
-  .timeline-item.right .connector {
-    left: calc(50% - 2px);
-  }
-
-  .triangle {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 0;
-    height: 0;
-    border-top: 6px solid transparent;
-    border-bottom: 6px solid transparent;
-  }
-
-  .timeline-item.left .triangle {
-    right: calc(50% - 2px);
-    border-left: 8px solid #000;
-  }
-
-  .timeline-item.right .triangle {
-    left: calc(50% - 2px);
-    border-right: 8px solid #000;
+  .timeline-box {
+    background: #fff;
+    border: 1px solid #000;
+    padding: 16px 20px;
+    border-radius: 6px;
+    max-width: 700px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
   }
 
   .timeline-box h3 {
-    margin-top: 0;
-    margin-bottom: 5px;
+    margin: 0 0 5px;
     color: #000;
   }
 
@@ -353,109 +285,75 @@
     margin: 0 0 10px;
     font-weight: normal;
     color: #333;
-    font-size: 1rem;
   }
 
   .timeline-box p,
   .timeline-box li {
     color: #000;
+    margin: 0;
+  }
+
+  .timeline-box ul {
+    margin-top: 10px;
+    padding-left: 20px;
   }
 
   @media screen and (max-width: 768px) {
-    .timeline-item,
-    .timeline-item.left,
-    .timeline-item.right {
-      width: 100%;
-      padding-left: 30px;
-      padding-right: 30px;
-      left: 0;
-      text-align: left;
-    }
-
-    .timeline-line {
-      left: 8px;
+    .timeline-entry {
+      flex-direction: column;
+      align-items: flex-start;
     }
 
     .timeline-date {
-      left: 40px;
-      transform: translateY(-50%);
+      text-align: left;
+      padding-bottom: 10px;
     }
 
-    .connector, .triangle {
-      display: none;
+    .timeline-vertical::before {
+      left: 20px;
     }
 
-    .timeline-box {
-      margin: 0 auto !important;
-      transform: translateX(0) !important;
-      opacity: 1 !important;
+    .timeline-entry::before {
+      left: 12px;
     }
   }
 </style>
 
-<section id="resume" class="section">
+<section id="experience" class="section">
   <h2 style="text-align: center;">Working Experience</h2>
-  <div class="timeline-container">
-    <div class="timeline-line"></div>
+  <div class="timeline-vertical">
 
-    <!-- Experience 1 -->
-    <div class="timeline-item left">
-      <div class="timeline-date">2021</div>
-      <div class="connector"></div>
-      <div class="triangle"></div>
+    <!-- Entry 1 -->
+    <div class="timeline-entry">
+      <div class="timeline-date">May – Aug. 2025</div>
       <div class="timeline-box">
-        <h3>Associate Software Engineer</h3>
-        <h4>Seekers Cloud (PVT) LTD, Colombo, SL</h4>
-        <p>I worked here as an Associate Software Engineer Intern & UI & UX Designer.</p>
+        <h3>Caterpillar</h3>
+        <h4>Engine Platform Engineering Intern – Lafayette, IN</h4>
         <ul>
-          <li>Software Development</li>
-          <li>Front-End Development</li>
-          <li>Back-End Web Development</li>
-          <li>Full-Stack Development</li>
-          <li>Spring Framework</li>
-          <li>Angular</li>
+          <li>Improved mining truck engine oil management system serviceability by tripling oil fill rate and optimizing drainage design, saving 10+ hours of service time annually per truck.</li>
+          <li>Balanced preventive maintenance with productivity to extend machine lifespan and maximize operational efficiency.</li>
+          <li>Documented system response differences between autonomous and human-operated trucks, enhancing software clarity for customers.</li>
         </ul>
       </div>
     </div>
 
-    <!-- Experience 2 -->
-    <div class="timeline-item right">
-      <div class="timeline-date">2021 – 2022</div>
-      <div class="connector"></div>
-      <div class="triangle"></div>
+    <!-- Entry 2 -->
+    <div class="timeline-entry">
+      <div class="timeline-date">May – Aug. 2024</div>
       <div class="timeline-box">
-        <h3>Associate Software Engineer</h3>
-        <h4>INTELLEON (PVT) LTD, Colombo, SL</h4>
-        <p>I worked here as an Associate Software Engineer & UI & UX Designer.</p>
+        <h3>HUSCO International</h3>
+        <h4>Design Engineering Intern – Waukesha, WI</h4>
         <ul>
-          <li>Software Development</li>
-          <li>Front-End Development</li>
-          <li>Back-End Web Development</li>
-          <li>Full-Stack Development</li>
-          <li>Spring Framework</li>
-          <li>Angular</li>
+          <li>Designed and prototyped hydraulic control valves for OEMs, meeting performance and durability standards.</li>
+          <li>Collaborated with customer engineers and internal teams to refine designs and align with manufacturing capabilities.</li>
+          <li>Created technical documentation and drawings using GD&T for precise manufacturing and quality control.</li>
         </ul>
       </div>
     </div>
+
   </div>
 </section>
-
-<script>
-  function revealTimeline() {
-    document.querySelectorAll('.timeline-item').forEach(item => {
-      const rect = item.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 100) {
-        item.classList.add('visible');
-      }
-    });
-  }
-
-  document.addEventListener('DOMContentLoaded', revealTimeline);
-  window.addEventListener('scroll', revealTimeline);
-</script>
-
-
-
+  
   <!-- SECTION: Projects -->
   <section id="projects" class="section">
     <h2>Projects</h2>
