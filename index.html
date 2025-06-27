@@ -221,42 +221,51 @@
 <!-- SECTION: Career History -->
 <section id="resume" class="section">
   <h2 class="section-title">Career History</h2>
-  <div class="resume-container">
+  <div class="horizontal-timeline">
 
     <!-- Entry 1 -->
-    <div class="resume-item">
-      <h3 class="resume-title">Corporate Intern - Engineering</h3>
-      <h4 class="resume-subtitle">Company Name (Reporting to David Knolhoff, Skip Manager: Ron Smith)</h4>
-      <p class="resume-location">Miami, FL — Present</p>
-      <ul class="resume-details">
-        <li>Supported engineering teams in project development, testing, and documentation.</li>
-        <li>Assisted in process improvement initiatives and technical research tasks.</li>
-        <li>Collaborated across departments to enhance operational efficiency and communication.</li>
-      </ul>
+    <div class="timeline-entry">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <h3>Corporate Intern - Engineering</h3>
+        <h4>Company Name (Reporting to David Knolhoff, Skip Manager: Ron Smith)</h4>
+        <p>Miami, FL — Present</p>
+        <ul>
+          <li>- Supported engineering teams in project development, testing, and documentation.</li>
+          <li>- Assisted in process improvement initiatives and technical research tasks.</li>
+          <li>- Collaborated across departments to enhance operational efficiency and communication.</li>
+        </ul>
+      </div>
     </div>
 
     <!-- Entry 2 -->
-    <div class="resume-item">
-      <h3 class="resume-title">Engine Platform Engineering Intern</h3>
-      <h4 class="resume-subtitle">Caterpillar – Lafayette, IN</h4>
-      <p class="resume-location">May 2025 – Aug. 2025</p>
-      <ul class="resume-details">
-        <li>Improved mining truck engine oil management system serviceability by tripling oil fill rate and optimizing drainage design, saving 10+ hours of service time annually per truck.</li>
-        <li>Balanced preventive maintenance with productivity to extend machine lifespan and maximize operational efficiency.</li>
-        <li>Documented system response differences between autonomous and human-operated trucks, enhancing software clarity for customers.</li>
-      </ul>
+    <div class="timeline-entry">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <h3>Engine Platform Engineering Intern</h3>
+        <h4>Caterpillar – Lafayette, IN</h4>
+        <p>May 2025 – Aug. 2025</p>
+        <ul>
+          <li>- Improved mining truck engine oil management system serviceability by tripling oil fill rate and optimizing drainage design, saving 10+ hours of service time annually per truck.</li>
+          <li>- Balanced preventive maintenance with productivity to extend machine lifespan and maximize operational efficiency.</li>
+          <li>- Documented system response differences between autonomous and human-operated trucks, enhancing software clarity for customers.</li>
+        </ul>
+      </div>
     </div>
 
     <!-- Entry 3 -->
-    <div class="resume-item">
-      <h3 class="resume-title">Design Engineering Intern</h3>
-      <h4 class="resume-subtitle">HUSCO International – Waukesha, WI</h4>
-      <p class="resume-location">May 2024 – Aug. 2024</p>
-      <ul class="resume-details">
-        <li>Designed and prototyped hydraulic control valves for OEMs, meeting performance and durability standards.</li>
-        <li>Collaborated with customer engineers and internal teams to refine designs and align with manufacturing capabilities.</li>
-        <li>Created technical documentation and drawings using GD&T for precise manufacturing and quality control.</li>
-      </ul>
+    <div class="timeline-entry">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <h3>Design Engineering Intern</h3>
+        <h4>HUSCO International – Waukesha, WI</h4>
+        <p>May 2024 – Aug. 2024</p>
+        <ul>
+          <li>- Designed and prototyped hydraulic control valves for OEMs, meeting performance and durability standards.</li>
+          <li>- Collaborated with customer engineers and internal teams to refine designs and align with manufacturing capabilities.</li>
+          <li>- Created technical documentation and drawings using GD&T for precise manufacturing and quality control.</li>
+        </ul>
+      </div>
     </div>
 
   </div>
@@ -267,60 +276,110 @@
     text-align: center;
     font-size: 2.5rem;
     font-weight: 700;
-    margin-bottom: 40px;
+    margin-bottom: 60px;
   }
 
-  .resume-container {
-    max-width: 900px;
-    margin: auto;
-    padding: 0 20px;
-  }
-
-  .resume-item {
-    margin-bottom: 40px;
-    border-left: 4px solid #000;
-    padding-left: 20px;
+  .horizontal-timeline {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
     position: relative;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: auto;
+    gap: 40px;
   }
 
-  .resume-item::before {
+  .horizontal-timeline::before {
     content: '';
     position: absolute;
-    left: -10px;
-    top: 5px;
+    top: 20px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #000;
+    z-index: 0;
+  }
+
+  .timeline-entry {
+    position: relative;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .timeline-dot {
     width: 16px;
     height: 16px;
     background: #fff;
     border: 2px solid #000;
     border-radius: 50%;
+    position: relative;
+    top: 12px;
+    z-index: 1;
   }
 
-  .resume-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin: 0;
+  .timeline-content {
+    background: #fff;
+    border: 1px solid #000;
+    padding: 20px;
+    border-radius: 6px;
+    margin-top: 40px;
+    text-align: left;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
   }
 
-  .resume-subtitle {
-    font-size: 1rem;
+  .timeline-content h3 {
+    margin: 0 0 5px;
+    font-size: 1.25rem;
+  }
+
+  .timeline-content h4 {
+    margin: 0 0 10px;
+    font-weight: normal;
     color: #555;
-    margin: 5px 0;
+    font-size: 1rem;
   }
 
-  .resume-location {
+  .timeline-content p {
+    margin: 0 0 10px;
     font-size: 0.95rem;
     color: #777;
-    margin-bottom: 10px;
   }
 
-  .resume-details {
+  .timeline-content ul {
     padding-left: 20px;
   }
 
-  .resume-details li {
+  .timeline-content li {
     margin-bottom: 8px;
     font-size: 0.95rem;
     color: #333;
+    list-style: none;
+  }
+
+  @media screen and (max-width: 900px) {
+    .horizontal-timeline {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .timeline-entry {
+      width: 100%;
+    }
+
+    .horizontal-timeline::before {
+      top: 0;
+      left: 50%;
+      width: 4px;
+      height: 100%;
+    }
+
+    .timeline-dot {
+      left: -10px;
+      top: 0;
+    }
   }
 </style>
 
