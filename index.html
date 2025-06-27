@@ -155,7 +155,7 @@
     </p>
   </section>
 
-  <!-- SECTION: Career History -->
+<!-- SECTION: Career History -->
 <section id="resume" class="section">
   <h2 class="section-title">Career History</h2>
   <div class="timeline-container">
@@ -163,6 +163,7 @@
 
     <!-- Entry 1 -->
     <div class="timeline-entry">
+      <div class="timeline-label">2025</div>
       <div class="timeline-dot"></div>
       <div class="timeline-box">
         <h3>Engine Platform Engineering Intern</h3>
@@ -178,6 +179,7 @@
 
     <!-- Entry 2 -->
     <div class="timeline-entry">
+      <div class="timeline-label">2024</div>
       <div class="timeline-dot"></div>
       <div class="timeline-box">
         <h3>Design Engineering Intern</h3>
@@ -221,6 +223,16 @@
     position: relative;
     margin-bottom: 60px;
     padding-left: 80px;
+  }
+
+  .timeline-label {
+    position: absolute;
+    left: 0;
+    top: 38px;
+    width: 50px;
+    text-align: right;
+    font-size: 0.85rem;
+    color: #555;
   }
 
   .timeline-dot {
@@ -280,6 +292,11 @@
 
     .timeline-dot {
       left: 12px;
+    }
+
+    .timeline-label {
+      left: -40px;
+      text-align: left;
     }
 
     .timeline-entry {
