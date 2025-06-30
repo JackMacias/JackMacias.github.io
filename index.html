@@ -506,14 +506,12 @@ footer {
   const clonesAfter = 2;
   let currentIndex = clonesBefore;
 
-  // Build full list with clones
   const fullList = [
     ...imagePaths.slice(-clonesBefore),
     ...imagePaths,
     ...imagePaths.slice(0, clonesAfter)
   ];
 
-  // Create and append all images
   fullList.forEach((src, i) => {
     const img = document.createElement("img");
     img.src = src;
@@ -546,24 +544,18 @@ footer {
     currentIndex += step;
     updatePosition(true);
 
-    track.addEventListener("transitionend", () => {
-      let reset = false;
-
+    const handleTransitionEnd = () => {
       if (currentIndex >= total + clonesBefore) {
         currentIndex = clonesBefore;
-        reset = true;
+        updatePosition(false);
       } else if (currentIndex < clonesBefore) {
         currentIndex = total + (currentIndex - clonesBefore);
-        reset = true;
+        updatePosition(false);
       }
+      track.removeEventListener("transitionend", handleTransitionEnd);
+    };
 
-      if (reset) {
-        // Delay the reset just enough to avoid a visual blink
-        setTimeout(() => {
-          updatePosition(false);
-        }, 0);
-      }
-    }, { once: true });
+    track.addEventListener("transitionend", handleTransitionEnd);
   }
 
   document.addEventListener("DOMContentLoaded", () => {
