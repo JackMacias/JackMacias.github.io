@@ -402,56 +402,106 @@ footer {
     }
   }
 </style>
-<!-- SECTION: Projects -->
+
+
 <!DOCTYPE html>
 
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Modular Carousel Example</title>
+<title>Projects</title>
 <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .section-underline {
+      width: 60px;
+      height: 4px;
+      background-color: #222;
+      margin: 0 auto 30px auto;
+      border-radius: 2px;
+    }
+
+    .project {
+      margin-bottom: 60px;
+    }
+
+    .project h3 {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .project-flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .project-flex.reverse {
+      flex-direction: row-reverse;
+    }
+
+    .carousel-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1 1 60%;
+      max-width: 600px;
+    }
+
     .carousel-container {
+      position: relative;
+      overflow: hidden;
+      height: 200px;
       display: flex;
       align-items: center;
       justify-content: center;
-      max-width: 1000px;
-      margin: 40px auto;
+      width: 100%;
     }
 
-    .carousel-wrapper {
-      width: 700px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .carousel-track {
+    .carousel {
       display: flex;
-      align-items: center;
       transition: transform 0.5s ease-in-out;
+      align-items: center;
     }
 
-    .carousel-item {
-      flex-shrink: 0;
-      height: auto;
-      max-height: 180px;
-      width: auto;
-      margin: 0 20px;
+    .carousel-image {
+      width: 100px;
+      height: 150px;
       object-fit: contain;
+      flex-shrink: 0;
       opacity: 0.3;
-      transform: scale(0.9);
       transition: transform 0.5s ease, opacity 0.5s ease;
-      display: block;
+      transform: scale(0.9);
     }
 
-    .carousel-item.center {
+    .carousel-image.center {
       opacity: 1;
       transform: scale(1.1);
+      z-index: 1;
     }
 
-    .carousel-item.adjacent {
+    .carousel-image.adjacent {
       opacity: 0.6;
-      transform: scale(1);
+    }
+
+    .carousel-buttons {
+      margin-top: 10px;
+      display: flex;
+      gap: 20px;
     }
 
     .carousel-btn {
@@ -459,222 +509,166 @@ footer {
       color: white;
       border: none;
       border-radius: 50%;
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
       font-size: 2rem;
       cursor: pointer;
-      z-index: 2;
-      margin: 0 10px;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
     }
 
     .carousel-btn:hover {
       background-color: #333;
     }
 
-    .project {
+    .project-description {
+      padding: 0 100px;
+      flex: 1 1 35%;
+      font-size: 1rem;
+      line-height: 1.5;
+      text-align: right;
+      max-width: 600px;
+    }
+
+    .project-flex.reverse .project-description {
+      padding: 0 100px;
+      text-align: left;
+    }
+
+    @media (max-width: 768px) {
+      .project-flex,
+      .project-flex.reverse {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .project-description {
+      padding: 0 100px;
+        text-align: center !important;
+      }
+    }
+  
+    .project-description-wrapper {
+      flex: 1 1 35%;
+      max-width: 600px;
+      padding: 0 100px;
       text-align: center;
     }
 
-    .section-title {
-      text-align: center;
-      font-size: 2rem;
-      margin-top: 40px;
+    .project-description-wrapper h3 {
+      margin-bottom: 10px;
     }
-  </style>
+
+    .project-description {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin: 0 auto;
+    }
+
+    .project-flex.reverse .project-description-wrapper {
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .project-description-wrapper {
+        padding: 0 20px;
+      }
+    }
+
+    .project-description p {
+      text-indent: 2em;
+    }
+</style>
 </head>
 <body>
 <section class="section" id="Projects">
 <h2 class="section-title">Projects</h2>
-<div class="project"><div class="project-flex" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 2rem;"><div class="carousel-container">
-<button class="carousel-btn prev-sign">❮</button>
-<div class="carousel-wrapper">
-<div class="carousel-track" id="carousel-track-sign"></div>
+<div class="section-underline"></div>
+<!-- Project 1: Suspension Arm (Carousel Left, Description Right) -->
+<div class="project">
+<div class="project-flex">
+<div class="carousel-section">
+<div class="carousel-container">
+<div class="carousel" id="carousel1">
+<img alt="Arm 1" class="carousel-image" src="assets/Arm-1.jpg"/>
+<img alt="Arm 2" class="carousel-image" src="assets/Arm-2.jpg"/>
+<img alt="Arm 3" class="carousel-image" src="assets/Arm-3.jpg"/>
 </div>
-<button class="carousel-btn next-sign">❯</button>
-</div><div class="project-text" style="flex: 1 1 45%; max-width: 600px; padding: 0 100px;text-align: left; font-size: 1rem; line-height: 1.6;"><h3 style="text-align: left; margin-top: 0;">Forumla One LED Sign</h3><p style="text-indent: 2em;">This project showcases my hands-on fabrication and design work. Click through the carousel to view images of this project.</p></div></div></div>
-<div class="project"><div class="project-flex" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 2rem; flex-direction: row-reverse;"><div class="project-text" style="flex: 1 1 45%; max-width: 600px; padding: 0 100px;text-align: left; font-size: 1rem; line-height: 1.6;"><h3 style="text-align: left; margin-top: 0;">High Ground Clearance Suspension</h3><p style="text-indent: 2em;">This project showcases my hands-on fabrication and design work. Click through the carousel to view images of this project.</p></div><div class="carousel-container">
-<button class="carousel-btn prev-arm">❮</button>
-<div class="carousel-wrapper">
-<div class="carousel-track" id="carousel-track-arm"></div>
 </div>
-<button class="carousel-btn next-arm">❯</button>
-</div></div></div>
-<div class="project"><div class="project-flex" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 2rem;"><div class="carousel-container">
-<button class="carousel-btn prev-board">❮</button>
-<div class="carousel-wrapper">
-<div class="carousel-track" id="carousel-track-board"></div>
+<div class="carousel-buttons">
+<button class="carousel-btn" onclick="moveSlide('carousel1', -1)">❮</button>
+<button class="carousel-btn" onclick="moveSlide('carousel1', 1)">❯</button>
 </div>
-<button class="carousel-btn next-board">❯</button>
-</div><div class="project-text" style="flex: 1 1 45%; max-width: 600px; padding: 0 100px;text-align: left; font-size: 1rem; line-height: 1.6;"><h3 style="text-align: left; margin-top: 0;">Various Cutting/Charcuterie Boards</h3><p style="text-indent: 2em;">This project showcases my hands-on fabrication and design work. Click through the carousel to view images of this project.</p></div></div></div>
-<div class="project"><div class="project-flex" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 2rem; flex-direction: row-reverse;"><div class="project-text" style="flex: 1 1 45%; max-width: 600px; padding: 0 100px;text-align: left; font-size: 1rem; line-height: 1.6;"><h3 style="text-align: left; margin-top: 0;">Bolt Action Pen</h3><p style="text-indent: 2em;">This project showcases my hands-on fabrication and design work. Click through the carousel to view images of this project.</p></div><div class="carousel-container">
-<button class="carousel-btn prev-pen">❮</button>
-<div class="carousel-wrapper">
-<div class="carousel-track" id="carousel-track-pen"></div>
 </div>
-<button class="carousel-btn next-pen">❯</button>
-</div></div></div>
-<div class="project"><div class="project-flex" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 2rem;"><div class="carousel-container">
-<button class="carousel-btn prev-laser">❮</button>
-<div class="carousel-wrapper">
-<div class="carousel-track" id="carousel-track-laser"></div>
+<div class="project-description-wrapper"><h3>Suspension Arm</h3><div class="project-description">
+<p>
+            This high-clearance suspension arm was designed to enhance ground clearance for off-road applications.
+            It features a lightweight structure, stress-relief geometry, and was iteratively tested and refined through CAD simulation and physical prototyping.
+          </p>
+</div></div>
 </div>
-<button class="carousel-btn next-laser">❯</button>
-</div><div class="project-text" style="flex: 1 1 45%; max-width: 600px; padding: 0 100px;text-align: left; font-size: 1rem; line-height: 1.6;"><h3 style="text-align: left; margin-top: 0;">Laser Cut Layer Art</h3><p style="text-indent: 2em;">This project showcases my hands-on fabrication and design work. Click through the carousel to view images of this project.</p></div></div></div>
-<div class="project"><div class="project-flex" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 2rem; flex-direction: row-reverse;"><div class="project-text" style="flex: 1 1 45%; max-width: 600px; padding: 0 100px;text-align: left; font-size: 1rem; line-height: 1.6;"><h3 style="text-align: left; margin-top: 0;">Pool Cue Stand</h3><p style="text-indent: 2em;">This project showcases my hands-on fabrication and design work. Click through the carousel to view images of this project.</p></div><div class="carousel-container">
-<button class="carousel-btn prev-pool">❮</button>
-<div class="carousel-wrapper">
-<div class="carousel-track" id="carousel-track-pool"></div>
 </div>
-<button class="carousel-btn next-pool">❯</button>
-</div></div></div>
+<!-- Project 2: LED Sign (Carousel Right, Description Left) -->
+<div class="project">
+<div class="project-flex reverse">
+<div class="carousel-section">
+<div class="carousel-container">
+<div class="carousel" id="carousel2">
+<img alt="Sign 1" class="carousel-image" src="assets/Sign-1.jpg"/>
+<img alt="Sign 2" class="carousel-image" src="assets/Sign-2.jpg"/>
+<img alt="Sign 3" class="carousel-image" src="assets/Sign-3.jpg"/>
+</div>
+</div>
+<div class="carousel-buttons">
+<button class="carousel-btn" onclick="moveSlide('carousel2', -1)">❮</button>
+<button class="carousel-btn" onclick="moveSlide('carousel2', 1)">❯</button>
+</div>
+</div>
+<div class="project-description-wrapper"><h3>LED Sign</h3><div class="project-description">
+<p>
+            This custom-built LED sign features Formula One branding, with hand-soldered addressable LEDs and a wood/acrylic chassis.
+            Controlled by an Arduino with custom animations and light modes.
+          </p>
+</div></div>
+</div>
+</div>
 </section>
 <script>
-    function initCarousel({ trackId, prevBtnClass, nextBtnClass, imagePaths }) {
-      const track = document.getElementById(trackId);
-      const total = imagePaths.length;
-      let currentIndex = 1;
+    const carousels = {};
 
-      const fullList = [
-        imagePaths[total - 1] || imagePaths[0],
-        ...imagePaths,
-        imagePaths[1] || imagePaths[0]
-      ];
-
-      const imageElements = [];
-
-      fullList.forEach((src, i) => {
-        const img = document.createElement("img");
-        img.src = src;
-        img.className = "carousel-item";
-        img.alt = `Image ${i}`;
-        track.appendChild(img);
-        imageElements.push(img);
-      });
-
-      const items = imageElements;
-
-      function updateClasses() {
-        items.forEach((item, index) => {
-          item.classList.remove("center", "adjacent");
-          if (index === currentIndex) {
-            item.classList.add("center");
-          } else if (index === currentIndex - 1 || index === currentIndex + 1) {
-            item.classList.add("adjacent");
-          }
-        });
-      }
-
-      function updatePosition(animate = true) {
-        const centerItem = items[currentIndex];
-        const wrapper = track.parentElement;
-
-        let offset = 0;
-        for (let i = 0; i < currentIndex; i++) {
-          offset += items[i].offsetWidth + 40; // 20px margin on each side
-        }
-
-        const centerOffset = (wrapper.offsetWidth - centerItem.offsetWidth) / 2;
-        const translateX = -offset + centerOffset;
-
-        track.style.transition = animate ? "transform 0.5s ease-in-out" : "none";
-        track.style.transform = `translateX(${translateX}px)`;
-
-        updateClasses();
-      }
-
-      function moveSlide(step) {
-        currentIndex += step;
-        updatePosition(true);
-
-        const handleTransitionEnd = () => {
-          if (currentIndex >= total + 1) {
-            currentIndex = 1;
-            updatePosition(false);
-          } else if (currentIndex < 1) {
-            currentIndex = total;
-            updatePosition(false);
-          }
-          track.removeEventListener("transitionend", handleTransitionEnd);
+    function moveSlide(id, step) {
+      if (!carousels[id]) {
+        carousels[id] = {
+          carousel: document.getElementById(id),
+          images: Array.from(document.querySelectorAll(`#${id} .carousel-image`)),
+          index: 0
         };
-
-        track.addEventListener("transitionend", handleTransitionEnd);
       }
 
-      document.querySelector(`.${prevBtnClass}`).addEventListener("click", () => moveSlide(-1));
-      document.querySelector(`.${nextBtnClass}`).addEventListener("click", () => moveSlide(1));
+      const c = carousels[id];
+      c.index = (c.index + step + c.images.length) % c.images.length;
 
-      Promise.all(items.map(img => {
-        return new Promise(resolve => {
-          if (img.complete) resolve();
-          else img.onload = resolve;
-        });
-      })).then(() => {
-        updatePosition(false);
-      });
+      c.images.forEach(img => img.classList.remove('center', 'adjacent'));
+
+      const offset = -c.index * c.images[0].offsetWidth + (c.carousel.offsetWidth / 2 - c.images[0].offsetWidth / 2);
+      c.carousel.style.transform = `translateX(${offset}px)`;
+
+      c.images[c.index].classList.add('center');
+      if (c.images[c.index - 1]) c.images[c.index - 1].classList.add('adjacent');
+      if (c.images[c.index + 1]) c.images[c.index + 1].classList.add('adjacent');
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
-
-      initCarousel({
-        trackId: "carousel-track-sign",
-        prevBtnClass: "prev-sign",
-        nextBtnClass: "next-sign",
-        imagePaths: [
-          "assets/Sign-1.jpg", "assets/Sign-2.jpg", "assets/Sign-3.jpg",
-          "assets/Sign-4.jpg", "assets/Sign-5.jpg"
-        ]
-      });
-      
-      initCarousel({
-        trackId: "carousel-track-arm",
-        prevBtnClass: "prev-arm",
-        nextBtnClass: "next-arm",
-        imagePaths: [
-          "assets/Arm-1.jpg", "assets/Arm-2.jpg", "assets/Arm-3.jpg",
-          "assets/Arm-4.jpg", "assets/Arm-5.jpg", "assets/Arm-6.jpg",
-          "assets/Arm-7.jpg", "assets/Arm-8.jpg", "assets/Arm-9.jpg"
-        ]
-      });
-
-      initCarousel({
-        trackId: "carousel-track-board",
-        prevBtnClass: "prev-board",
-        nextBtnClass: "next-board",
-        imagePaths: [
-          "assets/Board-1.jpg", "assets/Board-2.jpg", "assets/Board-3.jpg",
-          "assets/Board-4.jpg", "assets/Board-5.jpg", "assets/Board-6.jpg",
-          "assets/Board-7.jpg", "assets/Board-8.jpg", "assets/Board-9.jpg",
-          "assets/Board-10.jpg", "assets/Board-11.jpg"
-        ]
-      });
-        initCarousel({
-        trackId: "carousel-track-pen",
-        prevBtnClass: "prev-pen",
-        nextBtnClass: "next-pen",
-        imagePaths: [
-          "assets/Pen-1.jpg", "assets/Pen-2.jpg"
-        ]
-      });
-        initCarousel({
-        trackId: "carousel-track-laser",
-        prevBtnClass: "prev-laser",
-        nextBtnClass: "next-laser",
-        imagePaths: [
-          "assets/Laser-Mando.png", "assets/Laser-Batman.jpg", "assets/Laser-Tiger.png"
-        ]
-      });
-        initCarousel({
-        trackId: "carousel-track-pool",
-        prevBtnClass: "prev-pool",
-        nextBtnClass: "next-pool",
-        imagePaths: [
-          "assets/Pool-1.png"
-        ]
-      });
+    document.addEventListener('DOMContentLoaded', () => {
+      moveSlide('carousel1', 0);
+      moveSlide('carousel2', 0);
     });
   </script>
 </body>
 </html>
+
 <!-- SECTION: Contact -->
 <section class="section" id="contact" style="padding: 60px 0; background-color: #ffffff;">
 <h2 style="text-align: center; font-size: 3.125rem;">Get in Touch</h2>
