@@ -415,15 +415,21 @@ footer {
   <h2 class="section-title">Projects</h2>
 
   <div class="project">
-    <h3>Suspension ArmS</h3>
+    <h3>Suspension Arm</h3>
     <div class="carousel-container">
       <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
       <div class="carousel-wrapper">
-        <div class="carousel" id="carousel">
-          <img id="prevImage" class="carousel-image adjacent" alt="Previous">
-          <img id="centerImage" class="carousel-image center" alt="Center">
-          <img id="nextImage" class="carousel-image adjacent" alt="Next">
-        </div>
+        <ul class="carousel" id="carousel">
+          <li><img src="assets/Arm-1.jpg" alt="Arm 1" /></li>
+          <li><img src="assets/Arm-2.jpg" alt="Arm 2" /></li>
+          <li><img src="assets/Arm-3.jpg" alt="Arm 3" /></li>
+          <li><img src="assets/Arm-4.jpg" alt="Arm 4" /></li>
+          <li><img src="assets/Arm-5.PNG" alt="Arm 5" /></li>
+          <li><img src="assets/Arm-6.jpg" alt="Arm 6" /></li>
+          <li><img src="assets/Arm-7.jpg" alt="Arm 7" /></li>
+          <li><img src="assets/Arm-8.PNG" alt="Arm 8" /></li>
+          <li><img src="assets/Arm-9.jpg" alt="Arm 9" /></li>
+        </ul>
       </div>
       <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
     </div>
@@ -440,36 +446,34 @@ footer {
   }
 
   .carousel-wrapper {
-    overflow: hidden;
     width: 660px;
+    overflow: hidden;
   }
 
   .carousel {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    transform: translateX(0);
+    padding: 0;
+    margin: 0;
+    list-style: none;
     transition: transform 0.5s ease-in-out;
   }
 
-  .carousel-image {
+  .carousel li {
+    flex-shrink: 0;
     width: 200px;
     height: 150px;
     margin: 0 10px;
-    object-fit: contain;
-    flex-shrink: 0;
     opacity: 0.3;
     transform: scale(0.9);
     transition: transform 0.5s ease, opacity 0.5s ease;
   }
 
-  .carousel-image.center {
+  .carousel li.center {
     opacity: 1;
     transform: scale(1.1);
   }
 
-  .carousel-image.adjacent {
+  .carousel li.adjacent {
     opacity: 0.6;
     transform: scale(1);
   }
@@ -484,6 +488,7 @@ footer {
     font-size: 2rem;
     cursor: pointer;
     z-index: 2;
+    margin: 0 10px;
   }
 
   .carousel-btn:hover {
@@ -492,56 +497,36 @@ footer {
 </style>
 
 <script>
-  const imagePaths = [
-    "assets/Arm-1.jpg",
-    "assets/Arm-2.jpg",
-    "assets/Arm-3.jpg",
-    "assets/Arm-4.jpg",
-    "assets/Arm-5.PNG",
-    "assets/Arm-6.jpg",
-    "assets/Arm-7.jpg",
-    "assets/Arm-8.PNG",
-    "assets/Arm-9.jpg"
-  ];
-
+  const carousel = document.getElementById("carousel");
+  const items = carousel.children;
+  const itemWidth = 220; // 200px + 2*10px margin
   let currentIndex = 0;
 
-  const prevImage = document.getElementById("prevImage");
-  const centerImage = document.getElementById("centerImage");
-  const nextImage = document.getElementById("nextImage");
-  const carousel = document.getElementById("carousel");
-
-  function updateImages() {
-    const total = imagePaths.length;
-    const prevIndex = (currentIndex - 1 + total) % total;
-    const nextIndex = (currentIndex + 1) % total;
-
-    prevImage.src = imagePaths[prevIndex];
-    centerImage.src = imagePaths[currentIndex];
-    nextImage.src = imagePaths[nextIndex];
-
-    // Reset classes for smooth transition
-    prevImage.className = "carousel-image adjacent";
-    centerImage.className = "carousel-image center";
-    nextImage.className = "carousel-image adjacent";
+  function updateClasses() {
+    Array.from(items).forEach((item, i) => {
+      item.classList.remove("center", "adjacent");
+      if (i === currentIndex) item.classList.add("center");
+      if (i === currentIndex - 1 || i === currentIndex + 1) item.classList.add("adjacent");
+    });
   }
 
   function moveSlide(step) {
-    const direction = step > 0 ? -1 : 1;
-    carousel.style.transition = "transform 0.5s ease-in-out";
-    carousel.style.transform = `translateX(${direction * 220}px)`;
+    const total = items.length;
+    currentIndex = (currentIndex + step + total) % total;
 
-    carousel.addEventListener("transitionend", () => {
-      carousel.style.transition = "none";
-      carousel.style.transform = "translateX(0)";
-      currentIndex = (currentIndex + step + imagePaths.length) % imagePaths.length;
-      updateImages();
-    }, { once: true });
+    const offset = -currentIndex * itemWidth + itemWidth * 1.5;
+    carousel.style.transform = `translateX(${offset}px)`;
+
+    updateClasses();
   }
 
-  document.addEventListener("DOMContentLoaded", updateImages);
+  document.addEventListener("DOMContentLoaded", () => {
+    // Center the first image
+    const offset = -currentIndex * itemWidth + itemWidth * 1.5;
+    carousel.style.transform = `translateX(${offset}px)`;
+    updateClasses();
+  });
 </script>
-
   
 <!-- SECTION: Awards -->
 <section class="section" id="Awards">
