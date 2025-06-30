@@ -501,8 +501,6 @@ footer {
 
   let currentIndex = 0;
   const track = document.getElementById("carousel-track");
-  const prevBtn = document.querySelector(".prev");
-  const nextBtn = document.querySelector(".next");
 
   function createImageElement(src, className) {
     const img = document.createElement("img");
@@ -522,41 +520,18 @@ footer {
     track.appendChild(createImageElement(imagePaths[currentIndex], "center"));
     track.appendChild(createImageElement(imagePaths[nextIndex], "adjacent"));
 
-    track.style.transition = "none";
     track.style.transform = "translateX(0)";
   }
 
   function moveSlide(step) {
     const total = imagePaths.length;
-    const newIndex = (currentIndex + step + total) % total;
+    currentIndex = (currentIndex + step + total) % total;
 
-    const direction = step > 0 ? -1 : 1;
-    const offset = direction * 220;
+    track.style.transition = "transform 0.5s ease-in-out";
+    track.style.transform = `translateX(${step > 0 ? -220 : 220}px)`;
 
-    // Preload new images
-    const prevIndex = (newIndex - 1 + total) % total;
-    const nextIndex = (newIndex + 1) % total;
-
-    const newTrack = document.createElement("div");
-    newTrack.className = "carousel-track";
-    newTrack.style.display = "flex";
-    newTrack.style.transition = "none";
-    newTrack.style.transform = `translateX(${offset}px)`;
-
-    newTrack.appendChild(createImageElement(imagePaths[prevIndex], "adjacent"));
-    newTrack.appendChild(createImageElement(imagePaths[newIndex], "center"));
-    newTrack.appendChild(createImageElement(imagePaths[nextIndex], "adjacent"));
-
-    track.parentElement.replaceChild(newTrack, track);
-
-    requestAnimationFrame(() => {
-      newTrack.style.transition = "transform 0.5s ease-in-out";
-      newTrack.style.transform = "translateX(0)";
-    });
-
-    newTrack.addEventListener("transitionend", () => {
-      newTrack.id = "carousel-track";
-      currentIndex = newIndex;
+    track.addEventListener("transitionend", () => {
+      renderCarousel();
     }, { once: true });
   }
 
