@@ -419,16 +419,18 @@ footer {
     <h3>Suspension Arm</h3>
     <div class="carousel-container">
       <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
-      <div class="carousel" id="carousel">
-        <img src="assets/Arm-1.jpg" class="carousel-image" alt="Arm 1">
-        <img src="assets/Arm-2.jpg" class="carousel-image" alt="Arm 2">
-        <img src="assets/Arm-3.jpg" class="carousel-image" alt="Arm 3">
-        <img src="assets/Arm-4.jpg" class="carousel-image" alt="Arm 4">
-        <img src="assets/Arm-5.PNG" class="carousel-image" alt="Arm 5">
-        <img src="assets/Arm-6.jpg" class="carousel-image" alt="Arm 6">
-        <img src="assets/Arm-7.jpg" class="carousel-image" alt="Arm 7">
-        <img src="assets/Arm-8.PNG" class="carousel-image" alt="Arm 8">
-        <img src="assets/Arm-9.jpg" class="carousel-image" alt="Arm 9">
+      <div class="carousel-wrapper">
+        <div class="carousel" id="carousel">
+          <img src="assets/Arm-1.jpg" class="carousel-image" alt="Arm 1">
+          <img src="assets/Arm-2.jpg" class="carousel-image" alt="Arm 2">
+          <img src="assets/Arm-3.jpg" class="carousel-image" alt="Arm 3">
+          <img src="assets/Arm-4.jpg" class="carousel-image" alt="Arm 4">
+          <img src="assets/Arm-5.PNG" class="carousel-image" alt="Arm 5">
+          <img src="assets/Arm-6.jpg" class="carousel-image" alt="Arm 6">
+          <img src="assets/Arm-7.jpg" class="carousel-image" alt="Arm 7">
+          <img src="assets/Arm-8.PNG" class="carousel-image" alt="Arm 8">
+          <img src="assets/Arm-9.jpg" class="carousel-image" alt="Arm 9">
+        </div>
       </div>
       <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
     </div>
@@ -440,37 +442,41 @@ footer {
     position: relative;
     max-width: 1000px;
     margin: auto;
-    overflow: hidden;
-    height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
+  .carousel-wrapper {
+    overflow: hidden;
+    width: 100%;
+  }
+
   .carousel {
     display: flex;
-    transition: transform 0.5s ease-in-out;
-    align-items: center;
+    transition: transform 0.6s ease-in-out;
+    will-change: transform;
   }
 
   .carousel-image {
-    width: 100px;
+    width: 200px;
     height: 150px;
     object-fit: contain;
     flex-shrink: 0;
     opacity: 0.3;
-    transition: transform 0.5s ease, opacity 0.5s ease;
     transform: scale(0.9);
+    transition: transform 0.5s ease, opacity 0.5s ease;
   }
 
   .carousel-image.center {
     opacity: 1;
     transform: scale(1.1);
-    z-index: 1;
+    z-index: 2;
   }
 
   .carousel-image.adjacent {
     opacity: 0.6;
+    z-index: 1;
   }
 
   .carousel-btn {
@@ -478,27 +484,16 @@ footer {
     color: white;
     border: none;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     font-size: 2rem;
     cursor: pointer;
-    z-index: 5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s;
+    z-index: 3;
+    margin: 0 10px;
   }
 
   .carousel-btn:hover {
     background-color: #333;
-  }
-
-  .carousel-btn.prev {
-    margin-right: 20px;
-  }
-
-  .carousel-btn.next {
-    margin-left: 20px;
   }
 </style>
 
@@ -508,15 +503,14 @@ footer {
   function moveSlide(step) {
     const carousel = document.getElementById('carousel');
     const images = Array.from(document.querySelectorAll('.carousel-image'));
+    const imageWidth = images[0].offsetWidth;
 
     currentIndex = (currentIndex + step + images.length) % images.length;
 
-    images.forEach((img, index) => {
-      img.classList.remove('center', 'adjacent');
-    });
-
-    const offset = -currentIndex * images[0].offsetWidth + (carousel.offsetWidth / 2 - images[0].offsetWidth / 2);
+    const offset = -currentIndex * imageWidth + (carousel.parentElement.offsetWidth / 2 - imageWidth / 2);
     carousel.style.transform = `translateX(${offset}px)`;
+
+    images.forEach(img => img.classList.remove('center', 'adjacent'));
 
     images[currentIndex].classList.add('center');
     if (images[currentIndex - 1]) images[currentIndex - 1].classList.add('adjacent');
