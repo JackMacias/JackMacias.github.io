@@ -593,7 +593,15 @@ footer {
       document.querySelector(`.${prevBtnClass}`).addEventListener("click", () => moveSlide(-1));
       document.querySelector(`.${nextBtnClass}`).addEventListener("click", () => moveSlide(1));
 
-      updatePosition(false);
+      let loadedCount = 0;
+      items.forEach((img) => {
+        img.onload = () => {
+          loadedCount++;
+          if (loadedCount === items.length) {
+            updatePosition(false);
+          }
+        };
+      });
     }
 
     document.addEventListener("DOMContentLoaded", () => {
