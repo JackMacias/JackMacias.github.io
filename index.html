@@ -530,11 +530,22 @@ footer {
     <div class="project">
       <h3>Bolt Action Pen</h3>
       <div class="carousel-container">
-        <button class="carousel-btn prev-arm">&#10094;</button>
+        <button class="carousel-btn prev-pen">&#10094;</button>
         <div class="carousel-wrapper">
-          <div class="carousel-track" id="carousel-track-arm"></div>
+          <div class="carousel-track" id="carousel-track-pen"></div>
         </div>
-        <button class="carousel-btn next-arm">&#10095;</button>
+        <button class="carousel-btn next-pen">&#10095;</button>
+      </div>
+    </div>
+    
+    <div class="project">
+      <h3>Laser Cut Layer Art</h3>
+      <div class="carousel-container">
+        <button class="carousel-btn prev-laser">&#10094;</button>
+        <div class="carousel-wrapper">
+          <div class="carousel-track" id="carousel-track-laser"></div>
+        </div>
+        <button class="carousel-btn next-laser">&#10095;</button>
       </div>
     </div>
 
@@ -661,16 +672,16 @@ footer {
       });
         initCarousel({
         trackId: "carousel-track-board",
-        prevBtnClass: "prev-board",
-        nextBtnClass: "next-board",
+        prevBtnClass: "prev-pen",
+        nextBtnClass: "next-pen",
         imagePaths: [
           "assets/Pen-1.jpg", "assets/Pen-2.jpg"
         ]
       });
         initCarousel({
         trackId: "carousel-track-board",
-        prevBtnClass: "prev-board",
-        nextBtnClass: "next-board",
+        prevBtnClass: "prev-laser",
+        nextBtnClass: "next-laser",
         imagePaths: [
           "assets/Laser-Batman.jpg"
         ]
