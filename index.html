@@ -501,14 +501,13 @@ footer {
 
   const track = document.getElementById("carousel-track");
   const total = imagePaths.length;
-  let currentIndex = 1;
+  const itemWidth = 220; // 200px + 2*10px margin
+  let currentIndex = total; // Start at first real image (after clones)
 
-  // Clone last and first images for seamless looping
-  const fullList = [
-    imagePaths[total - 1],
-    ...imagePaths,
-    imagePaths[0]
-  ];
+  // Clone last and first N images
+  const clonesBefore = imagePaths.slice(-2);
+  const clonesAfter = imagePaths.slice(0, 2);
+  const fullList = [...clonesBefore, ...imagePaths, ...clonesAfter];
 
   // Create and append all images
   fullList.forEach((src, i) => {
@@ -533,7 +532,7 @@ footer {
   }
 
   function updatePosition(animate = true) {
-    const offset = -((currentIndex * 220) - 220);
+    const offset = -((currentIndex * itemWidth) - itemWidth);
     track.style.transition = animate ? "transform 0.5s ease-in-out" : "none";
     track.style.transform = `translateX(${offset}px)`;
     updateClasses();
@@ -544,11 +543,11 @@ footer {
     updatePosition(true);
 
     track.addEventListener("transitionend", () => {
-      if (currentIndex === 0) {
+      if (currentIndex >= total + 2) {
         currentIndex = total;
         updatePosition(false);
-      } else if (currentIndex === fullList.length - 1) {
-        currentIndex = 1;
+      } else if (currentIndex < 2) {
+        currentIndex = total + (currentIndex - 2);
         updatePosition(false);
       }
     }, { once: true });
