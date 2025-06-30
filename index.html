@@ -487,7 +487,6 @@ footer {
 </style>
 
 <script>
-  // Image paths
   const imagePaths = [
     "assets/Arm-1.jpg",
     "assets/Arm-2.jpg",
@@ -503,47 +502,40 @@ footer {
   let currentIndex = 0;
   const track = document.getElementById("carousel-track");
 
-  // Create image element with class
-  function createImageElement(src, className) {
+  // Create and append all images once
+  imagePaths.forEach((src, index) => {
     const img = document.createElement("img");
     img.src = src;
-    img.className = `carousel-item ${className}`;
-    img.alt = "Project image";
-    return img;
-  }
+    img.className = "carousel-item";
+    img.alt = `Project image ${index + 1}`;
+    track.appendChild(img);
+  });
 
-  // Render carousel with center and adjacent images
-  function renderCarousel() {
-    const total = imagePaths.length;
-    const prevIndex = (currentIndex - 1 + total) % total;
-    const nextIndex = (currentIndex + 1) % total;
+  const items = track.querySelectorAll(".carousel-item");
 
-    track.innerHTML = "";
-    track.appendChild(createImageElement(imagePaths[prevIndex], "adjacent"));
-    track.appendChild(createImageElement(imagePaths[currentIndex], "center"));
-    track.appendChild(createImageElement(imagePaths[nextIndex], "adjacent"));
+  function updateCarousel() {
+    items.forEach((item, index) => {
+      item.classList.remove("center", "adjacent");
+      const relativeIndex = (index - currentIndex + imagePaths.length) % imagePaths.length;
 
-    track.style.transform = "translateX(0)";
-  }
+      if (relativeIndex === 0) {
+        item.classList.add("center");
+      } else if (relativeIndex === 1 || relativeIndex === imagePaths.length - 1) {
+        item.classList.add("adjacent");
+      }
+    });
 
-  // Move carousel left or right
-  function moveSlide(step) {
-    const total = imagePaths.length;
-    const direction = step > 0 ? -1 : 1;
-    const offset = direction * 220;
-
-    track.style.transition = "transform 0.5s ease-in-out";
+    const offset = -((currentIndex * 220) - 220); // center the current image
     track.style.transform = `translateX(${offset}px)`;
-
-    track.addEventListener("transitionend", () => {
-      currentIndex = (currentIndex + step + total) % total;
-      renderCarousel();
-    }, { once: true });
   }
 
-  // Initialize
+  function moveSlide(step) {
+    currentIndex = (currentIndex + step + imagePaths.length) % imagePaths.length;
+    updateCarousel();
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
-    renderCarousel();
+    updateCarousel();
     document.querySelector(".prev").addEventListener("click", () => moveSlide(-1));
     document.querySelector(".next").addEventListener("click", () => moveSlide(1));
   });
