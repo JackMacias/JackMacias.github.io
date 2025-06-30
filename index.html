@@ -410,22 +410,124 @@ footer {
 </style>
 
 <!-- SECTION: Projects -->
-<section class="section" id="projects">
-<div class="projects-header">
-<h2 class="section-title">Projects</h2>
-<h3>Bicep Curl Climber Design – Ri3D RustHOUNDS</h3>
-<ul>
-<li>Co-founded “Robot in 3 Days” challenge team at the collegiate level</li>
-<li>Developed the “Bicep Curl Climb,” adopted by ~35% of top 100 FRC teams</li>
-<li>Published open-source documentation with 1.9M+ views worldwide</li>
-</ul>
-<h3>High Ground Clearance Suspension Arm – Baja SAE</h3>
-<ul>
-<li>Designed arched suspension arms to increase clearance over obstacles</li>
-<li>Performed FEA simulations in SolidWorks to achieve safety goals</li>
-<li>Prototyped and tested components during endurance race conditions</li>
-</ul>
-</div></section>
+<section class="section" id="Projects">
+  <h2 class="section-title">Projects</h2>
+
+  <!-- Suspension Arm Project -->
+  <div class="project">
+    <h3>Suspension Arm</h3>
+    <div class="carousel-container">
+      <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+      <div class="carousel">
+        <img src="assets/Arm-1.jpg" class="carousel-image active" alt="Arm 1">
+        <img src="assets/Arm-2.jpg" class="carousel-image" alt="Arm 2">
+        <img src="assets/Arm-3.jpg" class="carousel-image" alt="Arm 3">
+        <img src="assets/Arm-4.jpg" class="carousel-image" alt="Arm 4">
+        <img src="assets/Arm-5.PNG" class="carousel-image" alt="Arm 5">
+        <img src="assets/Arm-6.jpg" class="carousel-image" alt="Arm 6">
+        <img src="assets/Arm-7.jpg" class="carousel-image" alt="Arm 7">
+        <img src="assets/Arm-8.PNG" class="carousel-image" alt="Arm 8">
+        <img src="assets/Arm-9.jpg" class="carousel-image" alt="Arm 9">
+      </div>
+      <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .carousel-container {
+    position: relative;
+    max-width: 600px;
+    margin: auto;
+    overflow: hidden;
+  }
+
+  .carousel {
+    display: flex;
+    align-items: center;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .carousel-image {
+    width: 50%;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .carousel-image.active {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .carousel-image.prev, .carousel-image.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) scale(0.5);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .carousel-image.prev {
+    left: 5%;
+  }
+
+  .carousel-image.next {
+    right: 5%;
+  }
+
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  .carousel-btn.prev {
+    left: 0;
+  }
+
+  .carousel-btn.next {
+    right: 0;
+  }
+</style>
+
+<script>
+  let slideIndex = 0;
+  const images = document.querySelectorAll('.carousel-image');
+
+  function showSlide(index) {
+    images.forEach((img, i) => {
+      img.classList.remove('active', 'prev', 'next');
+      img.style.display = 'none';
+      if (i === index) {
+        img.classList.add('active');
+        img.style.display = 'block';
+      } else if (i === (index - 1 + images.length) % images.length) {
+        img.classList.add('prev');
+        img.style.display = 'block';
+      } else if (i === (index + 1) % images.length) {
+        img.classList.add('next');
+        img.style.display = 'block';
+      }
+    });
+  }
+
+  function moveSlide(step) {
+    slideIndex = (slideIndex + step + images.length) % images.length;
+    showSlide(slideIndex);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    showSlide(slideIndex);
+  });
+</script>
+
 <!-- SECTION: Awards -->
 <section class="section" id="Awards">
 <div class="awards-header">
@@ -446,51 +548,15 @@ footer {
 </div>
 </section>
 
-<!-- SECTION: Projects -->
-<section class="section" id="projects">
-  <h2 class="section-title" style="text-align: center; font-size: 2.5rem; margin-bottom: 1rem; font-weight: bold;">Projects</h2>
-  
-  <div style="margin-bottom: 3rem;">
-    <h3 style="text-align: center; font-size: 1.75rem; margin-bottom: 1rem;">Suspension Arm</h3>
-
-    <div style="display: flex; justify-content: center; align-items: center;">
-      <button onclick="plusSlides(-1, 0)" style="background: none; border: none; font-size: 2rem; cursor: pointer;">&#10094;</button>
-
-      <div class="carousel" style="width: 600px; overflow: hidden; position: relative;">
-        <div class="slides" id="armSlides" style="display: flex; transition: transform 0.5s ease-in-out;">
-          <img src="assets/Arm-1.jpg" style="width: 600px; flex-shrink: 0; border-radius: 8px;">
-          <img src="assets/Arm-2.jpg" style="width: 600px; flex-shrink: 0; border-radius: 8px;">
-          <img src="assets/Arm-3.jpg" style="width: 600px; flex-shrink: 0; border-radius: 8px;">
-          <img src="assets/Arm-4.jpg" style="width: 600px; flex-shrink: 0; border-radius: 8px;">
-          <img src="assets/Arm-5.PNG" style="width: 600px; flex-shrink: 0; border-radius: 8px;">
-          <img src="assets/Arm-6.jpg" style="width: 600px; flex-shrink: 0; border-radius: 8px;">
-          <img src="assets/Arm-7.jpg" style="width: 600px; flex-shrink: 0; border-radius: 8px;">
-          <img src="assets/Arm-8.PNG" style="width: 600px; flex-shrink: 0; border-radius: 8px;">
-          <img src="assets/Arm-9.jpg" style="width: 600px; flex-shrink: 0; border-radius: 8px;">
-        </div>
-      </div>
-
-      <button onclick="plusSlides(1, 0)" style="background: none; border: none; font-size: 2rem; cursor: pointer;">&#10095;</button>
-    </div>
-  </div>
+<!-- SECTION: Contact -->
+<section class="section" id="contact" style="padding: 60px 0; background-color: #ffffff;">
+<h2 style="text-align: center; font-size: 3.125rem;">Get in Touch</h2>
+<div style="max-width: 600px; margin: 0 auto; padding-left: 120px;">
+<p>✉️ <span>jrmacias@wisc.edu</span></p>
+<p>📞 <span>(908) 381-4532</span></p>
+<p>🔗 https://www.linkedin.com/in/jack-macias</p>
+</div>
 </section>
-
-<script>
-  let slideIndices = [0];
-
-  function plusSlides(n, galleryIndex) {
-    const slideId = galleryIndex === 0 ? 'armSlides' : '';
-    const slidesContainer = document.getElementById(slideId);
-    const slides = slidesContainer.children;
-    const slideWidth = slides[0].clientWidth;
-    slideIndices[galleryIndex] += n;
-
-    if (slideIndices[galleryIndex] < 0) slideIndices[galleryIndex] = slides.length - 1;
-    if (slideIndices[galleryIndex] >= slides.length) slideIndices[galleryIndex] = 0;
-
-    slidesContainer.style.transform = `translateX(-${slideIndices[galleryIndex] * slideWidth}px)`;
-  }
-</script>
 
 <!-- SECTION: Footer -->
 </section></main>
