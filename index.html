@@ -495,17 +495,6 @@ footer {
     <h2 class="section-title">Projects</h2>
 
     <div class="project">
-      <h3>Suspension Arm</h3>
-      <div class="carousel-container">
-        <button class="carousel-btn prev-arm">&#10094;</button>
-        <div class="carousel-wrapper">
-          <div class="carousel-track" id="carousel-track-arm"></div>
-        </div>
-        <button class="carousel-btn next-arm">&#10095;</button>
-      </div>
-    </div>
-
-    <div class="project">
       <h3>Signage Designs</h3>
       <div class="carousel-container">
         <button class="carousel-btn prev-sign">&#10094;</button>
@@ -513,6 +502,17 @@ footer {
           <div class="carousel-track" id="carousel-track-sign"></div>
         </div>
         <button class="carousel-btn next-sign">&#10095;</button>
+      </div>
+    </div>
+
+    <div class="project">
+      <h3>Suspension Arm</h3>
+      <div class="carousel-container">
+        <button class="carousel-btn prev-arm">&#10094;</button>
+        <div class="carousel-wrapper">
+          <div class="carousel-track" id="carousel-track-arm"></div>
+        </div>
+        <button class="carousel-btn next-arm">&#10095;</button>
       </div>
     </div>
 
@@ -614,16 +614,6 @@ footer {
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-      initCarousel({
-        trackId: "carousel-track-arm",
-        prevBtnClass: "prev-arm",
-        nextBtnClass: "next-arm",
-        imagePaths: [
-          "assets/Arm-1.jpg", "assets/Arm-2.jpg", "assets/Arm-3.jpg",
-          "assets/Arm-4.jpg", "assets/Arm-5.jpg", "assets/Arm-6.jpg",
-          "assets/Arm-7.jpg", "assets/Arm-8.jpg", "assets/Arm-9.jpg"
-        ]
-      });
 
       initCarousel({
         trackId: "carousel-track-sign",
@@ -632,6 +622,17 @@ footer {
         imagePaths: [
           "assets/Sign-1.jpg", "assets/Sign-2.jpg", "assets/Sign-3.jpg",
           "assets/Sign-4.jpg", "assets/Sign-5.jpg"
+        ]
+      });
+      
+      initCarousel({
+        trackId: "carousel-track-arm",
+        prevBtnClass: "prev-arm",
+        nextBtnClass: "next-arm",
+        imagePaths: [
+          "assets/Arm-1.jpg", "assets/Arm-2.jpg", "assets/Arm-3.jpg",
+          "assets/Arm-4.jpg", "assets/Arm-5.jpg", "assets/Arm-6.jpg",
+          "assets/Arm-7.jpg", "assets/Arm-8.jpg", "assets/Arm-9.jpg"
         ]
       });
 
