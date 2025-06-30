@@ -418,7 +418,6 @@ footer {
   <div class="project">
     <h3>Suspension Arm</h3>
     <div class="carousel-container">
-      <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
       <div class="carousel">
         <img src="assets/Arm-1.jpg" class="carousel-image active" alt="Arm 1">
         <img src="assets/Arm-2.jpg" class="carousel-image" alt="Arm 2">
@@ -430,6 +429,7 @@ footer {
         <img src="assets/Arm-8.PNG" class="carousel-image" alt="Arm 8">
         <img src="assets/Arm-9.jpg" class="carousel-image" alt="Arm 9">
       </div>
+      <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
       <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
     </div>
   </div>
@@ -446,9 +446,11 @@ footer {
 
   .carousel {
     display: flex;
-    align-items: center;
+    transition: transform 0.5s ease-in-out;
+    transform: translateX(0);
+    gap: 2rem;
     justify-content: center;
-    position: relative;
+    align-items: center;
     height: 100%;
   }
 
@@ -457,28 +459,24 @@ footer {
     height: 100%;
     object-fit: contain;
     opacity: 0;
+    transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
     position: absolute;
-    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+    transform: scale(0.9);
   }
 
   .carousel-image.active {
     opacity: 1;
+    position: relative;
+    transform: scale(1);
     z-index: 2;
-    transform: translateX(0);
   }
 
   .carousel-image.prev,
   .carousel-image.next {
     opacity: 0.5;
+    position: relative;
     z-index: 1;
-  }
-
-  .carousel-image.prev {
-    transform: translateX(-350px);
-  }
-
-  .carousel-image.next {
-    transform: translateX(350px);
+    transform: scale(0.9);
   }
 
   .carousel-btn {
@@ -505,11 +503,11 @@ footer {
   }
 
   .carousel-btn.prev {
-    left: -80px;
+    left: 0;
   }
 
   .carousel-btn.next {
-    right: -80px;
+    right: 0;
   }
 </style>
 
@@ -521,23 +519,14 @@ footer {
     images.forEach((img, i) => {
       img.classList.remove('active', 'prev', 'next');
       img.style.opacity = '0';
-      img.style.zIndex = '0';
     });
 
     const prevIndex = (index - 1 + images.length) % images.length;
     const nextIndex = (index + 1) % images.length;
 
     images[prevIndex].classList.add('prev');
-    images[prevIndex].style.opacity = '0.5';
-    images[prevIndex].style.zIndex = '1';
-
     images[nextIndex].classList.add('next');
-    images[nextIndex].style.opacity = '0.5';
-    images[nextIndex].style.zIndex = '1';
-
     images[index].classList.add('active');
-    images[index].style.opacity = '1';
-    images[index].style.zIndex = '2';
   }
 
   function moveSlide(step) {
