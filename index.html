@@ -492,7 +492,7 @@ footer {
     <h2 class="section-title">Projects</h2>
 
     <div class="project">
-      <h3>Suspension ArmS</h3>
+      <h3>Suspension Arm</h3>
       <div class="carousel-container">
         <button class="carousel-btn prev-arm">&#10094;</button>
         <div class="carousel-wrapper">
@@ -526,15 +526,17 @@ footer {
   </section>
 
   <script>
-    function initCarousel({ trackId, prevBtnClass, nextBtnClass, imagePaths, clonesBefore = 2, clonesAfter = 2 }) {
+    function initCarousel({ trackId, prevBtnClass, nextBtnClass, imagePaths }) {
       const track = document.getElementById(trackId);
+      const clonesBefore = 1;
+      const clonesAfter = 1;
       const total = imagePaths.length;
-      let currentIndex = clonesBefore;
+      let currentIndex = 1;
 
       const fullList = [
-        ...imagePaths.slice(-clonesBefore),
+        imagePaths[imagePaths.length - 1],
         ...imagePaths,
-        ...imagePaths.slice(0, clonesAfter)
+        imagePaths[1 % total]
       ];
 
       fullList.forEach((src, i) => {
@@ -559,33 +561,27 @@ footer {
       }
 
       function updatePosition(animate = true) {
-        const items = track.querySelectorAll(".carousel-item");
         let offset = 0;
-      
         for (let i = 0; i < currentIndex; i++) {
-          offset += items[i].offsetWidth + 20; // 20px = margin (10px on each side)
+          offset += items[i].offsetWidth + 20;
         }
-      
         const centerItem = items[currentIndex];
         const centerOffset = (track.parentElement.offsetWidth - centerItem.offsetWidth) / 2;
-      
         track.style.transition = animate ? "transform 0.5s ease-in-out" : "none";
         track.style.transform = `translateX(${-offset + centerOffset}px)`;
-      
         updateClasses();
       }
-
 
       function moveSlide(step) {
         currentIndex += step;
         updatePosition(true);
 
         const handleTransitionEnd = () => {
-          if (currentIndex >= total + clonesBefore) {
-            currentIndex = clonesBefore;
+          if (currentIndex >= total + 1) {
+            currentIndex = 1;
             updatePosition(false);
-          } else if (currentIndex < clonesBefore) {
-            currentIndex = total + (currentIndex - clonesBefore);
+          } else if (currentIndex < 1) {
+            currentIndex = total;
             updatePosition(false);
           }
           track.removeEventListener("transitionend", handleTransitionEnd);
