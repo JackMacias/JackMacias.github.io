@@ -445,35 +445,36 @@ footer {
   .carousel {
     display: flex;
     align-items: center;
-    transition: transform 0.5s ease-in-out;
+    justify-content: center;
+    position: relative;
   }
 
   .carousel-image {
-    width: 50%;
+    width: 300px;
+    max-width: 100%;
     opacity: 0;
-    transform: scale(0.8);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    position: absolute;
+    transition: opacity 0.5s ease;
   }
 
   .carousel-image.active {
     opacity: 1;
-    transform: scale(1);
+    z-index: 2;
+    position: relative;
   }
 
-  .carousel-image.prev, .carousel-image.next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%) scale(0.5);
+  .carousel-image.prev,
+  .carousel-image.next {
     opacity: 0.5;
-    pointer-events: none;
+    z-index: 1;
   }
 
   .carousel-image.prev {
-    left: 5%;
+    left: -320px;
   }
 
   .carousel-image.next {
-    right: 5%;
+    right: -320px;
   }
 
   .carousel-btn {
@@ -485,7 +486,7 @@ footer {
     border: none;
     padding: 0.5rem 1rem;
     cursor: pointer;
-    z-index: 1;
+    z-index: 3;
   }
 
   .carousel-btn.prev {
