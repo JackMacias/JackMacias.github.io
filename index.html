@@ -415,21 +415,13 @@ footer {
   <h2 class="section-title">Projects</h2>
 
   <div class="project">
-    <h3>Suspension Arm</h3>
+    <h3>Suspension ArmS</h3>
     <div class="carousel-container">
       <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
       <div class="carousel-wrapper">
-        <ul class="carousel" id="carousel">
-          <li><img src="assets/Arm-1.jpg" alt="Arm 1" /></li>
-          <li><img src="assets/Arm-2.jpg" alt="Arm 2" /></li>
-          <li><img src="assets/Arm-3.jpg" alt="Arm 3" /></li>
-          <li><img src="assets/Arm-4.jpg" alt="Arm 4" /></li>
-          <li><img src="assets/Arm-5.PNG" alt="Arm 5" /></li>
-          <li><img src="assets/Arm-6.jpg" alt="Arm 6" /></li>
-          <li><img src="assets/Arm-7.jpg" alt="Arm 7" /></li>
-          <li><img src="assets/Arm-8.PNG" alt="Arm 8" /></li>
-          <li><img src="assets/Arm-9.jpg" alt="Arm 9" /></li>
-        </ul>
+        <div class="carousel-track" id="carousel-track">
+          <!-- Images will be injected here -->
+        </div>
       </div>
       <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
     </div>
@@ -448,17 +440,15 @@ footer {
   .carousel-wrapper {
     width: 660px;
     overflow: hidden;
+    position: relative;
   }
 
-  .carousel {
+  .carousel-track {
     display: flex;
-    padding: 0;
-    margin: 0;
-    list-style: none;
     transition: transform 0.5s ease-in-out;
   }
 
-  .carousel li {
+  .carousel-item {
     flex-shrink: 0;
     width: 200px;
     height: 150px;
@@ -468,12 +458,12 @@ footer {
     transition: transform 0.5s ease, opacity 0.5s ease;
   }
 
-  .carousel li.center {
+  .carousel-item.center {
     opacity: 1;
     transform: scale(1.1);
   }
 
-  .carousel li.adjacent {
+  .carousel-item.adjacent {
     opacity: 0.6;
     transform: scale(1);
   }
@@ -497,35 +487,59 @@ footer {
 </style>
 
 <script>
-  const carousel = document.getElementById("carousel");
-  const items = carousel.children;
-  const itemWidth = 220; // 200px + 2*10px margin
+  const imagePaths = [
+    "assets/Arm-1.jpg",
+    "assets/Arm-2.jpg",
+    "assets/Arm-3.jpg",
+    "assets/Arm-4.jpg",
+    "assets/Arm-5.PNG",
+    "assets/Arm-6.jpg",
+    "assets/Arm-7.jpg",
+    "assets/Arm-8.PNG",
+    "assets/Arm-9.jpg"
+  ];
+
+  const track = document.getElementById("carousel-track");
   let currentIndex = 0;
 
-  function updateClasses() {
-    Array.from(items).forEach((item, i) => {
-      item.classList.remove("center", "adjacent");
-      if (i === currentIndex) item.classList.add("center");
-      if (i === currentIndex - 1 || i === currentIndex + 1) item.classList.add("adjacent");
+  function renderCarousel() {
+    track.innerHTML = "";
+
+    const total = imagePaths.length;
+    const prevIndex = (currentIndex - 1 + total) % total;
+    const nextIndex = (currentIndex + 1) % total;
+
+    const indices = [prevIndex, currentIndex, nextIndex];
+
+    indices.forEach((i, idx) => {
+      const img = document.createElement("img");
+      img.src = imagePaths[i];
+      img.alt = `Arm ${i + 1}`;
+      img.className = "carousel-item";
+
+      if (idx === 0) img.classList.add("adjacent");
+      if (idx === 1) img.classList.add("center");
+      if (idx === 2) img.classList.add("adjacent");
+
+      track.appendChild(img);
     });
+
+    track.style.transform = "translateX(0)";
   }
 
   function moveSlide(step) {
-    const total = items.length;
-    currentIndex = (currentIndex + step + total) % total;
+    const direction = step > 0 ? -1 : 1;
+    track.style.transition = "transform 0.5s ease-in-out";
+    track.style.transform = `translateX(${direction * 220}px)`;
 
-    const offset = -currentIndex * itemWidth + itemWidth * 1.5;
-    carousel.style.transform = `translateX(${offset}px)`;
-
-    updateClasses();
+    track.addEventListener("transitionend", () => {
+      track.style.transition = "none";
+      currentIndex = (currentIndex + step + imagePaths.length) % imagePaths.length;
+      renderCarousel();
+    }, { once: true });
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    // Center the first image
-    const offset = -currentIndex * itemWidth + itemWidth * 1.5;
-    carousel.style.transform = `translateX(${offset}px)`;
-    updateClasses();
-  });
+  document.addEventListener("DOMContentLoaded", renderCarousel);
 </script>
   
 <!-- SECTION: Awards -->
