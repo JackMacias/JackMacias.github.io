@@ -434,18 +434,21 @@ footer {
 
     .carousel-track {
       display: flex;
+      align-items: center;
       transition: transform 0.5s ease-in-out;
     }
 
     .carousel-item {
       flex-shrink: 0;
-      height: 180px;
+      height: auto;
+      max-height: 180px;
       width: auto;
       margin: 0 20px;
       object-fit: contain;
       opacity: 0.3;
       transform: scale(0.9);
       transition: transform 0.5s ease, opacity 0.5s ease;
+      display: block;
     }
 
     .carousel-item.center {
@@ -492,7 +495,7 @@ footer {
     <h2 class="section-title">Projects</h2>
 
     <div class="project">
-      <h3>Suspension ArmS</h3>
+      <h3>Suspension Arm</h3>
       <div class="carousel-container">
         <button class="carousel-btn prev-arm">&#10094;</button>
         <div class="carousel-wrapper">
@@ -529,8 +532,6 @@ footer {
     function initCarousel({ trackId, prevBtnClass, nextBtnClass, imagePaths }) {
       const track = document.getElementById(trackId);
       const total = imagePaths.length;
-      const clonesBefore = 1;
-      const clonesAfter = 1;
       let currentIndex = 1;
 
       const fullList = [
@@ -540,7 +541,7 @@ footer {
       ];
 
       const imageElements = [];
-      
+
       fullList.forEach((src, i) => {
         const img = document.createElement("img");
         img.src = src;
@@ -549,7 +550,7 @@ footer {
         track.appendChild(img);
         imageElements.push(img);
       });
-      
+
       const items = imageElements;
 
       function updateClasses() {
@@ -564,14 +565,20 @@ footer {
       }
 
       function updatePosition(animate = true) {
+        const centerItem = items[currentIndex];
+        const wrapper = track.parentElement;
+
         let offset = 0;
         for (let i = 0; i < currentIndex; i++) {
-          offset += items[i].offsetWidth + 60;
+          offset += items[i].offsetWidth + 40; // 20px margin on each side
         }
-        const centerItem = items[currentIndex];
-        const centerOffset = (track.parentElement.offsetWidth - centerItem.offsetWidth) / 2 - 30;
+
+        const centerOffset = (wrapper.offsetWidth - centerItem.offsetWidth) / 2;
+        const translateX = -offset + centerOffset;
+
         track.style.transition = animate ? "transform 0.5s ease-in-out" : "none";
-        track.style.transform = `translateX(${-offset + centerOffset}px)`;
+        track.style.transform = `translateX(${translateX}px)`;
+
         updateClasses();
       }
 
@@ -596,14 +603,13 @@ footer {
       document.querySelector(`.${prevBtnClass}`).addEventListener("click", () => moveSlide(-1));
       document.querySelector(`.${nextBtnClass}`).addEventListener("click", () => moveSlide(1));
 
-      let loadedCount = 0;
-      items.forEach((img) => {
-        img.onload = () => {
-          loadedCount++;
-          if (loadedCount === items.length) {
-            updatePosition(false);
-          }
-        };
+      Promise.all(items.map(img => {
+        return new Promise(resolve => {
+          if (img.complete) resolve();
+          else img.onload = resolve;
+        });
+      })).then(() => {
+        updatePosition(false);
       });
     }
 
@@ -645,6 +651,7 @@ footer {
   </script>
 </body>
 </html>
+
 
 <!-- SECTION: Contact -->
 <section class="section" id="contact" style="padding: 60px 0; background-color: #ffffff;">
