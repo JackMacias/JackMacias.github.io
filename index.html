@@ -440,7 +440,11 @@ footer {
     .carousel-item {
       flex-shrink: 0;
       height: 180px;
-      width transform: scale(0.9);
+      width: auto;
+      margin: 0 10px;
+      object-fit: contain;
+      opacity: 0.3;
+      transform: scale(0.9);
       transition: transform 0.5s ease, opacity 0.5s ease;
     }
 
@@ -555,12 +559,22 @@ footer {
       }
 
       function updatePosition(animate = true) {
-        const currentItem = items[currentIndex];
-        const offset = currentItem.offsetLeft - (track.parentElement.offsetWidth / 2) + (currentItem.offsetWidth / 2);
+        const items = track.querySelectorAll(".carousel-item");
+        let offset = 0;
+      
+        for (let i = 0; i < currentIndex; i++) {
+          offset += items[i].offsetWidth + 20; // 20px = margin (10px on each side)
+        }
+      
+        const centerItem = items[currentIndex];
+        const centerOffset = (track.parentElement.offsetWidth - centerItem.offsetWidth) / 2;
+      
         track.style.transition = animate ? "transform 0.5s ease-in-out" : "none";
-        track.style.transform = `translateX(${-offset}px)`;
+        track.style.transform = `translateX(${-offset + centerOffset}px)`;
+      
         updateClasses();
       }
+
 
       function moveSlide(step) {
         currentIndex += step;
