@@ -487,6 +487,7 @@ footer {
 </style>
 
 <script>
+  // Image paths
   const imagePaths = [
     "assets/Arm-1.jpg",
     "assets/Arm-2.jpg",
@@ -502,6 +503,7 @@ footer {
   let currentIndex = 0;
   const track = document.getElementById("carousel-track");
 
+  // Create image element with class
   function createImageElement(src, className) {
     const img = document.createElement("img");
     img.src = src;
@@ -510,6 +512,7 @@ footer {
     return img;
   }
 
+  // Render carousel with center and adjacent images
   function renderCarousel() {
     const total = imagePaths.length;
     const prevIndex = (currentIndex - 1 + total) % total;
@@ -523,18 +526,22 @@ footer {
     track.style.transform = "translateX(0)";
   }
 
+  // Move carousel left or right
   function moveSlide(step) {
     const total = imagePaths.length;
-    currentIndex = (currentIndex + step + total) % total;
+    const direction = step > 0 ? -1 : 1;
+    const offset = direction * 220;
 
     track.style.transition = "transform 0.5s ease-in-out";
-    track.style.transform = `translateX(${step > 0 ? -220 : 220}px)`;
+    track.style.transform = `translateX(${offset}px)`;
 
     track.addEventListener("transitionend", () => {
+      currentIndex = (currentIndex + step + total) % total;
       renderCarousel();
     }, { once: true });
   }
 
+  // Initialize
   document.addEventListener("DOMContentLoaded", () => {
     renderCarousel();
     document.querySelector(".prev").addEventListener("click", () => moveSlide(-1));
