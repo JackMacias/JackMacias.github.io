@@ -549,6 +549,17 @@ footer {
       </div>
     </div>
 
+    <div class="project">
+      <h3>Pool Cue Stand</h3>
+      <div class="carousel-container">
+        <button class="carousel-btn prev-pool">&#10094;</button>
+        <div class="carousel-wrapper">
+          <div class="carousel-track" id="carousel-track-pool"></div>
+        </div>
+        <button class="carousel-btn next-pool">&#10095;</button>
+      </div>
+    </div>
+
   </section>
 
   <script>
@@ -684,6 +695,14 @@ footer {
         nextBtnClass: "next-laser",
         imagePaths: [
           "assets/Laser-Batman.jpg"
+        ]
+      });
+        initCarousel({
+        trackId: "carousel-track-pool",
+        prevBtnClass: "prev-pool",
+        nextBtnClass: "next-pool",
+        imagePaths: [
+          "assets/Pool-1.jpg"
         ]
       });
     });
