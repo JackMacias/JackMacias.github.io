@@ -415,7 +415,7 @@ footer {
   <h2 class="section-title">Projects</h2>
 
   <div class="project">
-    <h3>Suspension Arms</h3>
+    <h3>Suspension Arm</h3>
     <div class="carousel-container">
       <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
       <div class="carousel-wrapper">
@@ -505,6 +505,7 @@ footer {
   const prevImage = document.getElementById("prevImage");
   const centerImage = document.getElementById("centerImage");
   const nextImage = document.getElementById("nextImage");
+  const carousel = document.getElementById("carousel");
 
   function updateImages() {
     const total = imagePaths.length;
@@ -517,8 +518,16 @@ footer {
   }
 
   function moveSlide(step) {
-    currentIndex = (currentIndex + step + imagePaths.length) % imagePaths.length;
-    updateImages();
+    const direction = step > 0 ? -1 : 1;
+    carousel.style.transition = "transform 0.5s ease-in-out";
+    carousel.style.transform = `translateX(${direction * 220}px)`;
+
+    carousel.addEventListener("transitionend", () => {
+      carousel.style.transition = "none";
+      carousel.style.transform = "translateX(0)";
+      currentIndex = (currentIndex + step + imagePaths.length) % imagePaths.length;
+      updateImages();
+    }, { once: true });
   }
 
   document.addEventListener("DOMContentLoaded", updateImages);
