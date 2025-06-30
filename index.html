@@ -415,7 +415,7 @@ footer {
   <h2 class="section-title">Projects</h2>
 
   <div class="project">
-    <h3>Suspension Arm</h3>
+    <h3>Suspension ArmS</h3>
     <div class="carousel-container">
       <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
       <div class="carousel-wrapper">
@@ -449,6 +449,8 @@ footer {
     justify-content: center;
     align-items: center;
     width: 100%;
+    transform: translateX(0);
+    transition: transform 0.5s ease-in-out;
   }
 
   .carousel-image {
@@ -456,6 +458,7 @@ footer {
     height: 150px;
     margin: 0 10px;
     object-fit: contain;
+    flex-shrink: 0;
     opacity: 0.3;
     transform: scale(0.9);
     transition: transform 0.5s ease, opacity 0.5s ease;
@@ -468,6 +471,7 @@ footer {
 
   .carousel-image.adjacent {
     opacity: 0.6;
+    transform: scale(1);
   }
 
   .carousel-btn {
@@ -515,6 +519,11 @@ footer {
     prevImage.src = imagePaths[prevIndex];
     centerImage.src = imagePaths[currentIndex];
     nextImage.src = imagePaths[nextIndex];
+
+    // Reset classes for smooth transition
+    prevImage.className = "carousel-image adjacent";
+    centerImage.className = "carousel-image center";
+    nextImage.className = "carousel-image adjacent";
   }
 
   function moveSlide(step) {
@@ -532,6 +541,7 @@ footer {
 
   document.addEventListener("DOMContentLoaded", updateImages);
 </script>
+
   
 <!-- SECTION: Awards -->
 <section class="section" id="Awards">
