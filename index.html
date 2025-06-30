@@ -449,7 +449,7 @@ footer {
 
   .carousel-wrapper {
     overflow: hidden;
-    width: 100%;
+    width: 660px; /* 3 images * (200px + 10px margin on each side) */
   }
 
   .carousel {
@@ -463,6 +463,7 @@ footer {
     height: 150px;
     object-fit: contain;
     flex-shrink: 0;
+    margin: 0 10px;
     opacity: 0.3;
     transform: scale(0.9);
     transition: transform 0.5s ease, opacity 0.5s ease;
@@ -503,11 +504,11 @@ footer {
   function moveSlide(step) {
     const carousel = document.getElementById('carousel');
     const images = Array.from(document.querySelectorAll('.carousel-image'));
-    const imageWidth = images[0].offsetWidth;
+    const imageWidth = images[0].offsetWidth + 20; // 10px margin on each side
 
     currentIndex = (currentIndex + step + images.length) % images.length;
 
-    const offset = -currentIndex * imageWidth + (carousel.parentElement.offsetWidth / 2 - imageWidth / 2);
+    const offset = -currentIndex * imageWidth + (imageWidth * 1.5);
     carousel.style.transform = `translateX(${offset}px)`;
 
     images.forEach(img => img.classList.remove('center', 'adjacent'));
