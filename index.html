@@ -408,6 +408,7 @@ footer {
     }
   }
 </style>
+
 <!-- SECTION: Projects -->
 <section class="section" id="projects">
 <div class="projects-header">
@@ -444,16 +445,53 @@ footer {
 </div>
 </div>
 </section>
+
 <!-- SECTION: Projects -->
-<section class="section" id="contact">
-<div class="contact-header">
-<h2 class="section-title">Get In Touch</h2>
-<div style="max-width: 600px; margin: 0 auto; padding-left: 120px;">
-<p>✉️ <span>jrmacias@wisc.edu</span></p>
-<p>📞 <span>(908) 381-4532</span></p>
-<p>🔗 https://www.linkedin.com/in/jack-macias</p>
-</div>
+<section class="section" id="projects">
+  <h2 class="section-title" style="text-align: center; font-size: 2.5rem; margin-bottom: 1rem; font-weight: bold;">Projects</h2>
+  
+  <div style="margin-bottom: 3rem;">
+    <h3 style="text-align: center; font-size: 1.75rem; margin-bottom: 1rem;">Suspension Arm</h3>
+
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <button onclick="plusSlides(-1, 0)" style="background: none; border: none; font-size: 2rem; cursor: pointer;">&#10094;</button>
+
+      <div class="carousel" style="width: 600px; overflow: hidden; position: relative;">
+        <div class="slides" id="armSlides" style="display: flex; transition: transform 0.5s ease-in-out;">
+          <img src="assets/Arm-1.jpg" style="width: 600px; flex-shrink: 0; border-radius: 8px;">
+          <img src="assets/Arm-2.jpg" style="width: 600px; flex-shrink: 0; border-radius: 8px;">
+          <img src="assets/Arm-3.jpg" style="width: 600px; flex-shrink: 0; border-radius: 8px;">
+          <img src="assets/Arm-4.jpg" style="width: 600px; flex-shrink: 0; border-radius: 8px;">
+          <img src="assets/Arm-5.PNG" style="width: 600px; flex-shrink: 0; border-radius: 8px;">
+          <img src="assets/Arm-6.jpg" style="width: 600px; flex-shrink: 0; border-radius: 8px;">
+          <img src="assets/Arm-7.jpg" style="width: 600px; flex-shrink: 0; border-radius: 8px;">
+          <img src="assets/Arm-8.PNG" style="width: 600px; flex-shrink: 0; border-radius: 8px;">
+          <img src="assets/Arm-9.jpg" style="width: 600px; flex-shrink: 0; border-radius: 8px;">
+        </div>
+      </div>
+
+      <button onclick="plusSlides(1, 0)" style="background: none; border: none; font-size: 2rem; cursor: pointer;">&#10095;</button>
+    </div>
+  </div>
 </section>
+
+<script>
+  let slideIndices = [0];
+
+  function plusSlides(n, galleryIndex) {
+    const slideId = galleryIndex === 0 ? 'armSlides' : '';
+    const slidesContainer = document.getElementById(slideId);
+    const slides = slidesContainer.children;
+    const slideWidth = slides[0].clientWidth;
+    slideIndices[galleryIndex] += n;
+
+    if (slideIndices[galleryIndex] < 0) slideIndices[galleryIndex] = slides.length - 1;
+    if (slideIndices[galleryIndex] >= slides.length) slideIndices[galleryIndex] = 0;
+
+    slidesContainer.style.transform = `translateX(-${slideIndices[galleryIndex] * slideWidth}px)`;
+  }
+</script>
+
 <!-- SECTION: Footer -->
 </section></main>
 <footer>
