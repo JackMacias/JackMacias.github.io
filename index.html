@@ -239,6 +239,7 @@ footer a:hover {
 <h2 class="section-title">Resume</h2>
 <a class="resume-button" download="" href="assets/JackMaciasResume.pdf">Download Here</a>
 </div>
+
 <!-- SECTION: Experience -->
 <section class="section" id="experience">
 <div class="experience-header">
@@ -437,9 +438,9 @@ footer {
 <style>
   .carousel-container {
     position: relative;
-    max-width: 800px;
+    max-width: 1000px;
     margin: auto;
-    overflow: visible;
+    overflow: hidden;
     height: 400px;
   }
 
@@ -463,7 +464,6 @@ footer {
   .carousel-image.active {
     opacity: 1;
     z-index: 2;
-    position: relative;
     transform: translateX(0);
   }
 
@@ -489,44 +489,50 @@ footer {
     color: white;
     border: none;
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     font-size: 2rem;
     cursor: pointer;
-    z-index: 4;
+    z-index: 5;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   .carousel-btn.prev {
-    left: -70px;
+    left: -100px;
   }
 
   .carousel-btn.next {
-    right: -70px;
+    right: -100px;
   }
 </style>
 
 <script>
   let slideIndex = 0;
-  const images = document.querySelectorAll('.carousel-image');
+  let images;
 
   function showSlide(index) {
     images.forEach((img, i) => {
       img.classList.remove('active', 'prev', 'next');
-      img.style.display = 'none';
-      if (i === index) {
-        img.classList.add('active');
-        img.style.display = 'block';
-      } else if (i === (index - 1 + images.length) % images.length) {
-        img.classList.add('prev');
-        img.style.display = 'block';
-      } else if (i === (index + 1) % images.length) {
-        img.classList.add('next');
-        img.style.display = 'block';
-      }
+      img.style.opacity = '0';
+      img.style.zIndex = '0';
     });
+
+    const prevIndex = (index - 1 + images.length) % images.length;
+    const nextIndex = (index + 1) % images.length;
+
+    images[prevIndex].classList.add('prev');
+    images[prevIndex].style.opacity = '0.5';
+    images[prevIndex].style.zIndex = '1';
+
+    images[nextIndex].classList.add('next');
+    images[nextIndex].style.opacity = '0.5';
+    images[nextIndex].style.zIndex = '1';
+
+    images[index].classList.add('active');
+    images[index].style.opacity = '1';
+    images[index].style.zIndex = '2';
   }
 
   function moveSlide(step) {
@@ -535,6 +541,7 @@ footer {
   }
 
   document.addEventListener('DOMContentLoaded', () => {
+    images = document.querySelectorAll('.carousel-image');
     showSlide(slideIndex);
   });
 </script>
