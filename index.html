@@ -499,43 +499,57 @@ footer {
     "assets/Arm-9.jpg"
   ];
 
-  let currentIndex = 0;
   const track = document.getElementById("carousel-track");
+  const total = imagePaths.length;
+  let currentIndex = total; // Start at the first real image (after clones)
 
-  // Create and append all images once
-  imagePaths.forEach((src, index) => {
+  // Clone images for seamless looping
+  const fullList = [...imagePaths.slice(-1), ...imagePaths, ...imagePaths.slice(0, 1)];
+
+  fullList.forEach((src, i) => {
     const img = document.createElement("img");
     img.src = src;
     img.className = "carousel-item";
-    img.alt = `Project image ${index + 1}`;
+    img.alt = `Project image ${i + 1}`;
     track.appendChild(img);
   });
 
   const items = track.querySelectorAll(".carousel-item");
 
-  function updateCarousel() {
+  function updateClasses() {
     items.forEach((item, index) => {
       item.classList.remove("center", "adjacent");
-      const relativeIndex = (index - currentIndex + imagePaths.length) % imagePaths.length;
-
-      if (relativeIndex === 0) {
-        item.classList.add("center");
-      } else if (relativeIndex === 1 || relativeIndex === imagePaths.length - 1) {
-        item.classList.add("adjacent");
-      }
+      const relative = index - currentIndex;
+      if (relative === 0) item.classList.add("center");
+      else if (Math.abs(relative) === 1) item.classList.add("adjacent");
     });
+  }
 
-    const offset = -((currentIndex * 220) - 220); // center the current image
+  function updatePosition(animate = true) {
+    const offset = -((currentIndex * 220) - 220);
+    track.style.transition = animate ? "transform 0.5s ease-in-out" : "none";
     track.style.transform = `translateX(${offset}px)`;
+    updateClasses();
   }
 
   function moveSlide(step) {
-    currentIndex = (currentIndex + step + imagePaths.length) % imagePaths.length;
-    updateCarousel();
+    currentIndex += step;
+    updatePosition(true);
+
+    // Reset position after transition if at clone
+    track.addEventListener("transitionend", () => {
+      if (currentIndex === 0) {
+        currentIndex = total;
+        updatePosition(false);
+      } else if (currentIndex === fullList.length - 1) {
+        currentIndex = total - 1;
+        updatePosition(false);
+      }
+    }, { once: true });
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    updateCarousel();
+    updatePosition(false);
     document.querySelector(".prev").addEventListener("click", () => moveSlide(-1));
     document.querySelector(".next").addEventListener("click", () => moveSlide(1));
   });
