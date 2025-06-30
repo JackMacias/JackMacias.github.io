@@ -500,10 +500,10 @@ footer {
   ];
 
   const track = document.getElementById("carousel-track");
-  const itemWidth = 220; // 200px + 2*10px margin
+  const itemWidth = 220;
+  const total = imagePaths.length;
   const clonesBefore = 2;
   const clonesAfter = 2;
-  const total = imagePaths.length;
   let currentIndex = clonesBefore;
 
   // Build full list with clones
@@ -547,12 +547,21 @@ footer {
     updatePosition(true);
 
     track.addEventListener("transitionend", () => {
+      let reset = false;
+
       if (currentIndex >= total + clonesBefore) {
         currentIndex = clonesBefore;
-        requestAnimationFrame(() => updatePosition(false));
+        reset = true;
       } else if (currentIndex < clonesBefore) {
         currentIndex = total + (currentIndex - clonesBefore);
-        requestAnimationFrame(() => updatePosition(false));
+        reset = true;
+      }
+
+      if (reset) {
+        // Delay the reset just enough to avoid a visual blink
+        setTimeout(() => {
+          updatePosition(false);
+        }, 0);
       }
     }, { once: true });
   }
