@@ -453,12 +453,11 @@ footer {
 
   .carousel-image {
     width: 300px;
-    max-width: 100%;
     height: 100%;
     object-fit: contain;
     opacity: 0;
     position: absolute;
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition: opacity 0.75s ease, transform 0.75s ease;
   }
 
   .carousel-image.active {
@@ -489,19 +488,19 @@ footer {
     background-color: black;
     color: white;
     border: none;
-    border-radius: 50%;
-    padding: 1rem;
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
     font-size: 2rem;
     cursor: pointer;
     z-index: 4;
   }
 
   .carousel-btn.prev {
-    left: -60px;
+    left: -100px;
   }
 
   .carousel-btn.next {
-    right: -60px;
+    right: -100px;
   }
 </style>
 
