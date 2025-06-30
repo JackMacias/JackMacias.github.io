@@ -409,6 +409,7 @@ footer {
     }
   }
 </style>
+
 <!-- SECTION: Projects -->
 <!DOCTYPE html>
 <html lang="en">
@@ -426,18 +427,24 @@ footer {
     }
 
     .carousel-wrapper {
-      width: 660px;
+      width: 900px;
       overflow: hidden;
-      flex;
+      position: relative;
+    }
+
+    .carousel-track {
+      display: flex;
       align-items: center;
       transition: transform 0.5s ease-in-out;
     }
 
     .carousel-item {
       flex-shrink: 0;
-      height: 180px;
+      height: auto;
+      max-height: 180px;
       width: auto;
       margin: 0 20px;
+      object-fit: contain;
       opacity: 0.3;
       transform: scale(0.9);
       transition: transform 0.5s ease, opacity 0.5s ease;
@@ -452,6 +459,8 @@ footer {
     .carousel-item.adjacent {
       opacity: 0.6;
       transform: scale(1);
+    }
+
     .carousel-btn {
       background-color: black;
       color: white;
@@ -561,7 +570,7 @@ footer {
 
         let offset = 0;
         for (let i = 0; i < currentIndex; i++) {
-          offset += items[i].offsetWidth + 40;
+          offset += items[i].offsetWidth + 40; // 20px margin on each side
         }
 
         const centerOffset = (wrapper.offsetWidth - centerItem.offsetWidth) / 2;
