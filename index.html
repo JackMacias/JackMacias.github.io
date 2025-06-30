@@ -414,137 +414,158 @@ footer {
 <section class="section" id="Projects">
   <h2 class="section-title">Projects</h2>
 
-  <!-- Suspension Arm Project -->
   <div class="project">
     <h3>Suspension Arm</h3>
-
-    <!-- Carousel Wrapper -->
-    <div class="wrapper">
-      <div class="carousel">
-        <div class="carousel__item"><img src="assets/Arm-1.jpg" alt="Arm 1" /></div>
-        <div class="carousel__item"><img src="assets/Arm-2.jpg" alt="Arm 2" /></div>
-        <div class="carousel__item"><img src="assets/Arm-3.jpg" alt="Arm 3" /></div>
-        <div class="carousel__item"><img src="assets/Arm-4.jpg" alt="Arm 4" /></div>
-        <div class="carousel__item"><img src="assets/Arm-5.PNG" alt="Arm 5" /></div>
-        <div class="carousel__item"><img src="assets/Arm-6.jpg" alt="Arm 6" /></div>
-        <div class="carousel__item"><img src="assets/Arm-7.jpg" alt="Arm 7" /></div>
-        <div class="carousel__item"><img src="assets/Arm-8.PNG" alt="Arm 8" /></div>
-        <div class="carousel__item"><img src="assets/Arm-9.jpg" alt="Arm 9" /></div>
+    <div class="carousel-container">
+      <button class="carousel-btn prev">&#10094;</button>
+      <div class="carousel-wrapper">
+        <div class="carousel-track" id="carousel-track">
+          <!-- Images will be injected here -->
+        </div>
       </div>
+      <button class="carousel-btn next">&#10095;</button>
     </div>
   </div>
 </section>
 
-<!-- STYLES: Carousel -->
 <style>
-  :root {
-    --animation-timing: 27s;
-    --carousel-items: 9;
-    --animation-delay-fraction: calc(var(--animation-timing) / var(--carousel-items));
-    --animation-steps-fraction: calc(100% / var(--carousel-items));
-    --slide-change-timing: 3%;
-  }
-
-  .wrapper {
-    width: 100%;
+  .carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     max-width: 800px;
     margin: auto;
+  }
+
+  .carousel-wrapper {
+    width: 660px;
     overflow: hidden;
     position: relative;
   }
 
-  .carousel {
-    position: relative;
-    height: 300px;
+  .carousel-track {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    transition: transform 0.5s ease-in-out;
   }
 
-  .carousel__item {
-    position: absolute;
+  .carousel-item {
+    flex-shrink: 0;
     width: 200px;
-    opacity: 0;
-    transform: translateX(100%) scale(0.5);
-    animation: carousel-animate-horizontal var(--animation-timing) linear infinite;
+    margin: 0 10px;
+    object-fit: contain;
+    opacity: 0.3;
+    transform: scale(0.9);
     transition: transform 0.5s ease, opacity 0.5s ease;
   }
 
-  .carousel__item img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  .carousel-item.center {
+    opacity: 1;
+    transform: scale(1.1);
   }
 
-  /* Animation delays for each image */
-  .carousel__item:nth-child(1) { animation-delay: calc(var(--animation-delay-fraction) * 0); }
-  .carousel__item:nth-child(2) { animation-delay: calc(var(--animation-delay-fraction) * 1); }
-  .carousel__item:nth-child(3) { animation-delay: calc(var(--animation-delay-fraction) * 2); }
-  .carousel__item:nth-child(4) { animation-delay: calc(var(--animation-delay-fraction) * 3); }
-  .carousel__item:nth-child(5) { animation-delay: calc(var(--animation-delay-fraction) * 4); }
-  .carousel__item:nth-child(6) { animation-delay: calc(var(--animation-delay-fraction) * 5); }
-  .carousel__item:nth-child(7) { animation-delay: calc(var(--animation-delay-fraction) * 6); }
-  .carousel__item:nth-child(8) { animation-delay: calc(var(--animation-delay-fraction) * 7); }
-  .carousel__item:nth-child(9) { animation-delay: calc(var(--animation-delay-fraction) * 8); }
+  .carousel-item.adjacent {
+    opacity: 0.6;
+    transform: scale(1);
+  }
 
-  /* Keyframes for horizontal animation */
-  @keyframes carousel-animate-horizontal {
-    0% {
-      transform: translateX(100%) scale(0.5);
-      opacity: 0;
-      visibility: hidden;
-    }
-    var(--slide-change-timing),
-    var(--animation-steps-fraction) {
-      transform: translateX(100%) scale(0.7);
-      opacity: .4;
-      visibility: visible;
-    }
-    calc(var(--animation-steps-fraction) + var(--slide-change-timing)),
-    calc(var(--animation-steps-fraction) * 2) {
-      transform: translateX(0) scale(1);
-      opacity: 1;
-      visibility: visible;
-    }
-    calc(var(--animation-steps-fraction) * 2 + var(--slide-change-timing)),
-    calc(var(--animation-steps-fraction) * 3) {
-      transform: translateX(-100%) scale(0.7);
-      opacity: .4;
-      visibility: visible;
-    }
-    calc(var(--animation-steps-fraction) * 3 + var(--slide-change-timing)) {
-      transform: translateX(-100%) scale(0.5);
-      opacity: 0;
-      visibility: hidden;
-    }
-    100% {
-      transform: translateX(-100%) scale(0.5);
-      opacity: 0;
-      visibility: hidden;
-    }
+  .carousel-btn {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 2;
+    margin: 0 10px;
+  }
+
+  .carousel-btn:hover {
+    background-color: #333;
   }
 </style>
-  
-<!-- SECTION: Awards -->
-<section class="section" id="Awards">
-<div class="awards-header">
-<h2 class="section-title">Awards</h2>
-<div style="display: flex; flex-direction: column; gap: 1.5rem;">
-<div style="border: 1px solid #ccc; padding: 1rem; border-radius: 8px;">
-<strong>University of Wisconsin-Madison Engineering Diversity Scholarship Recipient</strong>
-</div>
-<div style="border: 1px solid #ccc; padding: 1rem; border-radius: 8px;">
-<strong>College of Engineering Dean’s Honors List</strong>
-</div>
-<div style="border: 1px solid #ccc; padding: 1rem; border-radius: 8px;">
-<strong>Town Proclamation for Exemplary Leadership and Service to the Community, Hillsborough, NJ</strong>
-</div>
-<div style="border: 1px solid #ccc; padding: 1rem; border-radius: 8px;">
-<strong>Eagle Scout, Troop 1776</strong>
-</div>
-</div>
-</section>
+
+<script>
+  const imagePaths = [
+    "assets/Arm-1.jpg",
+    "assets/Arm-2.jpg",
+    "assets/Arm-3.jpg",
+    "assets/Arm-4.jpg",
+    "assets/Arm-5.PNG",
+    "assets/Arm-6.jpg",
+    "assets/Arm-7.jpg",
+    "assets/Arm-8.PNG",
+    "assets/Arm-9.jpg"
+  ];
+
+  let currentIndex = 0;
+  const track = document.getElementById("carousel-track");
+  const prevBtn = document.querySelector(".prev");
+  const nextBtn = document.querySelector(".next");
+
+  function createImageElement(src, className) {
+    const img = document.createElement("img");
+    img.src = src;
+    img.className = `carousel-item ${className}`;
+    img.alt = "Project image";
+    return img;
+  }
+
+  function renderCarousel() {
+    const total = imagePaths.length;
+    const prevIndex = (currentIndex - 1 + total) % total;
+    const nextIndex = (currentIndex + 1) % total;
+
+    track.innerHTML = "";
+    track.appendChild(createImageElement(imagePaths[prevIndex], "adjacent"));
+    track.appendChild(createImageElement(imagePaths[currentIndex], "center"));
+    track.appendChild(createImageElement(imagePaths[nextIndex], "adjacent"));
+
+    track.style.transition = "none";
+    track.style.transform = "translateX(0)";
+  }
+
+  function moveSlide(step) {
+    const total = imagePaths.length;
+    const newIndex = (currentIndex + step + total) % total;
+
+    const direction = step > 0 ? -1 : 1;
+    const offset = direction * 220;
+
+    // Preload new images
+    const prevIndex = (newIndex - 1 + total) % total;
+    const nextIndex = (newIndex + 1) % total;
+
+    const newTrack = document.createElement("div");
+    newTrack.className = "carousel-track";
+    newTrack.style.display = "flex";
+    newTrack.style.transition = "none";
+    newTrack.style.transform = `translateX(${offset}px)`;
+
+    newTrack.appendChild(createImageElement(imagePaths[prevIndex], "adjacent"));
+    newTrack.appendChild(createImageElement(imagePaths[newIndex], "center"));
+    newTrack.appendChild(createImageElement(imagePaths[nextIndex], "adjacent"));
+
+    track.parentElement.replaceChild(newTrack, track);
+
+    requestAnimationFrame(() => {
+      newTrack.style.transition = "transform 0.5s ease-in-out";
+      newTrack.style.transform = "translateX(0)";
+    });
+
+    newTrack.addEventListener("transitionend", () => {
+      newTrack.id = "carousel-track";
+      currentIndex = newIndex;
+    }, { once: true });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    renderCarousel();
+    document.querySelector(".prev").addEventListener("click", () => moveSlide(-1));
+    document.querySelector(".next").addEventListener("click", () => moveSlide(1));
+  });
+</script>
 
 <!-- SECTION: Contact -->
 <section class="section" id="contact" style="padding: 60px 0; background-color: #ffffff;">
