@@ -569,7 +569,7 @@ footer {
           offset += items[i].offsetWidth + 60;
         }
         const centerItem = items[currentIndex];
-        const centerOffset = (track.parentElement.offsetWidth - centerItem.offsetWidth) / 2;
+        const centerOffset = (track.parentElement.offsetWidth - centerItem.offsetWidth) / 2 - 30;
         track.style.transition = animate ? "transform 0.5s ease-in-out" : "none";
         track.style.transform = `translateX(${-offset + centerOffset}px)`;
         updateClasses();
@@ -638,10 +638,7 @@ footer {
           "assets/Board-1.jpg", "assets/Board-2.jpg", "assets/Board-3.jpg",
           "assets/Board-4.jpg", "assets/Board-5.jpg", "assets/Board-6.jpg",
           "assets/Board-7.jpg", "assets/Board-8.jpg", "assets/Board-9.jpg",
-          "assets/Board-10.jpg", "assets/Board-11.jpg", "assets/Board-12.jpg",
-          "assets/Board-13.jpg", "assets/Board-14.jpg", "assets/Board-15.jpg",
-          "assets/BoardAll.jpg", "assets/BoardAmazing.jpg", "assets/BoardAmazing2.jpg",
-          "assets/BoardChartTable.PNG", "assets/BoardCommonUse.PNG"
+          "assets/Board-10.jpg", "assets/Board-11.jpg"
         ]
       });
     });
