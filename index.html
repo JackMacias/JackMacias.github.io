@@ -528,15 +528,15 @@ footer {
   <script>
     function initCarousel({ trackId, prevBtnClass, nextBtnClass, imagePaths }) {
       const track = document.getElementById(trackId);
+      const total = imagePaths.length;
       const clonesBefore = 1;
       const clonesAfter = 1;
-      const total = imagePaths.length;
       let currentIndex = 1;
 
       const fullList = [
-        imagePaths[imagePaths.length - 1],
+        imagePaths[total - 1] || imagePaths[0],
         ...imagePaths,
-        imagePaths[1 % total]
+        imagePaths[1] || imagePaths[0]
       ];
 
       fullList.forEach((src, i) => {
@@ -627,7 +627,10 @@ footer {
           "assets/Board-1.jpg", "assets/Board-2.jpg", "assets/Board-3.jpg",
           "assets/Board-4.jpg", "assets/Board-5.jpg", "assets/Board-6.jpg",
           "assets/Board-7.jpg", "assets/Board-8.jpg", "assets/Board-9.jpg",
-          "assets/Board-10.jpg", "assets/Board-11.jpg"
+          "assets/Board-10.jpg", "assets/Board-11.jpg", "assets/Board-12.jpg",
+          "assets/Board-13.jpg", "assets/Board-14.jpg", "assets/Board-15.jpg",
+          "assets/BoardAll.jpg", "assets/BoardAmazing.jpg", "assets/BoardAmazing2.jpg",
+          "assets/BoardChartTable.PNG", "assets/BoardCommonUse.PNG"
         ]
       });
     });
