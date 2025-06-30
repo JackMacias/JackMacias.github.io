@@ -416,7 +416,7 @@ footer {
 
   <!-- Suspension Arm Project -->
   <div class="project">
-    <h3>Suspension Arm</h3>
+    <h3>Suspension ArmS</h3>
     <div class="carousel-container">
       <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
       <div class="carousel-wrapper">
@@ -452,7 +452,7 @@ footer {
 
   .carousel-wrapper {
     overflow: hidden;
-    width: 660px; /* 3 images * (200px + 10px margin on each side) */
+    width: 660px; /* 3 images * (200px + 2*10px margin) */
   }
 
   .carousel {
@@ -508,9 +508,9 @@ footer {
   function updateClasses() {
     const images = carousel.querySelectorAll('.carousel-image');
     images.forEach(img => img.classList.remove('center', 'adjacent'));
-    images[currentIndex].classList.add('center');
-    if (images[currentIndex - 1]) images[currentIndex - 1].classList.add('adjacent');
-    if (images[currentIndex + 1]) images[currentIndex + 1].classList.add('adjacent');
+    images[currentIndex]?.classList.add('center');
+    images[currentIndex - 1]?.classList.add('adjacent');
+    images[currentIndex + 1]?.classList.add('adjacent');
   }
 
   function moveSlide(step) {
