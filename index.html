@@ -539,15 +539,18 @@ footer {
         imagePaths[1] || imagePaths[0]
       ];
 
+      const imageElements = [];
+      
       fullList.forEach((src, i) => {
         const img = document.createElement("img");
         img.src = src;
         img.className = "carousel-item";
         img.alt = `Image ${i}`;
         track.appendChild(img);
+        imageElements.push(img);
       });
-
-      const items = track.querySelectorAll(".carousel-item");
+      
+      const items = imageElements;
 
       function updateClasses() {
         items.forEach((item, index) => {
