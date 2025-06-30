@@ -446,6 +446,8 @@ footer {
 
   .carousel {
     display: flex;
+    justify-content: center;
+    align-items: center;
     transition: transform 0.5s ease-in-out;
   }
 
@@ -454,6 +456,15 @@ footer {
     height: 200px;
     object-fit: contain;
     flex-shrink: 0;
+    opacity: 0.3;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    transform: scale(0.9);
+  }
+
+  .carousel-image.center {
+    opacity: 1;
+    transform: scale(1.1);
+    z-index: 1;
   }
 
   .carousel-btn {
@@ -493,11 +504,27 @@ footer {
 
   function moveSlide(step) {
     const carousel = document.getElementById('carousel');
-    const images = document.querySelectorAll('.carousel-image');
+    const images = Array.from(document.querySelectorAll('.carousel-image'));
+
+    // Update index and wrap around
     currentIndex = (currentIndex + step + images.length) % images.length;
-    const offset = -currentIndex * images[0].offsetWidth;
+
+    // Remove all special classes
+    images.forEach(img => {
+      img.classList.remove('center');
+    });
+
+    // Move carousel
+    const offset = -currentIndex * images[0].offsetWidth + (carousel.offsetWidth / 2 - images[0].offsetWidth / 2);
     carousel.style.transform = `translateX(${offset}px)`;
+
+    // Highlight center image
+    images[currentIndex].classList.add('center');
   }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    moveSlide(0);
+  });
 </script>
 
 <!-- SECTION: Awards -->
