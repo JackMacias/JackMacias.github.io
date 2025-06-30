@@ -549,10 +549,10 @@ footer {
     track.addEventListener("transitionend", () => {
       if (currentIndex >= total + clonesBefore) {
         currentIndex = clonesBefore;
-        updatePosition(false);
+        requestAnimationFrame(() => updatePosition(false));
       } else if (currentIndex < clonesBefore) {
-        currentIndex = total + currentIndex;
-        updatePosition(false);
+        currentIndex = total + (currentIndex - clonesBefore);
+        requestAnimationFrame(() => updatePosition(false));
       }
     }, { once: true });
   }
