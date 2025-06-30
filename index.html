@@ -501,16 +501,21 @@ footer {
 
   const track = document.getElementById("carousel-track");
   const total = imagePaths.length;
-  let currentIndex = total; // Start at the first real image (after clones)
+  let currentIndex = 1;
 
-  // Clone images for seamless looping
-  const fullList = [...imagePaths.slice(-1), ...imagePaths, ...imagePaths.slice(0, 1)];
+  // Clone last and first images for seamless looping
+  const fullList = [
+    imagePaths[total - 1],
+    ...imagePaths,
+    imagePaths[0]
+  ];
 
+  // Create and append all images
   fullList.forEach((src, i) => {
     const img = document.createElement("img");
     img.src = src;
     img.className = "carousel-item";
-    img.alt = `Project image ${i + 1}`;
+    img.alt = `Project image ${i}`;
     track.appendChild(img);
   });
 
@@ -519,9 +524,11 @@ footer {
   function updateClasses() {
     items.forEach((item, index) => {
       item.classList.remove("center", "adjacent");
-      const relative = index - currentIndex;
-      if (relative === 0) item.classList.add("center");
-      else if (Math.abs(relative) === 1) item.classList.add("adjacent");
+      if (index === currentIndex) {
+        item.classList.add("center");
+      } else if (index === currentIndex - 1 || index === currentIndex + 1) {
+        item.classList.add("adjacent");
+      }
     });
   }
 
@@ -536,13 +543,12 @@ footer {
     currentIndex += step;
     updatePosition(true);
 
-    // Reset position after transition if at clone
     track.addEventListener("transitionend", () => {
       if (currentIndex === 0) {
         currentIndex = total;
         updatePosition(false);
       } else if (currentIndex === fullList.length - 1) {
-        currentIndex = total - 1;
+        currentIndex = 1;
         updatePosition(false);
       }
     }, { once: true });
