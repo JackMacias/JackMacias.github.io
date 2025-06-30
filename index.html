@@ -441,7 +441,7 @@ footer {
       flex-shrink: 0;
       height: 180px;
       width: auto;
-      margin: 0 10px;
+      margin: 0 20px;
       object-fit: contain;
       opacity: 0.3;
       transform: scale(0.9);
@@ -492,7 +492,7 @@ footer {
     <h2 class="section-title">Projects</h2>
 
     <div class="project">
-      <h3>Suspension Arm</h3>
+      <h3>Suspension ArmS</h3>
       <div class="carousel-container">
         <button class="carousel-btn prev-arm">&#10094;</button>
         <div class="carousel-wrapper">
@@ -566,7 +566,7 @@ footer {
       function updatePosition(animate = true) {
         let offset = 0;
         for (let i = 0; i < currentIndex; i++) {
-          offset += items[i].offsetWidth + 20;
+          offset += items[i].offsetWidth + 60;
         }
         const centerItem = items[currentIndex];
         const centerOffset = (track.parentElement.offsetWidth - centerItem.offsetWidth) / 2;
