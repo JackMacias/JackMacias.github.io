@@ -422,7 +422,7 @@ footer {
       display: flex;
       align-items: center;
       justify-content: center;
-      max-width: 800px;
+      max-width: 1000px;
       margin: 40px auto;
     }
 
@@ -439,11 +439,8 @@ footer {
 
     .carousel-item {
       flex-shrink: 0;
-      width: 200px;
-      margin: 0 10px;
-      object-fit: contain;
-      opacity: 0.3;
-      transform: scale(0.9);
+      height: 180px;
+      width transform: scale(0.9);
       transition: transform 0.5s ease, opacity 0.5s ease;
     }
 
@@ -511,7 +508,7 @@ footer {
         <button class="carousel-btn next-sign">&#10095;</button>
       </div>
     </div>
-    
+
     <div class="project">
       <h3>Board Designs</h3>
       <div class="carousel-container">
@@ -520,16 +517,13 @@ footer {
           <div class="carousel-track" id="carousel-track-board"></div>
         </div>
         <button class="carousel-btn next-board">&#10095;</button>
+      </div>
     </div>
-  </div>
-
-
-</section>
+  </section>
 
   <script>
     function initCarousel({ trackId, prevBtnClass, nextBtnClass, imagePaths, clonesBefore = 2, clonesAfter = 2 }) {
       const track = document.getElementById(trackId);
-      const itemWidth = 220;
       const total = imagePaths.length;
       let currentIndex = clonesBefore;
 
@@ -561,9 +555,10 @@ footer {
       }
 
       function updatePosition(animate = true) {
-        const offset = -((currentIndex * itemWidth) - itemWidth);
+        const currentItem = items[currentIndex];
+        const offset = currentItem.offsetLeft - (track.parentElement.offsetWidth / 2) + (currentItem.offsetWidth / 2);
         track.style.transition = animate ? "transform 0.5s ease-in-out" : "none";
-        track.style.transform = `translateX(${offset}px)`;
+        track.style.transform = `translateX(${-offset}px)`;
         updateClasses();
       }
 
@@ -613,21 +608,18 @@ footer {
           "assets/Sign-7.jpg"
         ]
       });
+
       initCarousel({
         trackId: "carousel-track-board",
         prevBtnClass: "prev-board",
         nextBtnClass: "next-board",
         imagePaths: [
           "assets/Board-1.jpg", "assets/Board-2.jpg", "assets/Board-3.jpg",
-          "assets/Board4-.jpg", "assets/-Board5-.jpg", "assets/-Board6-.jpg",
-          "assets/-Board7-.jpg", "assets/-Board8-.jpg", "assets/-Board9-.jpg",
-          "assets/Board-10.jpg", "assets/Board-11.jpg", "assets/Board-12.jpg",
-          "assets/Board-13.jpg", "assets/Board-14.jpg", "assets/Board-15.jpg",
-          "assets/-BoardAll-.jpg", "assets/-BoardAmazing-.jpg", "assets/-BoardAmazing2-.jpg",
-          "assets/-BoardChartTable.PNG", "assets/-BoardCommonUse.PNG"
+          "assets/Board-4.jpg", "assets/Board-5.jpg", "assets/Board-6.jpg",
+          "assets/Board-7.jpg", "assets/Board-8.jpg", "assets/Board-9.jpg",
+          "assets/Board-10.jpg", "assets/Board-11.jpg"
         ]
       });
-
     });
   </script>
 </body>
