@@ -411,164 +411,167 @@ footer {
 </style>
 
 <!-- SECTION: Projects -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Seamless Carousel</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      background: #111;
-      color: white;
-      margin: 0;
-      padding: 2rem;
-    }
-    .carousel-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      max-width: 800px;
-      margin: auto;
-    }
-    .carousel-wrapper {
-      width: 660px;
-      overflow: hidden;
-      position: relative;
-    }
-    .carousel-track {
-      display: flex;
-      transition: transform 0.5s ease-in-out;
-      will-change: transform;
-    }
-    .carousel-item {
-      flex-shrink: 0;
-      width: 200px;
-      margin: 0 10px;
-      object-fit: contain;
-      opacity: 0.3;
-      transform: scale(0.9);
-      transition: transform 0.5s ease, opacity 0.5s ease;
-    }
-    .carousel-item.center {
-      opacity: 1;
-      transform: scale(1.1);
-    }
-    .carousel-item.adjacent {
-      opacity: 0.6;
-      transform: scale(1);
-    }
-    .carousel-btn {
-      background-color: black;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      font-size: 2rem;
-      cursor: pointer;
-      z-index: 2;
-      margin: 0 10px;
-    }
-    .carousel-btn:hover {
-      background-color: #333;
-    }
-  </style>
-</head>
-<body>
+<section class="section" id="Projects">
   <h2 class="section-title">Projects</h2>
-  <div class="carousel-container">
-    <button class="carousel-btn prev">&#10094;</button>
-    <div class="carousel-wrapper">
-      <div class="carousel-track" id="carousel-track"></div>
+
+  <div class="project">
+    <h3>Suspension Arm</h3>
+    <div class="carousel-container">
+      <button class="carousel-btn prev">&#10094;</button>
+      <div class="carousel-wrapper">
+        <div class="carousel-track" id="carousel-track">
+          <!-- Images will be injected here -->
+        </div>
+      </div>
+      <button class="carousel-btn next">&#10095;</button>
     </div>
-    <button class="carousel-btn next">&#10095;</button>
   </div>
+</section>
 
-  <script>
-    const imagePaths = [
-      "assets/Arm-1.jpg",
-      "assets/Arm-2.jpg",
-      "assets/Arm-3.jpg",
-      "assets/Arm-4.jpg",
-      "assets/Arm-5.PNG",
-      "assets/Arm-6.jpg",
-      "assets/Arm-7.jpg",
-      "assets/Arm-8.PNG",
-      "assets/Arm-9.jpg"
-    ];
+<style>
+  .carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 800px;
+    margin: auto;
+  }
 
-    const track = document.getElementById("carousel-track");
-    const itemWidth = 220;
-    const clonesBefore = 2;
-    const clonesAfter = 2;
-    const total = imagePaths.length;
-    let currentIndex = clonesBefore;
+  .carousel-wrapper {
+    width: 660px;
+    overflow: hidden;
+    position: relative;
+  }
 
-    const fullList = [
-      ...imagePaths.slice(-clonesBefore),
-      ...imagePaths,
-      ...imagePaths.slice(0, clonesAfter)
-    ];
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
 
-    fullList.forEach((src, i) => {
-      const img = document.createElement("img");
-      img.src = src;
-      img.className = "carousel-item";
-      img.alt = "Project image " + i;
-      track.appendChild(img);
+  .carousel-item {
+    flex-shrink: 0;
+    width: 200px;
+    margin: 0 10px;
+    object-fit: contain;
+    opacity: 0.3;
+    transform: scale(0.9);
+    transition: transform 0.5s ease, opacity 0.5s ease;
+  }
+
+  .carousel-item.center {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  .carousel-item.adjacent {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+
+  .carousel-btn {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 2;
+    margin: 0 10px;
+  }
+
+  .carousel-btn:hover {
+    background-color: #333;
+  }
+</style>
+
+<script>
+  const imagePaths = [
+    "assets/Arm-1.jpg",
+    "assets/Arm-2.jpg",
+    "assets/Arm-3.jpg",
+    "assets/Arm-4.jpg",
+    "assets/Arm-5.PNG",
+    "assets/Arm-6.jpg",
+    "assets/Arm-7.jpg",
+    "assets/Arm-8.PNG",
+    "assets/Arm-9.jpg"
+  ];
+
+  const track = document.getElementById("carousel-track");
+  const itemWidth = 220;
+  const total = imagePaths.length;
+  const clonesBefore = 2;
+  const clonesAfter = 2;
+  let currentIndex = clonesBefore;
+
+  // Build full list with clones
+  const fullList = [
+    ...imagePaths.slice(-clonesBefore),
+    ...imagePaths,
+    ...imagePaths.slice(0, clonesAfter)
+  ];
+
+  // Create and append all images
+  fullList.forEach((src, i) => {
+    const img = document.createElement("img");
+    img.src = src;
+    img.className = "carousel-item";
+    img.alt = `Project image ${i}`;
+    track.appendChild(img);
+  });
+
+  const items = track.querySelectorAll(".carousel-item");
+
+  function updateClasses() {
+    items.forEach((item, index) => {
+      item.classList.remove("center", "adjacent");
+      if (index === currentIndex) {
+        item.classList.add("center");
+      } else if (index === currentIndex - 1 || index === currentIndex + 1) {
+        item.classList.add("adjacent");
+      }
     });
+  }
 
-    const items = track.querySelectorAll(".carousel-item");
+  function updatePosition(animate = true) {
+    const offset = -((currentIndex * itemWidth) - itemWidth);
+    track.style.transition = animate ? "transform 0.5s ease-in-out" : "none";
+    track.style.transform = `translateX(${offset}px)`;
+    updateClasses();
+  }
 
-    function updateClasses() {
-      items.forEach((item, index) => {
-        item.classList.remove("center", "adjacent");
-        if (index === currentIndex) {
-          item.classList.add("center");
-        } else if (index === currentIndex - 1 || index === currentIndex + 1) {
-          item.classList.add("adjacent");
-        }
-      });
-    }
+  function moveSlide(step) {
+    currentIndex += step;
+    updatePosition(true);
 
-    function updatePosition(animate = true) {
-      const offset = -((currentIndex * itemWidth) - itemWidth);
-      track.style.transition = animate ? "transform 0.5s ease-in-out" : "none";
-      track.style.transform = `translateX(${offset}px)`;
-      updateClasses();
-    }
+    track.addEventListener("transitionend", () => {
+      let reset = false;
 
-    function moveSlide(step) {
-      currentIndex += step;
-      updatePosition(true);
+      if (currentIndex >= total + clonesBefore) {
+        currentIndex = clonesBefore;
+        reset = true;
+      } else if (currentIndex < clonesBefore) {
+        currentIndex = total + (currentIndex - clonesBefore);
+        reset = true;
+      }
 
-      track.addEventListener("transitionend", () => {
-        let reset = false;
-        if (currentIndex >= total + clonesBefore) {
-          currentIndex = clonesBefore;
-          reset = true;
-        } else if (currentIndex < clonesBefore) {
-          currentIndex = total + (currentIndex - clonesBefore);
-          reset = true;
-        }
-        if (reset) {
-          requestAnimationFrame(() => {
-            updatePosition(false);
-          });
-        }
-      }, { once: true });
-    }
+      if (reset) {
+        // Delay the reset just enough to avoid a visual blink
+        setTimeout(() => {
+          updatePosition(false);
+        }, 0);
+      }
+    }, { once: true });
+  }
 
-    document.addEventListener("DOMContentLoaded", () => {
-      updatePosition(false);
-      document.querySelector(".prev").addEventListener("click", () => moveSlide(-1));
-      document.querySelector(".next").addEventListener("click", () => moveSlide(1));
-    });
-  </script>
-</body>
-</html>
+  document.addEventListener("DOMContentLoaded", () => {
+    updatePosition(false);
+    document.querySelector(".prev").addEventListener("click", () => moveSlide(-1));
+    document.querySelector(".next").addEventListener("click", () => moveSlide(1));
+  });
+</script>
 
 <!-- SECTION: Contact -->
 <section class="section" id="contact" style="padding: 60px 0; background-color: #ffffff;">
