@@ -495,7 +495,7 @@ footer {
     <h2 class="section-title">Projects</h2>
 
     <div class="project">
-      <h3>Signage Designs</h3>
+      <h3>Forumla One LED Sign</h3>
       <div class="carousel-container">
         <button class="carousel-btn prev-sign">&#10094;</button>
         <div class="carousel-wrapper">
@@ -506,7 +506,7 @@ footer {
     </div>
 
     <div class="project">
-      <h3>Suspension Arm</h3>
+      <h3>High Ground Clearance Suspension</h3>
       <div class="carousel-container">
         <button class="carousel-btn prev-arm">&#10094;</button>
         <div class="carousel-wrapper">
@@ -517,7 +517,7 @@ footer {
     </div>
 
     <div class="project">
-      <h3>Board Designs</h3>
+      <h3>Various Cutting/Charcuterie Boards</h3>
       <div class="carousel-container">
         <button class="carousel-btn prev-board">&#10094;</button>
         <div class="carousel-wrapper">
@@ -526,6 +526,18 @@ footer {
         <button class="carousel-btn next-board">&#10095;</button>
       </div>
     </div>
+    
+    <div class="project">
+      <h3>Bolt Action Pen</h3>
+      <div class="carousel-container">
+        <button class="carousel-btn prev-arm">&#10094;</button>
+        <div class="carousel-wrapper">
+          <div class="carousel-track" id="carousel-track-arm"></div>
+        </div>
+        <button class="carousel-btn next-arm">&#10095;</button>
+      </div>
+    </div>
+
   </section>
 
   <script>
@@ -645,6 +657,22 @@ footer {
           "assets/Board-4.jpg", "assets/Board-5.jpg", "assets/Board-6.jpg",
           "assets/Board-7.jpg", "assets/Board-8.jpg", "assets/Board-9.jpg",
           "assets/Board-10.jpg", "assets/Board-11.jpg"
+        ]
+      });
+        initCarousel({
+        trackId: "carousel-track-board",
+        prevBtnClass: "prev-board",
+        nextBtnClass: "next-board",
+        imagePaths: [
+          "assets/Pen-1.jpg", "assets/Pen-2.jpg"
+        ]
+      });
+        initCarousel({
+        trackId: "carousel-track-board",
+        prevBtnClass: "prev-board",
+        nextBtnClass: "next-board",
+        imagePaths: [
+          "assets/Laser-Batman.jpg"
         ]
       });
     });
