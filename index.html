@@ -415,7 +415,7 @@ footer {
   <h2 class="section-title">Projects</h2>
 
   <div class="project">
-    <h3>Suspension ArmS</h3>
+    <h3>Suspension Arm</h3>
     <div class="carousel-container">
       <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
       <div class="carousel-wrapper">
@@ -451,8 +451,9 @@ footer {
   .carousel-item {
     flex-shrink: 0;
     width: 200px;
-    height: 150px;
     margin: 0 10px;
+    max-width: 100%;
+    object-fit: contain;
     opacity: 0.3;
     transform: scale(0.9);
     transition: transform 0.5s ease, opacity 0.5s ease;
@@ -517,9 +518,8 @@ footer {
       img.alt = `Arm ${i + 1}`;
       img.className = "carousel-item";
 
-      if (idx === 0) img.classList.add("adjacent");
+      if (idx === 0 || idx === 2) img.classList.add("adjacent");
       if (idx === 1) img.classList.add("center");
-      if (idx === 2) img.classList.add("adjacent");
 
       track.appendChild(img);
     });
@@ -528,14 +528,40 @@ footer {
   }
 
   function moveSlide(step) {
+    const total = imagePaths.length;
     const direction = step > 0 ? -1 : 1;
-    track.style.transition = "transform 0.5s ease-in-out";
-    track.style.transform = `translateX(${direction * 220}px)`;
 
-    track.addEventListener("transitionend", () => {
-      track.style.transition = "none";
-      currentIndex = (currentIndex + step + imagePaths.length) % imagePaths.length;
-      renderCarousel();
+    // Preload next set of images
+    const newIndex = (currentIndex + step + total) % total;
+    const prevIndex = (newIndex - 1 + total) % total;
+    const nextIndex = (newIndex + 1) % total;
+    const indices = [prevIndex, newIndex, nextIndex];
+
+    const newTrack = document.createElement("div");
+    newTrack.className = "carousel-track";
+    newTrack.style.display = "flex";
+    newTrack.style.transition = "none";
+    newTrack.style.transform = `translateX(${direction * 220}px)`;
+
+    indices.forEach((i, idx) => {
+      const img = document.createElement("img");
+      img.src = imagePaths[i];
+      img.alt = `Arm ${i + 1}`;
+      img.className = "carousel-item";
+      if (idx === 0 || idx === 2) img.classList.add("adjacent");
+      if (idx === 1) img.classList.add("center");
+      newTrack.appendChild(img);
+    });
+
+    track.parentElement.replaceChild(newTrack, track);
+    requestAnimationFrame(() => {
+      newTrack.style.transition = "transform 0.5s ease-in-out";
+      newTrack.style.transform = "translateX(0)";
+    });
+
+    newTrack.addEventListener("transitionend", () => {
+      newTrack.id = "carousel-track";
+      currentIndex = newIndex;
     }, { once: true });
   }
 
