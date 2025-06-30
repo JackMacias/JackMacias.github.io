@@ -446,12 +446,11 @@ footer {
 
   .carousel {
     display: flex;
-    transition: transform 0.5s ease-in-out;
-    transform: translateX(0);
     gap: 2rem;
     justify-content: center;
     align-items: center;
     height: 100%;
+    position: relative;
   }
 
   .carousel-image {
@@ -460,23 +459,23 @@ footer {
     object-fit: contain;
     opacity: 0;
     transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
-    position: absolute;
+    position: relative;
     transform: scale(0.9);
+    display: none;
   }
 
   .carousel-image.active {
     opacity: 1;
-    position: relative;
     transform: scale(1);
     z-index: 2;
+    display: block;
   }
 
   .carousel-image.prev,
   .carousel-image.next {
     opacity: 0.5;
-    position: relative;
     z-index: 1;
-    transform: scale(0.9);
+    display: block;
   }
 
   .carousel-btn {
@@ -519,14 +518,23 @@ footer {
     images.forEach((img, i) => {
       img.classList.remove('active', 'prev', 'next');
       img.style.opacity = '0';
+      img.style.display = 'none';
     });
 
     const prevIndex = (index - 1 + images.length) % images.length;
     const nextIndex = (index + 1) % images.length;
 
     images[prevIndex].classList.add('prev');
+    images[prevIndex].style.opacity = '0.5';
+    images[prevIndex].style.display = 'block';
+
     images[nextIndex].classList.add('next');
+    images[nextIndex].style.opacity = '0.5';
+    images[nextIndex].style.display = 'block';
+
     images[index].classList.add('active');
+    images[index].style.opacity = '1';
+    images[index].style.display = 'block';
   }
 
   function moveSlide(step) {
