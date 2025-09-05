@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jack Macias | Mechanical Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navh: 64px;
+      --maxw: 1200px;
+      --gap: clamp(24px, 6vw, 64px);
+      --accent: #000;
+      --c-gap: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      margin: 0; color: #222; background: #fff;
+    }
+
+    /* NAV */
+    .navbar {
+      position: sticky; top: 0; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2rem; background: #000; color: #fff;
+    }
+    .navbar .logo { font-weight: 700; font-size: 1.25rem; }
+    .navbar ul { display: flex; gap: 1.25rem; margin: 0; padding: 0; list-style: none; }
+    .navbar a { color: #fff; text-decoration: none; border-bottom: 2px solid transparent; padding-bottom: 2px; }
+    .navbar a:hover { border-color: #fff; }
+
+    /* LAYOUT */
+    .section { padding: 60px clamp(16px, 5vw, 48px); }
+    .container { max-width: var(--maxw); margin: 0 auto; }
+    .section-title { text-align: center; font-size: 2.25rem; margin: 0 0 1rem; font-weight: 800; }
+    .section-underline { width: 80px; height: 6px; background: #000; border-radius: 4px; margin: 0.5rem auto 2rem; }
+
+    
+    /* Make Home fill the first screen (navbar height accounted for) */
+    #home { 
+      min-height: calc(100vh - var(--navh));
+      display: flex; 
+      align-items: center; 
+      padding-top: clamp(24px, 5vh, 60px);
+      padding-bottom: clamp(24px, 5vh, 60px);
+    }
+    #home .container { width: 100%; }
+
+    /* HERO */
+    .hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--gap); align-items: center; }
+    .hero h1 { font-size: clamp(2.25rem, 4vw, 3.5rem); margin: 0 0 0.25rem; }
+    .hero-name { font-size: clamp(2.6rem, 6vw, 5rem); line-height: 1.05; }
+    .cta-button { display: inline-block; margin-top: 1.25rem; padding: 0.6rem 1.1rem; background: #000; color:#fff; text-decoration:none; border-radius: 6px; font-weight: 700; }
+    .hero-img { width: 340px; max-width: 100%; height: 340px; object-fit: cover; border-radius: 50%; box-shadow: 0 0 48px 16px rgba(0,0,0,.35); justify-self: center; }
+
+    /* Typing line under name */
+    .typewrap, .typewrap * { font-weight: 400; }
+    .typewrap { margin-top: .25rem; font-size: clamp(1.2rem, 2.5vw, 1.6rem); font-weight: 400; letter-spacing: .2px; }
+    .cursor { display: inline-block; width: 1ch; text-align: left; }
+    .blink { animation: blink 0.5s steps(1) 1; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* EXPERIENCE */
+    .timeline { position: relative; display: grid; gap: 2rem; max-width: 900px; margin: 0 auto; }
+    .t-box { border: 1px solid #000; border-radius: 8px; padding: 1rem 1.25rem; box-shadow: 0 2px 6px rgba(0,0,0,.05); }
+    .t-box h3 { margin: 0 0 .25rem; }
+    .t-box h4 { margin: 0 0 .5rem; color: #555; font-weight: 500; }
+    .t-box ul { margin: 0; padding-left: 1rem; }
+
+    
+    /* Resume-style experience headers */
+    .t-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+    .t-head h3 { margin: 0; }
+    .t-date { white-space: nowrap; color: #555; font-weight: 500; }
+    .t-subhead { margin: .25rem 0 .5rem; color: #555; font-weight: 500; }
+
+    
+    
+    /* === Left-side vertical timeline rail + nodes (outside the boxes) === */
+    .timeline { position: relative; }
+    /* vertical rail sits in the left gutter of the timeline container */
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 0.9rem;   /* rail position inside the gutter */
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #000;
+      opacity: .15;
+    }
+    /* push the entire card to the right so the rail/dot are OUTSIDE the box */
+    .timeline .t-box {
+      position: relative;
+      margin-left: 2.25rem; /* creates a gutter for the rail + node */
+    }
+    /* node is positioned to the LEFT of the card border using a negative offset */
+    .timeline .t-box::before {
+      content: "";
+      position: absolute;
+      left: -1.15rem;  /* outside the box border */
+      top: 1.25rem;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid #000;
+      box-shadow: 0 0 0 4px #fff; /* keeps the rail from visually touching the card */
+    }
+    .timeline .t-box.is-current::before { background: #000; }
+    .timeline .t-head h3 { font-weight: 700; }
+
+    @media (max-width: 960px){
+      .timeline::before { left: 0.7rem; }
+      .timeline .t-box { margin-left: 1.75rem; }
+      .timeline .t-box::before { left: -0.95rem; }
+    }
+
+    
+    /* === Timeline outside alignment fix using CSS variables === */
+    .timeline {
+      position: relative;
+      --rail-x: 0.9rem;      /* horizontal position of the rail from the left edge of the timeline */
+      --rail-w: 2px;         /* rail width */
+      --card-gutter: 2.25rem;/* left gutter space before each card */
+      --dot: 1rem;           /* dot diameter */
+    }
+    .timeline::before { left: var(--rail-x); width: var(--rail-w); }
+    .timeline .t-box { margin-left: var(--card-gutter); }
+    .timeline .t-box::before {
+      /* position dot so its center sits on the rail center */
+      left: calc(var(--rail-x) - var(--card-gutter) - (var(--dot) / 2) + (var(--rail-w) / 2));
+      width: var(--dot); height: var(--dot);
+    }
+    @media (max-width: 960px){
+      .timeline { --rail-x: 0.7rem; --card-gutter: 1.75rem; --dot: 0.9rem; }
+    }
+
+    /* PROJECTS */
+    .project-row {
+      display: grid;
+      grid-template-columns: minmax(320px, 0.95fr) minmax(420px, 1.05fr);
+      gap: var(--gap);
+      align-items: start;
+      margin: 0 auto 4rem;
+      max-width: var(--maxw);
+      overflow: hidden;
+    }
+    .project-text h3 { margin: 0 0 .5rem; font-size: 1.35rem; }
+    .project-text p { margin: 0; line-height: 1.6; max-width: 38ch; }
+
+    /* Carousel */
+    .carousel { position: relative; width: 100%; max-width: 100%; overflow: hidden; }
+    .carousel-viewport { overflow: hidden; width: 100%; }
+    .carousel-track { display: flex; align-items: center; transition: transform .5s ease-in-out; will-change: transform; }
+    .c-img { flex: 0 0 auto; max-height: clamp(180px, 26vh, 300px); max-width: min(420px, 38vw); margin: 0 calc(var(--c-gap)/2); object-fit: contain; opacity: .35; transform: scale(.92); transition: transform .4s, opacity .4s; }
+    .c-img.center { opacity: 1; transform: scale(1.06); }
+    .c-img.adj { opacity: .65; transform: scale(1); }
+
+    .c-controls { display: flex; gap: 2.5rem; justify-content: center; margin-top: .75rem; }
+    .c-btn { width: 52px; height: 52px; border-radius: 50%; border: none; background: #000; color: #fff; font-size: 1.5rem; cursor: pointer; }
+    .c-btn:hover { background: #333; }
+
+    /* FOOTER */
+    footer { background: #000; color: #fff; }
+    .footer-inner { display: grid; grid-template-columns: 2fr 1fr; gap: var(--gap); max-width: var(--maxw); margin: 0 auto; padding: 2rem 5vw; }
+    footer a { color: #fff; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    
+    /* === FINAL-FINAL alignment: rail derived from card geometry; dot centered on rail === */
+    .timeline {
+      --card-gutter: 2.25rem; /* margin-left on each card */
+      --card-padL: 1.25rem;   /* padding-left on .t-box */
+      --card-border: 1px;     /* border width on .t-box */
+      --rail-w: 2px;          /* rail width */
+      --dot: 1rem;            /* dot diameter */
+    }
+    .timeline .t-box { margin-left: var(--card-gutter); }
+    .timeline .t-box::before {
+      /* center of the dot sits exactly at: containerX = card-gutter - (padL + border) */
+      left: calc(-1 * (var(--card-padL) + var(--card-border)) - (var(--dot) / 2));
+      width: var(--dot); height: var(--dot);
+    }
+    .timeline::before {
+      /* rail centered exactly at the same containerX */
+      left: calc(var(--card-gutter) - var(--card-padL) - var(--card-border) - (var(--rail-w) / 2));
+      width: var(--rail-w);
+    }
+
+    
+    /* === Timeline: darker & thicker rail + pixel alignment === */
+    .timeline {
+      --card-gutter: 2.25rem; /* margin-left of each card */
+      --card-padL: 1.25rem;   /* padding-left of .t-box */
+      --card-border: 1px;     /* border width of .t-box */
+      --rail-w: 3px;          /* thicker rail */
+      --dot: 1rem;            /* dot diameter incl. border */
+      --align-nudge: -1px;    /* tiny global nudge so dot center = rail center on all browsers */
+    }
+    /* Rail sits in gutter; solid/dark to match dot outline */
+    .timeline::before {
+      left: calc(var(--card-gutter) - var(--card-padL) - var(--card-border) - (var(--rail-w) / 2) + var(--align-nudge));
+      width: var(--rail-w);
+      background: #000;
+      opacity: 1;
+    }
+    /* Dot positioned relative to card so its CENTER hits the same gutter center */
+    .timeline .t-box { margin-left: var(--card-gutter); }
+    .timeline .t-box::before {
+      left: calc(-1 * (var(--card-padL) + var(--card-border)) - (var(--dot) / 2) + var(--align-nudge));
+      width: var(--dot); height: var(--dot);
+      border: 2px solid #000; background: #fff;
+      box-shadow: 0 0 0 4px #fff;
+    }
+    .timeline .t-box.is-current::before { background: #000; }
+    @media (max-width: 960px){
+      .timeline {
+        --card-gutter: 1.9rem;
+        --card-padL: 1.1rem;
+        --rail-w: 3px;
+        --dot: 0.95rem;
+        --align-nudge: -1px;
+      }
+    }
+
+    
+    /* === Rail-only nudge so the line visually matches the dots across browsers/zoom === */
+    .timeline {
+      --card-gutter: 2.25rem; /* margin-left of each card */
+      --card-padL: 1.25rem;   /* padding-left of .t-box */
+      --card-border: 1px;     /* border width of .t-box */
+      --rail-w: 3px;          /* thicker rail */
+      --dot: 1rem;            /* dot diameter incl. border */
+      --rail-offset: 4px;     /* move the rail horizontally WITHOUT moving dots */
+    }
+    .timeline .t-box { margin-left: var(--card-gutter); }
+    .timeline .t-box::before {
+      left: calc(-1 * (var(--card-padL) + var(--card-border)) - (var(--dot) / 2));
+      width: var(--dot); height: var(--dot);
+      border: 2px solid #000; background: #fff;
+      box-shadow: 0 0 0 4px #fff;
+    }
+    .timeline::before {
+      left: calc(var(--card-gutter) - var(--card-padL) - var(--card-border) - (var(--rail-w) / 2) + var(--rail-offset));
+      width: var(--rail-w);
+      background: #000;
+      opacity: 1;
+    }
+    .timeline .t-box.is-current::before { background: #000; }
+    @media (max-width: 960px){
+      .timeline { --rail-offset: 3px; }
+    }
+
+    
+    /* === Header & Timeline adjustments === */
+    /* Taller navbar */
+    .navbar { padding-top: 1.35rem; padding-bottom: 1.35rem; }
+
+    /* Vertically center timeline dots on each box */
+    .timeline .t-box::before {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    
+    /* Extra space below Contact section */
+    #contact { padding-bottom: clamp(120px, 16vh, 240px); }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; }
+      .project-row { grid-template-columns: 1fr; }
+      .project-text { order: 1; }
+      .carousel { order: 2; }
+      .c-controls { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="logo">Jack Macias</div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="section hero-section" id="home">
+    <div class="container hero">
+      <div>
+        <h1>Hello, I'm<br><span class="hero-name">Jack Macias</span></h1>
+        <!-- Typing line under the name -->
+        <div class="typewrap" aria-live="polite">
+          <span id="type-line"></span><span id="type-cursor" class="cursor">_</span>
+        </div>
+        <a class="cta-button" href="#contact">Contact Me</a>
+      </div>
+      <img class="hero-img" src="assets/IMG_1174.jpg" alt="Jack Macias portrait" />
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <div class="section-underline"></div>
+      <p style="max-width: 780px; margin: 0 auto; text-align: center; line-height: 1.7;">
+        Mechanical engineering student at UW–Madison with a foundation in design, analysis, and practical problem solving,
+        shaped through internships and team-based engineering challenges. Driven to contribute to engineering solutions that
+        blend innovation and efficiency, while continuously developing both technical expertise and broader professional skills.
+      </p>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section" id="experience">
+    <div class="container">
+      <h2 class="section-title">Experience</h2>
+      <div class="section-underline"></div>
+      <div class="timeline">
+        
+        <div class="t-box">
+          <div class="t-head"><h3>Engineering Parallel Co-op</h3><div class="t-date">Aug. 2025 – Present</div></div>
+<div class="t-subhead">Caterpillar — Remote</div>
+          <ul>
+            <li>Improved oil makeup system for large mining trucks, increasing flow rates and reducing downtime, resulting in estimated annual savings of $650,000 per truck.</li>
+            <li>Directed CFD and physical testing efforts by defining boundary conditions and performance targets, ensuring simulation accuracy and alignment with field data.</li>
+            <li>Identified and analyzed software fault responses across seven mining truck models, improving operator comprehension of autonomous vs. human-operated systems.</li>
+          </ul>
+        </div>
+        <div class="t-box">
+          <div class="t-head"><h3>Engine Platform Engineering Intern</h3><div class="t-date">May 2025 – Aug. 2025</div></div>
+<div class="t-subhead">Caterpillar — Lafayette, IN</div>
+          <ul>
+            <li>Documented and resolved issues during pilot engine build, coordinating with manufacturing engineers and factory technicians to implement pre-production fixes.</li>
+            <li>Created and maintained bill of materials for a test engine, establishing revision procedures for evolving components and systems.</li>
+            <li>Designed, simulated, and tested an updated oil pan casting to decrease drain time by 30%, applying Caterpillar casting standards and validating via rapid prototyping and field fitment.</li>
+          </ul>
+        </div>
+        <div class="t-box">
+          <div class="t-head"><h3>Design Engineering Intern</h3><div class="t-date">May 2024 – Aug. 2024</div></div>
+<div class="t-subhead">HUSCO International — Waukesha, WI</div>
+          <ul>
+            <li>Designed and prototyped hydraulic control valves with 45% cost savings for skid steers and tracked-type tractors while meeting OEM performance and durability standards.</li>
+            <li>Collaborated with customer engineering teams to analyze specifications and integrate feedback into the iterative design process, aligning with internal manufacturing teams.</li>
+            <li>Authored technical documentation, design reports, and engineering drawings using GD&amp;T principles to ensure precise manufacturing and quality control.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <div class="container">
+      <h2 class="section-title">Projects</h2>
+      <div class="section-underline"></div>
+
+      <!-- Suspension Arm -->
+      <div class="project-row">
+        <div class="project-text">
+          <h3>High Ground Clearance Suspension Arm</h3>
+          <p>Designed an arched lower front control arm to boost ground clearance without sacrificing strength. Built the SolidWorks model, ran FEA to tune wall thickness and fillets, and designed a jig for repeatable weldment. Machined threaded inserts to mount a load cell and capture track data, then correlated measurements to the model to validate safety factors and stiffness.</p>
+        </div>
+        <div class="carousel" data-track="arm">
+          <div class="carousel-viewport">
+            <div class="carousel-track">
+              <img class="c-img" src="assets/Arm-1.jpg" alt="Arm 1" />
+              <img class="c-img" src="assets/Arm-2.jpg" alt="Arm 2" />
+              <img class="c-img" src="assets/Arm-3.jpg" alt="Arm 3" />
+              <img class="c-img" src="assets/Arm-4.jpg" alt="Arm 4" />
+              <img class="c-img" src="assets/Arm-5.jpg" alt="Arm 5" />
+              <img class="c-img" src="assets/Arm-6.jpg" alt="Arm 6" />
+              <img class="c-img" src="assets/Arm-7.jpg" alt="Arm 7" />
+              <img class="c-img" src="assets/Arm-8.jpg" alt="Arm 8" />
+              <img class="c-img" src="assets/Arm-9.jpg" alt="Arm 9" />
+            </div>
+          </div>
+          <div class="c-controls">
+            <button class="c-btn" data-dir="-1" aria-label="Previous slide">❮</button>
+            <button class="c-btn" data-dir="1" aria-label="Next slide">❯</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- F1 LED Sign -->
+      <div class="project-row">
+        <div class="project-text">
+          <h3>Formula One Logo LED Sign</h3>
+          <p>Reverse‑engineered the F1 logo in Autodesk Inventor and CNC‑machined the body with integrated channels for LED strips. Soldered and wired three addressable loops with clean strain relief and a hidden connector for standard wall power. Added a diffuser layer and tidy back‑side cable management for a uniform glow and serviceable assembly.</p>
+        </div>
+        <div class="carousel" data-track="sign">
+          <div class="carousel-viewport">
+            <div class="carousel-track">
+              <img class="c-img" src="assets/Sign-1.jpg" alt="Sign 1" />
+              <img class="c-img" src="assets/Sign-2.jpg" alt="Sign 2" />
+              <img class="c-img" src="assets/Sign-3.jpg" alt="Sign 3" />
+              <img class="c-img" src="assets/Sign-4.jpg" alt="Sign 4" />
+              <img class="c-img" src="assets/Sign-5.jpg" alt="Sign 5" />
+            </div>
+          </div>
+          <div class="c-controls">
+            <button class="c-btn" data-dir="-1" aria-label="Previous slide">❮</button>
+            <button class="c-btn" data-dir="1" aria-label="Next slide">❯</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cutting Boards -->
+      <div class="project-row">
+        <div class="project-text">
+          <h3>Cutting / Charcuterie Boards</h3>
+          <p>Custom boards in walnut, maple, and cherry focused on clean joinery, contrasting grain, and durable finishes. Flattened and glued up panels, routed profiles, and sanded through grits before applying a food‑safe oil/wax finish. The set shows edge‑ and end‑grain patterns, inlay accents, and consistent thickness control.</p>
+        </div>
+        <div class="carousel" data-track="board">
+          <div class="carousel-viewport">
+            <div class="carousel-track">
+              <img class="c-img" src="assets/Board-1.jpg" alt="Board 1" />
+              <img class="c-img" src="assets/Board-2.jpg" alt="Board 2" />
+              <img class="c-img" src="assets/Board-3.jpg" alt="Board 3" />
+              <img class="c-img" src="assets/Board-4.jpg" alt="Board 4" />
+              <img class="c-img" src="assets/Board-5.jpg" alt="Board 5" />
+              <img class="c-img" src="assets/Board-6.jpg" alt="Board 6" />
+              <img class="c-img" src="assets/Board-7.jpg" alt="Board 7" />
+              <img class="c-img" src="assets/Board-8.jpg" alt="Board 8" />
+              <img class="c-img" src="assets/Board-9.jpg" alt="Board 9" />
+              <img class="c-img" src="assets/Board-10.jpg" alt="Board 10" />
+              <img class="c-img" src="assets/Board-11.jpg" alt="Board 11" />
+            </div>
+          </div>
+          <div class="c-controls">
+            <button class="c-btn" data-dir="-1" aria-label="Previous slide">❮</button>
+            <button class="c-btn" data-dir="1" aria-label="Next slide">❯</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bolt Action Pen -->
+      <div class="project-row">
+        <div class="project-text">
+          <h3>Bolt Action Pen</h3>
+          <p>Turned a two‑piece pen on the lathe, fitting press components to tight tolerances for a smooth bolt action. Faced and bored blanks, dry‑fit hardware, then finished the barrel to a consistent sheen for a pocket‑safe surface.</p>
+        </div>
+        <div class="carousel" data-track="pen">
+          <div class="carousel-viewport">
+            <div class="carousel-track">
+              <img class="c-img" src="assets/Pen-1.jpg" alt="Pen 1" />
+              <img class="c-img" src="assets/Pen-2.jpg" alt="Pen 2" />
+            </div>
+          </div>
+          <div class="c-controls">
+            <button class="c-btn" data-dir="-1" aria-label="Previous slide">❮</button>
+            <button class="c-btn" data-dir="1" aria-label="Next slide">❯</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Laser Cut Layer Art -->
+      <div class="project-row">
+        <div class="project-text">
+          <h3>Laser Cut Layer Art</h3>
+          <p>Converted vector artwork into stacked layers, compensated for kerf, and laser‑cut each profile in plywood and acrylic. Registered layers with alignment pins, then bonded and finished to create depth and clean silhouette edges.</p>
+        </div>
+        <div class="carousel" data-track="laser">
+          <div class="carousel-viewport">
+            <div class="carousel-track">
+              <img class="c-img" src="assets/Laser-Batman.jpg" alt="Laser Batman" />
+              <img class="c-img" src="assets/Laser-Tiger.png" alt="Laser Tiger" />
+              <img class="c-img" src="assets/Laser-Mando.png" alt="Laser Mando" />
+            </div>
+          </div>
+          <div class="c-controls">
+            <button class="c-btn" data-dir="-1" aria-label="Previous slide">❮</button>
+            <button class="c-btn" data-dir="1" aria-label="Next slide">❯</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pool Cue Stand -->
+      <div class="project-row">
+        <div class="project-text">
+          <h3>Pool Cue Stand</h3>
+          <p>Compact stand designed for stability and small‑space storage. Routed a circular base and pockets for cues, added fillets for comfort, and finished for moisture resistance and easy cleaning.</p>
+        </div>
+        <div class="carousel" data-track="pool">
+          <div class="carousel-viewport">
+            <div class="carousel-track">
+              <img class="c-img" src="assets/Pool-1.png" alt="Pool cue stand" />
+            </div>
+          </div>
+          <div class="c-controls">
+            <button class="c-btn" data-dir="-1" aria-label="Previous slide">❮</button>
+            <button class="c-btn" data-dir="1" aria-label="Next slide">❯</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="container">
+      <h2 class="section-title">Contact Me</h2>
+      <div class="section-underline"></div>
+      <p style="text-align:center; font-size:1.05rem;">
+        ✉️ <span>jrmacias@wisc.edu</span> &nbsp;·&nbsp;
+        📞 <span>(908) 381-4532</span> &nbsp;·&nbsp;
+        🔗 <a href="https://www.linkedin.com/in/jack-macias" target="_blank" rel="noreferrer noopener">linkedin.com/in/jack-macias</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <h3 style="margin:0 0 .5rem; text-decoration: underline;">About Me</h3>
+        <p style="margin:0; line-height:1.7;">Mechanical engineering student at UW–Madison who has built a foundation in design, analysis, and practical problem solving through internships and team-based engineering challenges. Driven to contribute solutions that blend innovation and efficiency, while continuously developing technical expertise and broad professional skills.</p>
+      </div>
+      <div>
+        <nav style="display:flex; flex-direction:column; gap:.5rem;">
+          <a href="#home">Home →</a>
+          <a href="#about">About →</a>
+          <a href="#experience">Experience →</a>
+          <a href="#projects">Projects →</a>
+          <a href="#contact">Contact →</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Carousel init with corrected centering math
+    document.querySelectorAll('.carousel').forEach((carousel) => {
+      const track = carousel.querySelector('.carousel-track');
+      const imgs = Array.from(track.querySelectorAll('.c-img'));
+      let current = 1;
+      if (imgs.length === 0) return;
+
+      const lastClone = imgs[imgs.length - 1].cloneNode(true);
+      const firstClone = imgs[0].cloneNode(true);
+      const list = [lastClone, ...imgs, firstClone];
+      track.innerHTML = '';
+      list.forEach(n => { n.classList.remove('center','adj'); n.classList.add('c-img'); track.appendChild(n); });
+      const items = Array.from(track.children);
+
+      function markClasses() {
+        items.forEach((el, i) => {
+          el.classList.remove('center','adj');
+          if (i === current) el.classList.add('center');
+          if (i === current - 1 || i === current + 1) el.classList.add('adj');
+        });
+      }
+
+      function translateToIndex(animate = true) {
+        const wrapper = carousel.querySelector('.carousel-viewport');
+        const centerEl = items[current];
+
+        // Sum widths of items before the current one using offsetWidth (ignores CSS transform scale)
+        let offset = 0;
+        for (let i = 0; i < current; i++) {
+          const s = getComputedStyle(items[i]);
+          const margins = parseFloat(s.marginLeft) + parseFloat(s.marginRight);
+          offset += items[i].offsetWidth + margins;
+        }
+
+        // Use actual rendered width for the centered element to account for scale(.)
+        const centerWidth = centerEl.getBoundingClientRect().width;
+        const centerOffset = (wrapper.clientWidth - centerWidth) / 2;
+
+        const x = Math.round(-offset + centerOffset);
+        track.style.transition = animate ? 'transform .5s ease-in-out' : 'none';
+        track.style.transform = `translate3d(${x}px, 0, 0)`;
+        markClasses();
+      }
+
+      function move(step) {
+        current += step;
+        translateToIndex(true);
+        const handle = () => {
+          if (current >= items.length - 1) { current = 1; translateToIndex(false); }
+          else if (current <= 0) { current = items.length - 2; translateToIndex(false); }
+          track.removeEventListener('transitionend', handle);
+        };
+        track.addEventListener('transitionend', handle);
+      }
+
+      const btns = carousel.querySelectorAll('.c-btn');
+      if (btns.length === 2) {
+        btns[0].addEventListener('click', () => move(-1));
+        btns[1].addEventListener('click', () => move(1));
+      }
+
+      const loadPromises = Array.from(track.querySelectorAll('img')).map(img => img.complete ? Promise.resolve() : new Promise(r => img.onload = r));
+      Promise.all(loadPromises).then(() => translateToIndex(false));
+
+      const onResize = () => translateToIndex(false);
+      if ('ResizeObserver' in window) {
+        const ro = new ResizeObserver(onResize);
+        ro.observe(carousel);
+      } else {
+        window.addEventListener('resize', onResize);
+      }
+    });
+  </script>
+  <script>
+    // Typing line under the name with 3 cursor blinks before erasing
+    (function(){
+      const line = document.getElementById('type-line');
+      const cursor = document.getElementById('type-cursor');
+      if(!line || !cursor) return;
+
+      const words = [
+        "Engineer","Curious","Hardworking","Problem Solver","Innovator",
+        "Builder","Team Player","Hands-on","Data-Driven",
+        "Iterative","Detail‑oriented","Learner"
+      ];
+
+      const TYPE_SPEED = 120;  // slower typing
+      const ERASE_SPEED = 70;  // slower erase
+      const END_PAUSE = 600;   // pause before the three blinks
+      const BLINKS = 3;        // required blinks before erase
+      let wi = 0, ci = 0, mode = "type", blinkCount = 0, blinkOn = true;
+
+      function setText(txt){ line.textContent = txt; }
+      function setCursor(on){ cursor.style.opacity = on ? 1 : 0; }
+
+      function tick(){
+        const w = words[wi % words.length];
+
+        if(mode === "type"){
+          setCursor(true);
+          ci++;
+          setText(w.slice(0, ci));
+          if(ci >= w.length){
+            mode = "pause"; setTimeout(tick, END_PAUSE); return;
+          }
+          setTimeout(tick, TYPE_SPEED);
+        }
+        else if(mode === "pause"){
+          // do 3 blinks of '_' before erasing
+          mode = "blink";
+          blinkCount = 0;
+          blinkOn = false;
+          setTimeout(tick, 250);
+        }
+        else if(mode === "blink"){
+          blinkOn = !blinkOn;
+          setCursor(blinkOn);
+          blinkCount++;
+          if(blinkCount >= BLINKS*2){ // on/off pairs
+            setCursor(true);
+            mode = "erase";
+            setTimeout(tick, ERASE_SPEED);
+          } else {
+            setTimeout(tick, 250);
+          }
+        }
+        else if(mode === "erase"){
+          ci--;
+          setText(w.slice(0, Math.max(0, ci)));
+          if(ci <= 0){
+            wi = (wi + 1) % words.length;
+            mode = "type";
+          }
+          setTimeout(tick, ERASE_SPEED);
+        }
+      }
+      tick();
+    })();
+  </script>
+
+  <script>
+    (function(){
+      function setNavH(){
+        var nav = document.querySelector('.navbar');
+        if(!nav) return;
+        var h = Math.ceil(nav.getBoundingClientRect().height);
+        document.documentElement.style.setProperty('--navh', h + 'px');
+      }
+      window.addEventListener('load', setNavH);
+      window.addEventListener('resize', setNavH);
+      setNavH();
+    })();
+  </script>
+
+
+  <script>
+    // Highlight the timeline node for the entry centered in the viewport
+    (function(){
+      const boxes = document.querySelectorAll('.timeline .t-box');
+      if (!('IntersectionObserver' in window) || boxes.length === 0) return;
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => e.target.classList.toggle('is-current', e.isIntersecting));
+      }, { rootMargin: '-48% 0px -48% 0px', threshold: 0 });
+      boxes.forEach(b => io.observe(b));
+    })();
+  </script>
+
+</body>
+</html>
