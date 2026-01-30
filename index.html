@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="format-detection" content="telephone=no">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Jack Macias | Mechanical Engineer</title>
+  
+  <!-- Preconnects -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link as="image" fetchpriority="high" href="assets/IMG_1174.jpg" rel="preload"/>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"/>
+  
+  <style>
+    /* ==================== CSS VARIABLES ==================== */
+    :root {
+      --maxw: 1200px;
+      --gap: clamp(24px, 6vw, 64px);
+      --accent: #000;
+      --c-gap: 24px;
+      --navh: 64px;
+    }
+
+    /* ==================== RESET & BASE ==================== */
+    * { 
+      box-sizing: border-box; 
+    }
+    
+    html { 
+      scroll-behavior: auto;
+      scroll-padding-top: calc(var(--navh) + 20px);
+    }
+    
+    body {
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      margin: 0;
+      color: #222;
+      background: #fff;
+    }
+
+    /* ==================== NAVIGATION ==================== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.35rem 2rem;
+      background: #000;
+      color: #fff;
+    }
+    
+    .navbar .logo { 
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+    
+    .navbar ul { 
+      display: flex;
+      gap: 1.25rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    
+    .navbar a { 
+      color: #fff;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 2px;
+    }
+    
+    .navbar a:hover { 
+      border-color: #fff;
+    }
+
+    /* ==================== LAYOUT ==================== */
+    .section { 
+      padding: 60px clamp(16px, 5vw, 48px);
+      scroll-margin-top: calc(var(--navh) + 8px);
+    }
+    
+    .container { 
+      max-width: var(--maxw);
+      margin: 0 auto;
+    }
+    
+    .section-title { 
+      text-align: center;
+      font-size: 2.25rem;
+      margin: 0 0 1rem;
+      font-weight: 800;
+    }
+    
+    .section-underline { 
+      width: 80px;
+      height: 6px;
+      background: #000;
+      border-radius: 4px;
+      margin: 0.5rem auto 2rem;
+    }
+
+    /* Performance optimization */
+    .defer { 
+      content-visibility: auto;
+      contain-intrinsic-size: 800px;
+    }
+
+    /* ==================== HERO SECTION ==================== */
+    #home {
+      min-height: calc(100vh - var(--navh));
+      display: flex;
+      align-items: center;
+      padding-top: clamp(24px, 5vh, 60px);
+      padding-bottom: clamp(24px, 5vh, 60px);
+    }
+    
+    .hero { 
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: var(--gap);
+      align-items: center;
+      width: 100%;
+    }
+    
+    .hero h1 { 
+      font-size: clamp(2.25rem, 4vw, 3.5rem);
+      margin: 0 0 0.25rem;
+    }
+    
+    .hero-name { 
+      font-size: clamp(2.6rem, 6vw, 5rem);
+      line-height: 1.05;
+    }
+    
+    .hero-img { 
+      aspect-ratio: 1 / 1;
+      width: 340px;
+      max-width: 100%;
+      height: 340px;
+      object-fit: cover;
+      border-radius: 50%;
+      justify-self: center;
+    }
+    
+    .cta-button { 
+      display: inline-block;
+      margin-top: 1.25rem;
+      padding: 0.6rem 1.1rem;
+      background: #000;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    /* Typing animation */
+    .typewrap { 
+      margin-top: .25rem;
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      font-weight: 400;
+      letter-spacing: .2px;
+    }
+    
+    .typewrap, .typewrap * { 
+      font-weight: 400;
+    }
+    
+    .cursor { 
+      display: inline-block;
+      width: 1ch;
+      text-align: left;
+    }
+    
+    .blink { 
+      animation: blink 0.5s steps(1) 1;
+    }
+    
+    @keyframes blink { 
+      50% { opacity: 0; }
+    }
+
+    /* ==================== STEVENS-STYLE HERO ==================== */
+    #home.stevens-home { 
+      padding: 0;
+      margin: 0;
+      min-height: calc(100vh - var(--navh));
+    }
+    
+    .stevens-wrap {
+      display: grid !important;
+      grid-template-columns: 75% 25% !important;
+      min-height: calc(100vh - var(--navh)) !important;
+      width: 100vw !important;
+      max-width: 100vw !important;
+    }
+    
+    .stevens-left { 
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .stevens-left::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/HomeBackground.jpg');
+      background-size: cover;
+      background-position: center;
+      filter: grayscale(100%) contrast(1.1) brightness(.84);
+      transform: scale(1.02);
+    }
+    
+    .stevens-left::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,.28);
+    }
+    
+    .stevens-title-wrap {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      text-align: left;
+      color: #fff !important;
+      padding-left: 140px;
+      padding-right: 2rem;
+    }
+    
+    .stevens-name {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-weight: 800;
+      font-size: clamp(2.8rem, 7.5vw, 6.2rem);
+      line-height: 1.02;
+      margin: .1rem 0 .35rem;
+      color: #ffffff !important;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+    }
+    
+    .stevens-sub { 
+      font-size: clamp(2rem, 4.4vw, 2.7rem);
+      margin: 0;
+      color: #ffffff !important;
+      font-weight: 400;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+    }
+    
+    .stevens-right {
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+    
+    .stevens-right img {
+      width: 100%;
+      height: auto;
+      max-width: 280px;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid #fff;
+    }
+
+    /* ==================== TIMELINE (EXPERIENCE) ==================== */
+    .timeline {
+      position: relative;
+      --card-gutter: 1.25rem;
+      --card-padL: 1.25rem;
+      --card-border: 1px;
+      --rail-w: 3px;
+      --dot: 1rem;
+      --rail-offset: 4px;
+    }
+    
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: calc(var(--card-gutter) - var(--card-padL) - var(--card-border) - (var(--rail-w) / 2) + var(--rail-offset));
+      width: var(--rail-w);
+      background: #000;
+      opacity: 1;
+    }
+    
+    .t-box { 
+      border: 1px solid #000;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      background: #fff;
+      margin-left: var(--card-gutter);
+      position: relative;
+    }
+    
+    .t-box::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: calc(-1 * (var(--card-padL) + var(--card-border)) - (var(--dot) / 2));
+      width: var(--dot);
+      height: var(--dot);
+      border-radius: 50%;
+      border: 2px solid #000;
+      background: #fff;
+    }
+    
+    .t-box.is-current::before { 
+      background: #000;
+    }
+    
+    .timeline .t-box + .t-box { 
+      margin-top: 1.75rem;
+    }
+    
+    .t-head { 
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+    }
+    
+    .t-head h3 { 
+      margin: 0;
+    }
+    
+    .t-date { 
+      white-space: nowrap;
+      color: #555;
+      font-weight: 500;
+    }
+    
+    .t-subhead { 
+      margin: .25rem 0 .5rem;
+      color: #555;
+      font-weight: 500;
+    }
+
+    /* ==================== PROJECTS ==================== */
+    .project-row {
+      display: grid;
+      grid-template-columns: minmax(320px, 0.95fr) minmax(420px, 1.05fr);
+      gap: var(--gap);
+      align-items: start;
+      margin: 0 auto 4rem;
+      max-width: var(--maxw);
+      overflow: hidden;
+    }
+    
+    .project-text h3 { 
+      margin: 0 0 .5rem;
+      font-size: 1.35rem;
+    }
+    
+    .project-text p { 
+      margin: 0;
+      line-height: 1.6;
+      max-width: 60ch;
+    }
+
+    /* Carousel - Non-looping version */
+    .carousel { 
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+    }
+    
+    .carousel-viewport { 
+      overflow: hidden;
+      width: 100%;
+    }
+    
+    .carousel-track { 
+      display: flex;
+      align-items: center;
+      transition: transform .5s ease-in-out;
+      will-change: transform;
+    }
+    
+    .c-img { 
+      flex: 0 0 auto;
+      max-height: clamp(180px, 26vh, 300px);
+      max-width: min(420px, 38vw);
+      margin: 0 calc(var(--c-gap)/2);
+      object-fit: contain;
+      opacity: .35;
+      transform: scale(.92);
+      transition: transform .4s, opacity .4s;
+    }
+    
+    .c-img.center { 
+      opacity: 1;
+      transform: scale(1.06);
+    }
+    
+    .c-img.adj { 
+      opacity: .65;
+      transform: scale(1);
+    }
+    
+    .c-controls { 
+      display: flex;
+      gap: 2.5rem;
+      justify-content: center;
+      margin-top: .75rem;
+    }
+    
+    .c-btn { 
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: none;
+      background: #000;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    
+    .c-btn:hover:not(:disabled) { 
+      background: #333;
+    }
+    
+    .c-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    /* ==================== CONTACT ==================== */
+    #contact { 
+      background: #f6f7f9;
+    }
+
+    /* ==================== FOOTER ==================== */
+    footer { 
+      background: #000 !important;
+      color: #fff;
+    }
+    
+    .footer-inner { 
+      display: grid;
+      gap: var(--gap);
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 2rem 5vw;
+    }
+    
+    footer a { 
+      color: #fff;
+      text-decoration: none;
+    }
+    
+    footer a:hover { 
+      text-decoration: underline;
+    }
+
+    /* ==================== RESPONSIVE ==================== */
+    @media (max-width: 960px) {
+      .hero { 
+        grid-template-columns: 1fr;
+      }
+      
+      .project-row { 
+        grid-template-columns: 1fr;
+      }
+      
+      .project-text { 
+        order: 1;
+      }
+      
+      .carousel { 
+        order: 2;
+      }
+      
+      .c-controls { 
+        gap: 1.5rem;
+      }
+      
+      .timeline { 
+        --rail-offset: 3px;
+      }
+      
+      .stevens-wrap {
+        grid-template-columns: 1fr !important;
+      }
+      
+      .stevens-title-wrap {
+        padding-left: 2rem;
+      }
+      
+      .stevens-right {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="logo">Jack Macias</div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section (Stevens Style) -->
+  <section id="home" class="stevens-home">
+    <div class="stevens-wrap">
+      <div class="stevens-left">
+        <div class="stevens-title-wrap">
+          <div class="stevens-name">Jack Macias</div>
+          <div class="stevens-sub">Mechanical Engineer</div>
+        </div>
+      </div>
+      <div class="stevens-right">
+        <img src="assets/IMG_1174.jpg" alt="Jack Macias">
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <div class="section-underline"></div>
+      <div class="hero">
+        <div>
+          <h1>Hi, I'm <span class="hero-name">Jack Macias</span></h1>
+          <div class="typewrap">
+            <span id="type-line"></span><span id="type-cursor" class="cursor">_</span>
+          </div>
+          <p style="margin-top: 1rem; line-height: 1.6; max-width: 60ch;">
+            I'm a Mechanical Engineer passionate about designing innovative solutions and bringing ideas to life. 
+            With experience in CAD modeling, prototyping, and project management, I thrive on solving complex 
+            problems and collaborating with teams to deliver impactful results.
+          </p>
+          <a href="#contact" class="cta-button">Contact Me</a>
+        </div>
+        <img src="assets/IMG_1174.jpg" alt="Jack Macias" class="hero-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" class="section defer">
+    <div class="container">
+      <h2 class="section-title">Experience</h2>
+      <div class="section-underline"></div>
+      <div class="timeline">
+        <div class="t-box">
+          <div class="t-head">
+            <h3>Mechanical Engineering Intern</h3>
+            <span class="t-date">Summer 2024</span>
+          </div>
+          <div class="t-subhead">Tech Company Inc.</div>
+          <p>Designed and prototyped mechanical components, collaborated with cross-functional teams, and improved manufacturing processes.</p>
+        </div>
+        
+        <div class="t-box">
+          <div class="t-head">
+            <h3>Research Assistant</h3>
+            <span class="t-date">2023 - 2024</span>
+          </div>
+          <div class="t-subhead">University Engineering Lab</div>
+          <p>Conducted research on advanced materials, performed CAD modeling and simulations, and co-authored technical papers.</p>
+        </div>
+        
+        <div class="t-box">
+          <div class="t-head">
+            <h3>Project Lead</h3>
+            <span class="t-date">2022 - 2023</span>
+          </div>
+          <div class="t-subhead">Student Engineering Club</div>
+          <p>Led team of 10 students in designing and building competition robot, managed budget and timeline.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="section defer">
+    <div class="container">
+      <h2 class="section-title">Projects</h2>
+      <div class="section-underline"></div>
+
+      <!-- Project 1 -->
+      <div class="project-row">
+        <div class="project-text">
+          <h3>Automated Assembly System</h3>
+          <p>Designed and implemented an automated assembly system that increased production efficiency by 40%. 
+          Utilized pneumatic actuators, sensors, and custom control software.</p>
+        </div>
+        <div class="carousel">
+          <div class="carousel-viewport">
+            <div class="carousel-track">
+              <img src="assets/project1-1.jpg" alt="Project 1 Image 1" class="c-img">
+              <img src="assets/project1-2.jpg" alt="Project 1 Image 2" class="c-img">
+              <img src="assets/project1-3.jpg" alt="Project 1 Image 3" class="c-img">
+            </div>
+          </div>
+          <div class="c-controls">
+            <button class="c-btn prev">‹</button>
+            <button class="c-btn next">›</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-row">
+        <div class="carousel">
+          <div class="carousel-viewport">
+            <div class="carousel-track">
+              <img src="assets/project2-1.jpg" alt="Project 2 Image 1" class="c-img">
+              <img src="assets/project2-2.jpg" alt="Project 2 Image 2" class="c-img">
+              <img src="assets/project2-3.jpg" alt="Project 2 Image 3" class="c-img">
+            </div>
+          </div>
+          <div class="c-controls">
+            <button class="c-btn prev">‹</button>
+            <button class="c-btn next">›</button>
+          </div>
+        </div>
+        <div class="project-text">
+          <h3>Sustainable Energy Device</h3>
+          <p>Developed a prototype renewable energy harvesting device using advanced materials and innovative 
+          mechanical design principles. Project reduced energy consumption by 25%.</p>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-row">
+        <div class="project-text">
+          <h3>Precision Manufacturing Tool</h3>
+          <p>Created a custom precision tool for micro-scale manufacturing. Achieved tolerances within ±0.001mm 
+          through careful design and material selection.</p>
+        </div>
+        <div class="carousel">
+          <div class="carousel-viewport">
+            <div class="carousel-track">
+              <img src="assets/project3-1.jpg" alt="Project 3 Image 1" class="c-img">
+              <img src="assets/project3-2.jpg" alt="Project 3 Image 2" class="c-img">
+              <img src="assets/project3-3.jpg" alt="Project 3 Image 3" class="c-img">
+            </div>
+          </div>
+          <div class="c-controls">
+            <button class="c-btn prev">‹</button>
+            <button class="c-btn next">›</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2 class="section-title">Get In Touch</h2>
+      <div class="section-underline"></div>
+      <p style="text-align: center; max-width: 600px; margin: 0 auto 2rem; line-height: 1.6;">
+        I'm always interested in hearing about new opportunities and collaborations. 
+        Feel free to reach out!
+      </p>
+      <div style="text-align: center;">
+        <p style="font-size: 1.1rem; margin: 0.5rem 0;">
+          📧 <a href="mailto:jack.macias@email.com" style="color: #000; text-decoration: none; border-bottom: 2px solid #000;">jack.macias@email.com</a>
+        </p>
+        <p style="font-size: 1.1rem; margin: 0.5rem 0;">
+          💼 <a href="https://linkedin.com/in/jackmacias" target="_blank" style="color: #000; text-decoration: none; border-bottom: 2px solid #000;">LinkedIn</a>
+        </p>
+        <p style="font-size: 1.1rem; margin: 0.5rem 0;">
+          🐙 <a href="https://github.com/jackmacias" target="_blank" style="color: #000; text-decoration: none; border-bottom: 2px solid #000;">GitHub</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <p style="margin: 0;">© 2026 Jack Macias. All rights reserved.</p>
+      </div>
+      <nav style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+        <a href="#home">Home →</a>
+        <a href="#about">About →</a>
+        <a href="#experience">Experience →</a>
+        <a href="#projects">Projects →</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- ==================== JAVASCRIPT ==================== -->
+  
+  <!-- Navbar Height Calculator -->
+  <script>
+    (function() {
+      function setNavH() {
+        const nav = document.querySelector('.navbar');
+        if (!nav) return;
+        const h = Math.ceil(nav.getBoundingClientRect().height);
+        document.documentElement.style.setProperty('--navh', h + 'px');
+      }
+      window.addEventListener('load', setNavH);
+      window.addEventListener('resize', setNavH);
+      setNavH();
+    })();
+  </script>
+
+  <!-- Non-Looping Carousel -->
+  <script>
+    function setupCarousel(carousel) {
+      const track = carousel.querySelector('.carousel-track');
+      const imgs = Array.from(track.querySelectorAll('.c-img'));
+      const prevBtn = carousel.querySelector('.prev');
+      const nextBtn = carousel.querySelector('.next');
+      
+      if (imgs.length === 0) return;
+      
+      let current = 0;
+
+      function updateButtons() {
+        prevBtn.disabled = current === 0;
+        nextBtn.disabled = current === imgs.length - 1;
+      }
+
+      function markClasses() {
+        imgs.forEach((el, i) => {
+          el.classList.remove('center', 'adj');
+          if (i === current) el.classList.add('center');
+          if (i === current - 1 || i === current + 1) el.classList.add('adj');
+        });
+      }
+
+      function translateToIndex(animate = true) {
+        const wrapper = carousel.querySelector('.carousel-viewport');
+        const centerEl = imgs[current];
+        
+        let offset = 0;
+        for (let i = 0; i < current; i++) {
+          const s = getComputedStyle(imgs[i]);
+          const margins = parseFloat(s.marginLeft) + parseFloat(s.marginRight);
+          offset += imgs[i].offsetWidth + margins;
+        }
+        
+        const centerWidth = centerEl.getBoundingClientRect().width;
+        const centerOffset = (wrapper.clientWidth - centerWidth) / 2;
+        const x = Math.round(-offset + centerOffset);
+        
+        track.style.transition = animate ? 'transform .5s ease-in-out' : 'none';
+        track.style.transform = `translate3d(${x}px, 0, 0)`;
+        
+        markClasses();
+        updateButtons();
+      }
+
+      function move(step) {
+        const newIndex = current + step;
+        if (newIndex < 0 || newIndex >= imgs.length) return;
+        current = newIndex;
+        translateToIndex(true);
+      }
+
+      prevBtn.addEventListener('click', () => move(-1));
+      nextBtn.addEventListener('click', () => move(1));
+
+      // Initialize carousel after images load
+      const loadPromises = imgs.map(img => 
+        img.complete ? Promise.resolve() : new Promise(r => img.onload = r)
+      );
+      
+      Promise.all(loadPromises).then(() => {
+        translateToIndex(false);
+      });
+
+      // Handle resize
+      const onResize = () => translateToIndex(false);
+      if ('ResizeObserver' in window) {
+        const ro = new ResizeObserver(onResize);
+        ro.observe(carousel);
+      } else {
+        window.addEventListener('resize', onResize);
+      }
+    }
+
+    // Lazy-init carousels with IntersectionObserver
+    (function() {
+      const carousels = document.querySelectorAll('.carousel');
+      
+      if (!('IntersectionObserver' in window)) {
+        carousels.forEach(setupCarousel);
+        return;
+      }
+      
+      const io = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setupCarousel(entry.target);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '300px 0px', threshold: 0 });
+      
+      carousels.forEach(c => io.observe(c));
+    })();
+  </script>
+
+  <!-- Typing Animation -->
+  <script>
+    (function() {
+      const line = document.getElementById('type-line');
+      const cursor = document.getElementById('type-cursor');
+      if (!line || !cursor) return;
+
+      const words = [
+        "Engineer", "Curious", "Hardworking", "Problem Solver", "Innovator",
+        "Builder", "Team Player", "Hands-on", "Data-Driven",
+        "Iterative", "Detail‑oriented", "Learner"
+      ];
+
+      const TYPE_SPEED = 120;
+      const ERASE_SPEED = 70;
+      const END_PAUSE = 600;
+      const BLINKS = 3;
+      
+      let wi = 0, ci = 0, mode = "type", blinkCount = 0, blinkOn = true;
+
+      function setText(txt) { line.textContent = txt; }
+      function setCursor(on) { cursor.style.opacity = on ? 1 : 0; }
+
+      function tick() {
+        const w = words[wi % words.length];
+
+        if (mode === "type") {
+          setCursor(true);
+          ci++;
+          setText(w.slice(0, ci));
+          if (ci >= w.length) {
+            mode = "pause";
+            setTimeout(tick, END_PAUSE);
+            return;
+          }
+          setTimeout(tick, TYPE_SPEED);
+        }
+        else if (mode === "pause") {
+          mode = "blink";
+          blinkCount = 0;
+          blinkOn = false;
+          setTimeout(tick, 250);
+        }
+        else if (mode === "blink") {
+          blinkOn = !blinkOn;
+          setCursor(blinkOn);
+          blinkCount++;
+          if (blinkCount >= BLINKS * 2) {
+            setCursor(true);
+            mode = "erase";
+            setTimeout(tick, ERASE_SPEED);
+          } else {
+            setTimeout(tick, 250);
+          }
+        }
+        else if (mode === "erase") {
+          ci--;
+          setText(w.slice(0, Math.max(0, ci)));
+          if (ci <= 0) {
+            wi = (wi + 1) % words.length;
+            mode = "type";
+          }
+          setTimeout(tick, ERASE_SPEED);
+        }
+      }
+      tick();
+    })();
+  </script>
+
+  <!-- Timeline Scroll Spy -->
+  <script>
+    (function() {
+      const boxes = document.querySelectorAll('.timeline .t-box');
+      if (!('IntersectionObserver' in window) || boxes.length === 0) return;
+      
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => e.target.classList.toggle('is-current', e.isIntersecting));
+      }, { rootMargin: '-48% 0px -48% 0px', threshold: 0 });
+      
+      boxes.forEach(b => io.observe(b));
+    })();
+  </script>
+
+  <!-- Contact Scroll to Bottom -->
+  <script>
+    (function() {
+      function scrollToBottom(e) {
+        e.preventDefault();
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      }
+      document.querySelectorAll('a[href="#contact"]').forEach(a => {
+        a.addEventListener('click', scrollToBottom);
+      });
+    })();
+  </script>
+</body>
+</html>
