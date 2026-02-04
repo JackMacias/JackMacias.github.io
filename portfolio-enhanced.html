@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="format-detection" content="telephone=no">
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Jack Macias | Mechanical Engineer</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link as="image" fetchpriority="high" href="assets/IMG_1174.jpg" rel="preload"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+    :root {
+      --maxw: 1200px;
+      --gap: clamp(24px, 6vw, 64px);
+      --accent: #000;
+      --c-gap: 24px;
+      --navh: 64px;
+    }
+
+    * { box-sizing: border-box; }
+    html { 
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--navh) + 20px);
+    }
+    body {
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      margin: 0; 
+      color: #222; 
+      background: #fff;
+      overflow-x: hidden;
+    }
+
+    /* NAV with reveal on scroll */
+    .navbar {
+      position: sticky; 
+      top: 0; 
+      z-index: 100;
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between;
+      padding: 1.35rem 2rem;
+      background: #000; 
+      color: #fff;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar .logo { 
+      font-weight: 700; 
+      font-size: 1.25rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .navbar .logo::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #fff;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+
+    .navbar .logo:hover::after {
+      transform: translateX(0);
+    }
+
+    .navbar ul { 
+      display: flex; 
+      gap: 1.25rem; 
+      margin: 0; 
+      padding: 0; 
+      list-style: none; 
+    }
+
+    .navbar a { 
+      color: #fff; 
+      text-decoration: none; 
+      border-bottom: 2px solid transparent; 
+      padding-bottom: 2px;
+      position: relative;
+      transition: border-color 0.3s ease;
+    }
+
+    .navbar a::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.4s ease, height 0.4s ease;
+      z-index: -1;
+    }
+
+    .navbar a:hover::before {
+      width: 150%;
+      height: 300%;
+    }
+
+    .navbar a:hover { 
+      border-color: #fff; 
+    }
+
+    /* HERO with scroll-based parallax */
+    #home {
+      min-height: calc(100vh - var(--navh));
+      display: flex; 
+      align-items: center;
+      padding-top: clamp(24px, 5vh, 60px);
+      padding-bottom: clamp(24px, 5vh, 60px);
+      position: relative;
+    }
+
+    .hero { 
+      display: grid; 
+      grid-template-columns: 1.1fr 1fr; 
+      gap: var(--gap); 
+      align-items: center; 
+      width: 100%; 
+    }
+
+    /* Staggered fade-in on load */
+    .hero > * {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    .hero > *:nth-child(1) { animation-delay: 0.1s; }
+    .hero > *:nth-child(2) { animation-delay: 0.3s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero h1 { 
+      font-size: clamp(2.25rem, 4vw, 3.5rem); 
+      margin: 0 0 0.25rem;
+      position: relative;
+    }
+
+    .hero-name { 
+      font-size: clamp(2.6rem, 6vw, 5rem); 
+      line-height: 1.05;
+      background: linear-gradient(135deg, #000 0%, #333 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Animated underline on name */
+    .hero-name::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: #000;
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: expandLine 1s ease-out 0.8s forwards;
+    }
+
+    @keyframes expandLine {
+      to { transform: scaleX(1); }
+    }
+
+    .cta-button { 
+      display: inline-block; 
+      margin-top: 1.25rem; 
+      padding: 0.75rem 1.5rem; 
+      background: #000; 
+      color: #fff; 
+      text-decoration: none; 
+      border-radius: 6px; 
+      font-weight: 700;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .cta-button:hover::before {
+      left: 100%;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .cta-button:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-img { 
+      aspect-ratio: 1 / 1; 
+      width: 340px; 
+      max-width: 100%; 
+      height: 340px; 
+      object-fit: cover; 
+      border-radius: 50%; 
+      justify-self: center;
+      border: 4px solid #000;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                  box-shadow 0.4s ease,
+                  border-radius 0.4s ease;
+      cursor: pointer;
+    }
+
+    .hero-img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+      border-radius: 45%;
+    }
+
+    /* Typing animation */
+    .typewrap { 
+      margin-top: 0.25rem; 
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem); 
+      font-weight: 400; 
+      letter-spacing: 0.2px; 
+    }
+
+    .cursor { 
+      display: inline-block; 
+      width: 1ch; 
+      text-align: left; 
+    }
+
+    .blink { 
+      animation: blink 0.5s steps(1) 1; 
+    }
+
+    @keyframes blink { 
+      50% { opacity: 0; } 
+    }
+
+    /* SECTIONS - reveal on scroll */
+    .section { 
+      padding: 60px clamp(16px, 5vw, 48px);
+      scroll-margin-top: calc(var(--navh) + 8px);
+    }
+
+    .container { 
+      max-width: var(--maxw); 
+      margin: 0 auto; 
+    }
+
+    .section-title { 
+      text-align: center; 
+      font-size: 2.25rem; 
+      margin: 0 0 1rem; 
+      font-weight: 800;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .section-title.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-underline { 
+      width: 80px; 
+      height: 6px; 
+      background: #000; 
+      border-radius: 4px; 
+      margin: 0.5rem auto 2rem;
+      transform: scaleX(0);
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+    }
+
+    .section-underline.visible {
+      transform: scaleX(1);
+    }
+
+    /* EXPERIENCE - timeline animations */
+    .timeline { 
+      position: relative;
+      --card-gutter: 1.25rem;
+      --card-padL: 1.25rem;
+      --card-border: 1px;
+      --rail-w: 3px;
+      --dot: 1rem;
+      --rail-offset: 4px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute; 
+      top: 0; 
+      bottom: 0;
+      left: calc(var(--card-gutter) - var(--card-padL) - var(--card-border) - (var(--rail-w) / 2) + var(--rail-offset));
+      width: var(--rail-w); 
+      background: #000; 
+      opacity: 1;
+    }
+
+    .t-box { 
+      border: 1px solid #000; 
+      border-radius: 8px; 
+      padding: 1rem 1.25rem; 
+      background: #fff;
+      margin-left: var(--card-gutter);
+      position: relative;
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: opacity 0.6s ease, 
+                  transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                  box-shadow 0.3s ease,
+                  border-color 0.3s ease;
+    }
+
+    .t-box.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Stagger timeline items */
+    .t-box:nth-child(1) { transition-delay: 0.1s; }
+    .t-box:nth-child(2) { transition-delay: 0.2s; }
+    .t-box:nth-child(3) { transition-delay: 0.3s; }
+    .t-box:nth-child(4) { transition-delay: 0.4s; }
+
+    .t-box:hover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      border-color: #333;
+      transform: translateX(5px);
+    }
+
+    .t-box::before {
+      content: "";
+      position: absolute;
+      top: 50%; 
+      transform: translateY(-50%);
+      left: calc(-1 * (var(--card-padL) + var(--card-border)) - (var(--dot) / 2));
+      width: var(--dot); 
+      height: var(--dot);
+      border-radius: 50%;
+      border: 2px solid #000; 
+      background: #fff;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .t-box:hover::before {
+      transform: translateY(-50%) scale(1.2);
+      box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .t-box.is-current::before { 
+      background: #000; 
+    }
+
+    .t-box + .t-box { 
+      margin-top: 1.75rem; 
+    }
+
+    .t-head { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: baseline; 
+      gap: 1rem; 
+    }
+
+    .t-head h3 { 
+      margin: 0;
+      position: relative;
+    }
+
+    .t-head h3::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #000;
+      transition: width 0.3s ease;
+    }
+
+    .t-box:hover .t-head h3::after {
+      width: 100%;
+    }
+
+    .t-date { 
+      white-space: nowrap; 
+      color: #555; 
+      font-weight: 500; 
+    }
+
+    .t-subhead { 
+      margin: 0.25rem 0 0.5rem; 
+      color: #555; 
+      font-weight: 500; 
+    }
+
+    /* PROJECTS - reveal and scale */
+    .project-row {
+      display: grid;
+      grid-template-columns: minmax(320px, 0.95fr) minmax(420px, 1.05fr);
+      gap: var(--gap);
+      align-items: start;
+      margin: 0 auto 4rem;
+      max-width: var(--maxw);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .project-row.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger project reveals */
+    .project-row:nth-child(1) { transition-delay: 0s; }
+    .project-row:nth-child(2) { transition-delay: 0.1s; }
+    .project-row:nth-child(3) { transition-delay: 0.2s; }
+    .project-row:nth-child(4) { transition-delay: 0.3s; }
+    .project-row:nth-child(5) { transition-delay: 0.4s; }
+
+    .project-text {
+      transition: transform 0.3s ease;
+    }
+
+    .project-text:hover {
+      transform: translateY(-5px);
+    }
+
+    .project-text h3 { 
+      margin: 0 0 0.5rem; 
+      font-size: 1.35rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .project-text h3::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #000;
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .project-text:hover h3::after {
+      width: 100%;
+    }
+
+    .project-text p { 
+      margin: 0; 
+      line-height: 1.6; 
+      max-width: 60ch; 
+    }
+
+    /* Carousel with smooth transitions */
+    .carousel { 
+      position: relative; 
+      width: 100%; 
+      max-width: 100%; 
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .carousel:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .carousel-viewport { 
+      overflow: hidden; 
+      width: 100%; 
+    }
+
+    .carousel-track { 
+      display: flex; 
+      align-items: center; 
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform; 
+    }
+
+    .c-img { 
+      flex: 0 0 auto; 
+      max-height: clamp(180px, 26vh, 300px); 
+      max-width: min(420px, 38vw); 
+      margin: 0 calc(var(--c-gap)/2); 
+      object-fit: contain; 
+      opacity: 0.4; 
+      transform: scale(0.92);
+      filter: grayscale(50%);
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                  opacity 0.5s ease,
+                  filter 0.5s ease; 
+    }
+
+    .c-img.center { 
+      opacity: 1; 
+      transform: scale(1.08); 
+      filter: grayscale(0%);
+    }
+
+    .c-img.adj { 
+      opacity: 0.7; 
+      transform: scale(1);
+      filter: grayscale(20%);
+    }
+
+    .c-controls { 
+      display: flex; 
+      gap: 2.5rem; 
+      justify-content: center; 
+      margin-top: 0.75rem; 
+    }
+
+    .c-btn { 
+      width: 52px; 
+      height: 52px; 
+      border-radius: 50%; 
+      border: 2px solid #000; 
+      background: #fff; 
+      color: #000; 
+      font-size: 1.5rem; 
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .c-btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: #000;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.4s ease, height 0.4s ease;
+      z-index: -1;
+    }
+
+    .c-btn:hover::before {
+      width: 150%;
+      height: 150%;
+    }
+
+    .c-btn:hover {
+      background: #000; 
+      color: #fff;
+      transform: scale(1.1);
+    }
+
+    .c-btn:active {
+      transform: scale(0.95);
+    }
+
+    .c-btn:disabled { 
+      opacity: 0.3; 
+      cursor: not-allowed; 
+    }
+
+    .c-btn:disabled:hover { 
+      background: #fff;
+      color: #000;
+      transform: scale(1);
+    }
+
+    /* CONTACT */
+    #contact { 
+      background: #f6f7f9; 
+    }
+
+    /* FOOTER */
+    footer { 
+      background: #000 !important; 
+      color: #fff; 
+    }
+
+    .footer-inner { 
+      display: grid; 
+      grid-template-columns: 2fr 1fr; 
+      gap: var(--gap); 
+      max-width: var(--maxw); 
+      margin: 0 auto; 
+      padding: 2rem 5vw; 
+    }
+
+    footer a { 
+      color: #fff; 
+      text-decoration: none;
+      position: relative;
+      transition: transform 0.3s ease;
+      display: inline-block;
+    }
+
+    footer a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: #fff;
+      transition: width 0.3s ease;
+    }
+
+    footer a:hover::after {
+      width: 100%;
+    }
+
+    footer a:hover {
+      transform: translateX(5px);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; }
+      .project-row { grid-template-columns: 1fr; }
+      .project-text { order: 1; }
+      .carousel { order: 2; }
+      .c-controls { gap: 1.5rem; }
+      .timeline { --rail-offset: 3px; }
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+
+    /* Scroll progress indicator */
+    .scroll-progress {
+      position: fixed;
+      top: var(--navh);
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: #000;
+      z-index: 99;
+      transition: width 0.1s ease;
+    }
+
+    /* Page transition overlay */
+    .page-transition {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .page-transition.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+</style>
+</head>
+
+<body>
+<!-- Scroll progress bar -->
+<div class="scroll-progress"></div>
+
+<!-- Page transition overlay -->
+<div class="page-transition"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">Jack Macias</div>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero container">
+    <div>
+      <h1>Hello, I'm</h1>
+      <h1 class="hero-name">Jack Macias</h1>
+      <div class="typewrap">
+        <span id="type-line"></span>
+        <span id="type-cursor" class="cursor">_</span>
+      </div>
+      <a class="cta-button" href="mailto:jrmacias@wisc.edu">Get in Touch</a>
+    </div>
+    <img class="hero-img" src="assets/IMG_1774.jpg" alt="Jack Macias" loading="eager"/>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="container">
+    <h2 class="section-title">About Me</h2>
+    <div class="section-underline"></div>
+    <p style="line-height:1.7; max-width:900px; margin:0 auto;">
+      Mechanical engineering student at UW–Madison with a foundation in design, analysis, and practical problem solving,
+      shaped through internships and team-based engineering challenges. Driven to contribute to engineering solutions that
+      blend innovation and efficiency, while continuously developing both technical expertise and broader professional skills.
+    </p>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="section">
+  <div class="container">
+    <h2 class="section-title">Experience</h2>
+    <div class="section-underline"></div>
+    <div class="timeline">
+      <div class="t-box">
+        <div class="t-head">
+          <h3>Engineering Parallel Co-op</h3>
+          <span class="t-date">Aug. 2025 – Present</span>
+        </div>
+        <div class="t-subhead">Caterpillar — Remote</div>
+        <ul>
+          <li>Improved oil makeup system for large mining trucks, increasing flow rates and reducing downtime, resulting in estimated annual savings of $650,000 per truck.</li>
+          <li>Directed CFD and physical testing efforts by defining boundary conditions and performance targets, ensuring simulation accuracy and alignment with field data.</li>
+          <li>Identified and analyzed software fault responses across seven mining truck models, improving operator comprehension of autonomous vs. human-operated systems.</li>
+        </ul>
+      </div>
+
+      <div class="t-box">
+        <div class="t-head">
+          <h3>Engine Platform Engineering Intern</h3>
+          <span class="t-date">May 2025 – Aug. 2025</span>
+        </div>
+        <div class="t-subhead">Caterpillar — Lafayette, IN</div>
+        <ul>
+          <li>Documented and resolved issues during pilot engine build, coordinating with manufacturing engineers and factory technicians to implement pre-production fixes.</li>
+          <li>Created and maintained bill of materials for a test engine, establishing revision procedures for evolving components and systems.</li>
+          <li>Designed, simulated, and tested an updated oil pan casting to decrease drain time by 30%, applying Caterpillar casting standards and validating via rapid prototyping and field fitment.</li>
+        </ul>
+      </div>
+
+      <div class="t-box">
+        <div class="t-head">
+          <h3>Design Engineering Intern</h3>
+          <span class="t-date">May 2024 – Aug. 2024</span>
+        </div>
+        <div class="t-subhead">HUSCO International — Waukesha, WI</div>
+        <ul>
+          <li>Designed and prototyped hydraulic control valves with 45% cost savings for skid steers and tracked-type tractors while meeting OEM performance and durability standards.</li>
+          <li>Collaborated with customer engineering teams to analyze specifications and integrate feedback into the iterative design process, aligning with internal manufacturing teams.</li>
+          <li>Authored technical documentation, design reports, and engineering drawings using GD&T principles to ensure precise manufacturing and quality control.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="section">
+  <div class="container">
+    <h2 class="section-title">Projects</h2>
+    <div class="section-underline"></div>
+
+    <!-- Project 1 -->
+    <div class="project-row">
+      <div class="project-text">
+        <h3>Waterfall Edge Coffee Table</h3>
+        <p>Designed and built a live edge waterfall walnut coffee table featuring bookmatched slabs panel glued to create mirrored grain patterns with live edges on both outer sides. Cut and positioned the bookmatched piece in a waterfall configuration, achieving continuous grain flow from the tabletop over the edges. Applied Rubio Monocoat 2C oil finish for durable protection while enhancing the wood's natural depth and character.</p>
+      </div>
+      <div class="carousel">
+        <div class="carousel-viewport">
+          <div class="carousel-track">
+            <img class="c-img" src="assets/Table1.png" alt="Table 1" loading="lazy"/>
+            <img class="c-img" src="assets/Table2.png" alt="Table 2" loading="lazy"/>
+            <img class="c-img" src="assets/Table3.png" alt="Table 3" loading="lazy"/>
+            <img class="c-img" src="assets/Table4.png" alt="Table 4" loading="lazy"/>
+            <img class="c-img" src="assets/Table5.png" alt="Table 5" loading="lazy"/>
+            <img class="c-img" src="assets/Table6.png" alt="Table 6" loading="lazy"/>
+            <img class="c-img" src="assets/Table7.jpg" alt="Table 7" loading="lazy"/>
+            <img class="c-img" src="assets/Table8.jpg" alt="Table 8" loading="lazy"/>
+            <img class="c-img" src="assets/Table9.jpg" alt="Table 9" loading="lazy"/>
+            <img class="c-img" src="assets/Table10.jpg" alt="Table 10" loading="lazy"/>
+          </div>
+        </div>
+        <div class="c-controls">
+          <button class="c-btn">❮</button>
+          <button class="c-btn">❯</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-row">
+      <div class="project-text">
+        <h3>High Ground Clearance Suspension Arm</h3>
+        <p>Designed arched lower front suspension arms for the UW–Madison Baja SAE team, improving ground clearance over the previous model. Performed FEA in SolidWorks to evaluate performance under multiple loading conditions and refined the design to meet the targeted factor of safety. Collaborated with teammates to fabricate prototype arms and conducted offseason durability testing for endurance racing validation.</p>
+      </div>
+      <div class="carousel">
+        <div class="carousel-viewport">
+          <div class="carousel-track">
+            <img class="c-img" src="assets/Arm-1.jpg" alt="Arm 1" loading="lazy"/>
+            <img class="c-img" src="assets/Arm-2.jpg" alt="Arm 2" loading="lazy"/>
+            <img class="c-img" src="assets/Arm-3.jpg" alt="Arm 3" loading="lazy"/>
+            <img class="c-img" src="assets/Arm-4.jpg" alt="Arm 4" loading="lazy"/>
+            <img class="c-img" src="assets/Arm-5.jpg" alt="Arm 5" loading="lazy"/>
+            <img class="c-img" src="assets/Arm-6.jpg" alt="Arm 6" loading="lazy"/>
+            <img class="c-img" src="assets/Arm-7.jpg" alt="Arm 7" loading="lazy"/>
+            <img class="c-img" src="assets/Arm-8.jpg" alt="Arm 8" loading="lazy"/>
+            <img class="c-img" src="assets/Arm-9.jpg" alt="Arm 9" loading="lazy"/>
+          </div>
+        </div>
+        <div class="c-controls">
+          <button class="c-btn">❮</button>
+          <button class="c-btn">❯</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="project-row">
+      <div class="project-text">
+        <h3>Formula One Logo LED Sign</h3>
+        <p>Created a custom LED sign by modeling in Autodesk Inventor for CNC machining and exporting to VCarve. Machined the acrylic base, soldered red LEDs into three connected loops, and added connectors for standard outlet compatibility. Integrated electrical and mechanical components to produce a durable, functional display.</p>
+      </div>
+      <div class="carousel">
+        <div class="carousel-viewport">
+          <div class="carousel-track">
+            <img class="c-img" src="assets/Sign-1.jpg" alt="Sign 1" loading="lazy"/>
+            <img class="c-img" src="assets/Sign-2.jpg" alt="Sign 2" loading="lazy"/>
+            <img class="c-img" src="assets/Sign-3.jpg" alt="Sign 3" loading="lazy"/>
+            <img class="c-img" src="assets/Sign-4.jpg" alt="Sign 4" loading="lazy"/>
+            <img class="c-img" src="assets/Sign-5.jpg" alt="Sign 5" loading="lazy"/>
+          </div>
+        </div>
+        <div class="c-controls">
+          <button class="c-btn">❮</button>
+          <button class="c-btn">❯</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 4 -->
+    <div class="project-row">
+      <div class="project-text">
+        <h3>Cutting / Charcuterie Boards</h3>
+        <p>Designed cutting board and charcuterie board templates in Fusion 360. Processed raw materials using planer and jointer, and executed multiple glue-ups for complex patterns. Completed finishing through progressive sanding and grain-popping techniques, applying a food-safe mineral oil finish for durability and moisture resistance.</p>
+      </div>
+      <div class="carousel">
+        <div class="carousel-viewport">
+          <div class="carousel-track">
+            <img class="c-img" src="assets/Board-1.jpg" alt="Board 1" loading="lazy"/>
+            <img class="c-img" src="assets/Board-2.jpg" alt="Board 2" loading="lazy"/>
+            <img class="c-img" src="assets/Board-3.jpg" alt="Board 3" loading="lazy"/>
+            <img class="c-img" src="assets/Board-4.jpg" alt="Board 4" loading="lazy"/>
+            <img class="c-img" src="assets/Board-5.jpg" alt="Board 5" loading="lazy"/>
+            <img class="c-img" src="assets/Board-6.jpg" alt="Board 6" loading="lazy"/>
+            <img class="c-img" src="assets/Board-7.jpg" alt="Board 7" loading="lazy"/>
+            <img class="c-img" src="assets/Board-8.jpg" alt="Board 8" loading="lazy"/>
+            <img class="c-img" src="assets/Board-9.jpg" alt="Board 9" loading="lazy"/>
+            <img class="c-img" src="assets/Board-10.jpg" alt="Board 10" loading="lazy"/>
+            <img class="c-img" src="assets/Board-11.jpg" alt="Board 11" loading="lazy"/>
+          </div>
+        </div>
+        <div class="c-controls">
+          <button class="c-btn">❮</button>
+          <button class="c-btn">❯</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 5 -->
+    <div class="project-row">
+      <div class="project-text">
+        <h3>Bolt Action Pen</h3>
+        <p>Modeled a bolt-action pen in SolidWorks and generated engineering drawings with defined tolerances using a stack-up analysis. Produced a fully functional 3D printed prototype emphasizing precision, fit, and aesthetics before finalizing design. Machined stainless steel components using bandsaw, 3-jaw and collet chuck lathes, and a vertical mill.</p>
+      </div>
+      <div class="carousel">
+        <div class="carousel-viewport">
+          <div class="carousel-track">
+            <img class="c-img" src="assets/Pen-1.jpg" alt="Pen 1" loading="lazy"/>
+            <img class="c-img" src="assets/Pen-2.jpg" alt="Pen 2" loading="lazy"/>
+          </div>
+        </div>
+        <div class="c-controls">
+          <button class="c-btn">❮</button>
+          <button class="c-btn">❯</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 6 -->
+    <div class="project-row">
+      <div class="project-text">
+        <h3>Laser Cut Layer Art</h3>
+        <p>Designed layered silhouette artwork in Autodesk Inventor for laser cutting. Fabricated and hand-finished each layer through sanding and painting, then assembled and framed the pieces for a polished presentation. Combined CAD, manufacturing, and finishing techniques to create functional art pieces.</p>
+      </div>
+      <div class="carousel">
+        <div class="carousel-viewport">
+          <div class="carousel-track">
+            <img class="c-img" src="assets/Laser-Batman.jpg" alt="Laser Batman" loading="lazy"/>
+            <img class="c-img" src="assets/Laser-Tiger.png" alt="Laser Tiger" loading="lazy"/>
+            <img class="c-img" src="assets/Laser-Mando.png" alt="Laser Mando" loading="lazy"/>
+          </div>
+        </div>
+        <div class="c-controls">
+          <button class="c-btn">❮</button>
+          <button class="c-btn">❯</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 7 -->
+    <div class="project-row">
+      <div class="project-text">
+        <h3>Pool Cue Stand</h3>
+        <p>Designed a cedar pool cue holder in Fusion 360 with integrated storage for balls, chalk, and racks. Fabricated using mortise-and-tenon and rabbet joints, plus precision drilling on a drill press. Finished with rounded edges via router and applied a protective polyurethane coat for durability and aesthetics.</p>
+      </div>
+      <div class="carousel">
+        <div class="carousel-viewport">
+          <div class="carousel-track">
+            <img class="c-img" src="assets/Pool-1.png" alt="Pool cue stand" loading="lazy"/>
+          </div>
+        </div>
+        <div class="c-controls">
+          <button class="c-btn">❮</button>
+          <button class="c-btn">❯</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="container">
+    <h2 class="section-title">Let's Connect</h2>
+    <div class="section-underline"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <h3 style="margin:0 0 .5rem; text-decoration: underline;">About Me</h3>
+      <p style="margin:0; line-height:1.7;">
+        Mechanical engineering student at UW–Madison who has built a foundation in design, analysis, and practical problem solving through internships and team-based engineering challenges. Driven to contribute solutions that blend innovation and efficiency, while continuously developing technical expertise and broad professional skills.
+      </p>
+    </div>
+    <div class="footer-right">
+      <nav style="display:flex; flex-direction:column; gap:.5rem;">
+        <a href="#home">Home →</a>
+        <a href="#about">About →</a>
+        <a href="#experience">Experience →</a>
+        <a href="#projects">Projects →</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll progress bar
+  function updateScrollProgress() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const progress = (scrollTop / scrollHeight) * 100;
+    document.querySelector('.scroll-progress').style.width = progress + '%';
+  }
+
+  window.addEventListener('scroll', updateScrollProgress);
+
+  // Add shadow to navbar on scroll
+  window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    if (window.pageYOffset > 100) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  });
+
+  // Typing animation
+  (function(){
+    const line = document.getElementById('type-line');
+    const cursor = document.getElementById('type-cursor');
+    if(!line || !cursor) return;
+
+    const words = [
+      "Engineer","Curious","Hardworking","Problem Solver","Innovator",
+      "Builder","Team Player","Hands-on","Data-Driven",
+      "Iterative","Detail‑oriented","Learner"
+    ];
+
+    const TYPE_SPEED = 120;
+    const ERASE_SPEED = 70;
+    const END_PAUSE = 600;
+    const BLINKS = 3;
+    let wi = 0, ci = 0, mode = "type", blinkCount = 0, blinkOn = true;
+
+    function setText(txt){ line.textContent = txt; }
+    function setCursor(on){ cursor.style.opacity = on ? 1 : 0; }
+
+    function tick(){
+      const w = words[wi % words.length];
+
+      if(mode === "type"){
+        setCursor(true);
+        ci++;
+        setText(w.slice(0, ci));
+        if(ci >= w.length){
+          mode = "pause"; setTimeout(tick, END_PAUSE); return;
+        }
+        setTimeout(tick, TYPE_SPEED);
+      }
+      else if(mode === "pause"){
+        mode = "blink";
+        blinkCount = 0;
+        blinkOn = false;
+        setTimeout(tick, 250);
+      }
+      else if(mode === "blink"){
+        blinkOn = !blinkOn;
+        setCursor(blinkOn);
+        blinkCount++;
+        if(blinkCount >= BLINKS*2){
+          setCursor(true);
+          mode = "erase";
+          setTimeout(tick, ERASE_SPEED);
+        } else {
+          setTimeout(tick, 250);
+        }
+      }
+      else if(mode === "erase"){
+        ci--;
+        setText(w.slice(0, Math.max(0, ci)));
+        if(ci <= 0){
+          wi = (wi + 1) % words.length;
+          mode = "type";
+        }
+        setTimeout(tick, ERASE_SPEED);
+      }
+    }
+    tick();
+  })();
+
+  // Intersection Observer for scroll animations
+  const observerOptions = {
+    threshold: 0.15,
+    rootMargin: '0px 0px -10% 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  // Observe all animatable elements
+  document.querySelectorAll('.section-title, .section-underline, .t-box, .project-row').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Timeline current item tracking
+  const timelineObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => e.target.classList.toggle('is-current', e.isIntersecting));
+  }, { rootMargin: '-48% 0px -48% 0px', threshold: 0 });
+
+  document.querySelectorAll('.timeline .t-box').forEach(b => timelineObserver.observe(b));
+
+  // Carousel setup
+  function setupCarousel(carousel) {
+    const track = carousel.querySelector('.carousel-track');
+    const imgs = Array.from(track.querySelectorAll('.c-img'));
+    let current = 0;
+    if (imgs.length === 0) return;
+
+    function markClasses() {
+      imgs.forEach((el, i) => {
+        el.classList.remove('center','adj');
+        if (i === current) el.classList.add('center');
+        if (i === current - 1 || i === current + 1) el.classList.add('adj');
+      });
+    }
+
+    function updateButtons() {
+      const btns = carousel.querySelectorAll('.c-btn');
+      if (btns.length === 2) {
+        btns[0].disabled = current === 0;
+        btns[1].disabled = current === imgs.length - 1;
+      }
+    }
+
+    function translateToIndex(animate = true) {
+      const wrapper = carousel.querySelector('.carousel-viewport');
+      const centerEl = imgs[current];
+      let offset = 0;
+      for (let i = 0; i < current; i++) {
+        const s = getComputedStyle(imgs[i]);
+        const margins = parseFloat(s.marginLeft) + parseFloat(s.marginRight);
+        offset += imgs[i].offsetWidth + margins;
+      }
+      const centerWidth = centerEl.getBoundingClientRect().width;
+      const centerOffset = (wrapper.clientWidth - centerWidth) / 2;
+      const x = Math.round(-offset + centerOffset);
+      track.style.transition = animate ? 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)' : 'none';
+      track.style.transform = `translate3d(${x}px, 0, 0)`;
+      markClasses();
+      updateButtons();
+    }
+
+    function move(step) {
+      const newIndex = current + step;
+      if (newIndex < 0 || newIndex >= imgs.length) return;
+      current = newIndex;
+      translateToIndex(true);
+    }
+
+    const btns = carousel.querySelectorAll('.c-btn');
+    if (btns.length === 2) {
+      btns[0].addEventListener('click', () => move(-1));
+      btns[1].addEventListener('click', () => move(1));
+    }
+
+    const loadPromises = Array.from(track.querySelectorAll('img')).map(img => 
+      img.complete ? Promise.resolve() : new Promise(r => img.onload = r)
+    );
+    Promise.all(loadPromises).then(() => translateToIndex(false));
+
+    const onResize = () => translateToIndex(false);
+    if ('ResizeObserver' in window) {
+      const ro = new ResizeObserver(onResize);
+      ro.observe(carousel);
+    } else {
+      window.addEventListener('resize', onResize);
+    }
+  }
+
+  // Initialize carousels
+  const carouselObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setupCarousel(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '300px 0px', threshold: 0 });
+
+  document.querySelectorAll('.carousel').forEach(c => carouselObserver.observe(c));
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
